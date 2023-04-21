@@ -530,10 +530,10 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-IG1-P1.sln
-IG1-P1.vcxproj
-IG1-P1.vcxproj.filters
-IG1-P1.vcxproj.user
+P2_template.sln
+P2_template.vcxproj
+P2_template.vcxproj.filters
+P2_template.vcxproj.user
 
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
