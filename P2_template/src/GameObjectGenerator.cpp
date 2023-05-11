@@ -7,6 +7,7 @@
 #include "Coin.h"
 #include "Blockage.h"
 #include "Barrier.h"
+#include "Pedestrian.h"
 
 GameObjectGenerator::GameObjectGenerator(Game* game) : game(game) {}
 
@@ -55,8 +56,12 @@ void GameObjectGenerator::generateWorld() {
     game->addGameObject(blockage);
 
     //barrera
-    auto barrier = new Barrier(game, glm::vec3(-200, roadPos.y + 100, 0), glm::vec3(200, 20, 50));
+    auto barrier = new Barrier(game, glm::vec3(200, roadPos.y + 100, 0), glm::vec3(400, 200, 50));
     game->addGameObject(barrier);
+
+    //peaton
+    auto pedestrian = new Pedestrian(game, glm::vec3(W/2, roadPos.y, 1000), glm::vec3(50, 200, 50));
+    game->addGameObject(pedestrian);
 
 }
 

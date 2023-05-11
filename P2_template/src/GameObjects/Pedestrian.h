@@ -15,7 +15,7 @@ public:
     Pedestrian(Game* game, glm::vec3 pos, glm::vec3 dim);
     ~Pedestrian();
 
-    void update() override;
+    virtual void update();
     void draw() override;
     void receiveCarCollision(Player* car) override;
     //void receiveBulletCollision(GameObject* bullet) override;

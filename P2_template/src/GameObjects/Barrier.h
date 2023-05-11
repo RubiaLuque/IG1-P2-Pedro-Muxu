@@ -8,10 +8,10 @@
 class Barrier : public GameObject
 {
 private: 
-	const float UPDOWN_TIME = 3;
-	const float TOTAL_TIME = 6;
+	const float UPDOWN_TIME = 2;
+	const float TOTAL_TIME = 4;
 	float bTime;
-	const int OFFSET = 1;
+	const float OFFSET = 2;
 	bool up;
 
 	struct {
@@ -23,7 +23,7 @@ public:
 	~Barrier();
 
 	virtual void update();
-	void draw() override;
+	virtual void draw();
 	void drawDebug() override;
 	void receiveCarCollision(Player* car) override;
 

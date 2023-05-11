@@ -4,7 +4,7 @@
 #include "Game.h"
 
 Pedestrian::Pedestrian(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos) {
-    model.loadModel("astroBoy_walk.dae");
+    model.loadModel("../../bin/astroBoy_walk.dae");
 
     collider.move(0, dim.y / 2 - 25, 0);
     model.setRotation(0, 180, 1, 0, 0);

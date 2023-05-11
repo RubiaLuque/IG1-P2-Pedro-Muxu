@@ -3,9 +3,6 @@
 #include "Player.h"
 
 Barrier::Barrier(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos) {
-    position.x = pos.x;
-    position.y = pos.y;
-    position.z = pos.z;
     material.setDiffuseColor(ofColor::darkGrey);
     collider.setPosition(pos);
     collider.set(dim.x, dim.y, dim.z);
@@ -17,10 +14,12 @@ Barrier::~Barrier(){}
 
 void Barrier::update() {
     if (bTime < UPDOWN_TIME){
-        collider.setPosition(position.x, position.y + OFFSET, position.z);
+        transform.move(0, OFFSET, 0);
+        collider.setPosition(transform.getX(), transform.getY(), transform.getZ());
     }
     else if (bTime >= UPDOWN_TIME) {
-        collider.setPosition(position.x, position.y - OFFSET, position.z);
+        transform.move(0, -OFFSET, 0);
+        collider.setPosition(transform.getX(), transform.getY(), transform.getZ());
     }
 
     bTime += ofGetLastFrameTime();
@@ -29,9 +28,13 @@ void Barrier::update() {
 }
 
 void Barrier::draw() {
+    
+
     material.begin();
     {
+        transform.transformGL();
         collider.draw();
+        drawDebug();
     }
     material.end();
 }
