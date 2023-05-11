@@ -9,6 +9,7 @@ Coin::Coin(Game *game, glm::vec3 pos, glm::vec3 dim):
     collider.setPosition(pos);
     collider.set(dim.x, dim.y, dim.z);
 }
+
 Coin::~Coin(){
     
 }

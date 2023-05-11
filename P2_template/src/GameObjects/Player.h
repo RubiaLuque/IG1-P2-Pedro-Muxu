@@ -27,6 +27,7 @@ public:
     void drawDebug() override;
     void checkCollisions() override;
     float getSpeed();
+    //void setSpeed(float newSpeed);
     
     void steerLeft();
     void steerRight();
@@ -36,6 +37,7 @@ public:
     void stop();
     void addCoins(int n = 1);
     int getCoins();
+    
 };
 
 #endif 

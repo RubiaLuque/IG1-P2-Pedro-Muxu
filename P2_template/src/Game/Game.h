@@ -22,6 +22,7 @@ public:
     int ROAD_WIDTH;
     
     Game();
+    ~Game();
     void init();
     void update();
     void draw();
