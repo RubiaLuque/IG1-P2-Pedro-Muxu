@@ -8,10 +8,10 @@
 class Barrier : public GameObject
 {
 private: 
-	const float UPDOWN_TIME = 300;
-	const float TOTAL_TIME = 600;
+	const float UPDOWN_TIME = 3;
+	const float TOTAL_TIME = 6;
 	float bTime;
-	int offset;
+	const int OFFSET = 1;
 	bool up;
 
 	struct {
@@ -22,7 +22,7 @@ public:
 	Barrier(Game* game, glm::vec3 pos, glm::vec3 dim);
 	~Barrier();
 
-	void update() override;
+	virtual void update();
 	void draw() override;
 	void drawDebug() override;
 	void receiveCarCollision(Player* car) override;

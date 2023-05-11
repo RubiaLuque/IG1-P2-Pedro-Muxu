@@ -9,24 +9,23 @@ Barrier::Barrier(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, po
     material.setDiffuseColor(ofColor::darkGrey);
     collider.setPosition(pos);
     collider.set(dim.x, dim.y, dim.z);
-    
-    offset = 20;
+    bTime = 0;
     up = true;
 }
 
 Barrier::~Barrier(){}
 
 void Barrier::update() {
-    if (up) {
-        collider.setPosition(position.x, position.y + offset, position.z);
-        if (position.y > 2000)
-            !up;
+    if (bTime < UPDOWN_TIME){
+        collider.setPosition(position.x, position.y + OFFSET, position.z);
     }
-    else if (!up) {
-        collider.setPosition(position.x, position.y - offset, position.z);
-        if (position.y < 0)
-            up;
+    else if (bTime >= UPDOWN_TIME) {
+        collider.setPosition(position.x, position.y - OFFSET, position.z);
     }
+
+    bTime += ofGetLastFrameTime();
+
+    if (bTime >= TOTAL_TIME) bTime = 0;
 }
 
 void Barrier::draw() {
