@@ -79,6 +79,7 @@ Ideas
 - Casilla que si la pisas, termina el juego
 - Pantalla de llegada a la meta
 - Muelle que hace que salte el jugador
+- Guardar record de tiempo
 
 ### Detalles generales
 
