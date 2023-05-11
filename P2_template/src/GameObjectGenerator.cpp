@@ -6,6 +6,7 @@
 #include "Goal.h"
 #include "Coin.h"
 #include "Blockage.h"
+#include "Barrier.h"
 
 GameObjectGenerator::GameObjectGenerator(Game* game) : game(game) {}
 
@@ -52,6 +53,10 @@ void GameObjectGenerator::generateWorld() {
     auto blockage = new Blockage(game, glm::vec3(0, roadPos.y + 100, 300), glm::vec3(500, 200, 20)); //(ancho, altura, profundidad)
 
     game->addGameObject(blockage);
+
+    //barrera
+    auto barrier = new Barrier(game, glm::vec3(-200, roadPos.y + 100, 0), glm::vec3(200, 20, 50));
+    game->addGameObject(barrier);
 
 }
 

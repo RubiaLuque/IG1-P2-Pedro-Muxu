@@ -3,7 +3,7 @@
 Vamos a crear un juego de coches basado en la plantilla que os he creado. Podéis modificar o extender cosas, conforme vayáis implementando las diferentes extensiones.
 Las descripciones de las extensiones son muy generales, vosotros deberéis decidir sus detalles de implementación.
 
-### Obstáculo:	(Muxu)
+### Obstáculo:	(Muxu) HECHO   Nota: falta distribución aleatoria, pero eso es una vez hecha la 				pista definitiva
 
 Vamos a crear obstáculos que están distribuidos aleatoriamente por la pista.
 Si el coche colisiona se frena.
