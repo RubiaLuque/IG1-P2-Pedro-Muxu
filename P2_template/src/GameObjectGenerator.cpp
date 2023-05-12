@@ -56,7 +56,7 @@ void GameObjectGenerator::generateWorld() {
     game->addGameObject(blockage);
 
     //barrera
-    auto barrier = new Barrier(game, glm::vec3(200, roadPos.y + 100, 0), glm::vec3(400, 200, 50));
+    auto barrier = new Barrier(game, glm::vec3(500, roadPos.y + 100, 0), glm::vec3(400, 200, 50));
     game->addGameObject(barrier);
 
     //peaton

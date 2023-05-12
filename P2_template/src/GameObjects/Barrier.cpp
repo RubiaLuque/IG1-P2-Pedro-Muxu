@@ -7,7 +7,6 @@ Barrier::Barrier(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, po
     collider.setPosition(pos);
     collider.set(dim.x, dim.y, dim.z);
     bTime = 0;
-    up = true;
 }
 
 Barrier::~Barrier(){}
@@ -15,11 +14,11 @@ Barrier::~Barrier(){}
 void Barrier::update() {
     if (bTime < UPDOWN_TIME){
         transform.move(0, OFFSET, 0);
-        collider.setPosition(transform.getX(), transform.getY(), transform.getZ());
+        collider.setPosition(transform.getPosition());
     }
     else if (bTime >= UPDOWN_TIME) {
         transform.move(0, -OFFSET, 0);
-        collider.setPosition(transform.getX(), transform.getY(), transform.getZ());
+        collider.setPosition(transform.getPosition());
     }
 
     bTime += ofGetLastFrameTime();
@@ -28,7 +27,6 @@ void Barrier::update() {
 }
 
 void Barrier::draw() {
-    
 
     material.begin();
     {

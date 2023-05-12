@@ -17,6 +17,7 @@ Pedestrian::Pedestrian(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(ga
     speed = 6;
     bTurned = false;
 }
+
 Pedestrian::~Pedestrian() {
 
 }

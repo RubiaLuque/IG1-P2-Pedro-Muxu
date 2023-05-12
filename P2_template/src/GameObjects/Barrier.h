@@ -12,11 +12,6 @@ private:
 	const float TOTAL_TIME = 4;
 	float bTime;
 	const float OFFSET = 2;
-	bool up;
-
-	struct {
-		float x, y, z;
-	} position;
 
 public: 
 	Barrier(Game* game, glm::vec3 pos, glm::vec3 dim);
