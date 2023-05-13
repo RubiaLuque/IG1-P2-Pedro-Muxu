@@ -1,57 +1,94 @@
 #include "Game.h"
 #include "Player.h"
+#include "../Utils/checkML.h"
 
-Game::Game() {
+Game::Game() : bPlayerFinish(false), initTime(), player(nullptr), bDebug(false),
+gameObjectsStates(), generator(nullptr) {
+    /*
     // TODO create settings
     ROAD_WIDTH = 2000;
     ROAD_LENGTH = 10000;
+    */
 
-    generator = new GameObjectGenerator(this);
-    bDebug = false;
+    // generator = new GameObjectGenerator(this);
+
+    for (auto& gameObjects : gameObjectsStates) {
+        gameObjects = nullptr;//new GameObjectContainer();
+    }
 }
 
 Game::~Game() {
     ofLogNotice() << "Deleting game";
-    delete gameObjects;
-    delete generator;
-    delete currentState();
+    for (auto gameObjects : gameObjectsStates) {
+        if (gameObjects != nullptr) {
+            delete gameObjects;
+        }
+    }
+    // delete gameObjects;
+    if (generator != nullptr) {
+        delete generator;
+    }
+    //delete currentState();
 }
 
-void Game::init() {
+void Game::initGame() {
+    // si había un generador de nivel, se elimina
+    if (generator != nullptr) {
+        delete generator;
+        generator = nullptr;
+    }
 
-    if (gameObjects != nullptr)
+    generator = new GameObjectGenerator(this);
+
+    /*
+    if (gameObjects != nullptr) {
         delete gameObjects;
+    }
+    */
 
+    // se crea el contenedor de gameObjects
+    // gameObjects = new GameObjectContainer();
 
-    gameObjects = new GameObjectContainer();
-
+    // se crea el player
     player = new Player(this);
-    player->init();
+    //player->init();
+    addGameObject(player);
+    //gameObjects->add(player);
 
+    // se setea la posición de la cámara
     cam.setPosition(0, 300, -600);
     cam.setTarget(player->transform);
     cam.setParent(player->transform);
     cam.disableMouseInput();
     cam.setFarClip(100000);
 
-    gameObjects->add(player);
+    // se crea el mundo
     generator->generateWorld();
-    bPlayerFinish = false;
+    //bPlayerFinish = false;
+
+    // se inicia el contador
     initTime = ofGetElapsedTimef();
 }
 
-void Game::update() {
-    gameObjects->update();
+void Game::updateGameObjects() {
+    currentGameObjects()->update();
+    //gameObjects->update();
 }
 
-void Game::draw() {
+void Game::drawGameObjects() {
     ofEnableLighting();
     ofEnableDepthTest();
 
     cam.begin();
     {
-        if (bDebug) gameObjects->drawDebug();
-        else gameObjects->draw();
+        if (bDebug) {
+            currentGameObjects()->drawDebug();
+            //gameObjects->drawDebug();
+        }
+        else {
+            currentGameObjects()->draw();
+            //gameObjects->draw();
+        }
     }
     cam.end();
 
@@ -65,19 +102,27 @@ Player* Game::getPlayer() {
 }
 
 vector<GameObject*> Game::getCollisions(GameObject* gameObject) {
-    return gameObjects->getCollisions(gameObject);
+    return currentGameObjects()->getCollisions(gameObject);
+    //return gameObjects->getCollisions(gameObject);
 }
 
-void  Game::addGameObject(GameObject* gameobject) {
-    gameObjects->add(gameobject);
+void Game::addGameObject(GameObject* gameobject) {
+    currentGameObjects()->add(gameobject);
+    //gameObjects->add(gameobject);
+}
+
+void Game::reset(ecs::stateId id) {
+    if (gameObjectsStates[id] != nullptr) {
+        // se elimina el que había en el caso de que no sea la primera vez que se ha creado
+        delete gameObjectsStates[id];
+        gameObjectsStates[id] = nullptr;
+    }
+    // se crea uno nuevo
+    gameObjectsStates[id] = new GameObjectContainer();
 }
 
 void Game::finishGame() {
     bPlayerFinish = true;
-}
-
-void Game::toggleDebug() {
-    bDebug = !bDebug;
 }
 
 bool Game::isFinished() {
@@ -88,94 +133,10 @@ void Game::setFinished(bool v) {
     bPlayerFinish = v;
 }
 
+void Game::toggleDebug() {
+    bDebug = !bDebug;
+}
+
 float Game::getEllapsedTime() {
     return ofGetElapsedTimef() - initTime;
 }
-
-
-
-
-//VERSIÓN ANTIGUA CON ERRORES
-//#include "Game.h"
-//#include "Player.h"
-//
-//Game::Game(){
-//    // TODO create settings
-//    ROAD_WIDTH = 2000;
-//    ROAD_LENGTH = 10000;
-//
-//    generator = new GameObjectGenerator(this);
-//    bDebug = false;
-//}
-//
-//void Game::init(){
-//    
-//    if(gameObjects != nullptr)
-//        delete gameObjects;
-//    
-//    gameObjects = new GameObjectContainer();
-//    
-//    player = new Player(this);
-//    player->init();
-//
-//    cam.setPosition(0, 300, -600);
-//    cam.setTarget(player->transform);
-//    cam.setParent(player->transform);
-//    
-//    gameObjects->add(player);
-//    generator->generateWorld();
-//    bPlayerFinish = false;
-//    initTime = ofGetElapsedTimef();
-//}
-//
-//void Game::update(){
-//    gameObjects->update();
-//}
-//
-//void Game::draw(){
-//    ofEnableLighting();
-//    ofEnableDepthTest();
-//    
-//    cam.begin();
-//    {
-//        if(bDebug) gameObjects->drawDebug();
-//        else gameObjects->draw();
-//    }
-//    cam.end();
-//    
-//    ofDisableLighting();
-//    ofDisableDepthTest();
-//}
-//
-//
-//Player * Game::getPlayer(){
-//    return player;
-//}
-//
-//vector<GameObject *> Game::getCollisions(GameObject *gameObject){
-//    return gameObjects->getCollisions(gameObject);
-//}
-//
-//void  Game::addGameObject(GameObject *gameobject){
-//    gameObjects->add(gameobject);
-//}
-//
-//void Game::finishGame(){
-//    bPlayerFinish = true;
-//}
-//
-//void Game::toggleDebug(){
-//    bDebug = !bDebug;
-//}
-//
-//bool Game::isFinished(){
-//    return bPlayerFinish;
-//}
-//
-//void Game::setFinished(bool v){
-//    bPlayerFinish = v;
-//}
-//
-//float Game::getEllapsedTime(){
-//    return ofGetElapsedTimef() - initTime;
-//}

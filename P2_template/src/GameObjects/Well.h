@@ -3,7 +3,7 @@
 #ifndef WELL_H
 #define WELL_H
 
-#include "GameObject.h"
+#include "../Structure/GameObject.h"
 //Pozo
 class Well : public GameObject
 {

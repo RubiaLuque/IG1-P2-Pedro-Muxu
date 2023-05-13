@@ -1,19 +1,20 @@
 #ifndef Road_h
 #define Road_h
 
-#include "GameObject.h"
+#include "../Structure/GameObject.h"
 
-class Road : public GameObject{
-    
+class Road : public GameObject {
+private:
     ofLight light;
     ofPlanePrimitive plane;
+
 public:
-    Road(Game *game, glm::vec3 pos, glm::vec3 dim);
+    Road(Game* game, glm::vec3 pos, glm::vec3 dim);
     ~Road();
-    
+
     void draw() override;
     void drawDebug() override;
-    
+
 };
 
 #endif /* Road_h */

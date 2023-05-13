@@ -2,7 +2,7 @@
 
 #ifndef Goal_h
 #define Goal_h
-#include "GameObject.h"
+#include "../Structure/GameObject.h"
 
 class Goal : public GameObject{
     

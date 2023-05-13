@@ -7,7 +7,7 @@
 
 #ifndef Coin_h
 #define Coin_h
-#include "GameObject.h"
+#include "../Structure/GameObject.h"
 
 class Coin : public GameObject{
     

@@ -3,6 +3,8 @@
 
 //========================================================================
 int main( ){
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);	// Check Memory Leaks
+
     ofGLFWWindowSettings settings;
     settings.setGLVersion(3, 2);
     settings.setSize(1280, 720);

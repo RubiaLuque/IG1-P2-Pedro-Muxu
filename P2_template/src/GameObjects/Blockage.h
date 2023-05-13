@@ -3,7 +3,7 @@
 #ifndef Blockage_h
 #define Blockage_h
 
-#include "GameObject.h"
+#include "../Structure/GameObject.h"
 
 class Blockage : public GameObject
 {

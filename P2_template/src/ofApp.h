@@ -2,11 +2,15 @@
 
 #include "ofMain.h"
 #include "Game.h"
-#include "State.h"
+#include "../Structure/State.h"
 
 class ofApp : public ofBaseApp{
 
 	public:
+		virtual ~ofApp() {
+			delete game;
+		}
+
 		void setup();
 		void update();
 		void draw();

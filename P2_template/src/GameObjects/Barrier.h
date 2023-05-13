@@ -3,7 +3,7 @@
 #ifndef Barrier_h
 #define Barrier_h
 
-#include "GameObject.h"
+#include "../Structure/GameObject.h"
 
 class Barrier : public GameObject
 {

@@ -4,13 +4,17 @@
 #ifndef Person_h
 #define Person_h
 
-#include "GameObject.h"
+#include "../Structure/GameObject.h"
 
 #include "ofxAssimpModelLoader.h"
 
 class Pedestrian : public GameObject {
-    float speed = -5;
+private:
+    float speed;
     bool bTurned;
+    string modelPath;
+    ofxAssimpModelLoader model;
+
 public:
     Pedestrian(Game* game, glm::vec3 pos, glm::vec3 dim);
     ~Pedestrian();
@@ -22,7 +26,6 @@ public:
 
     //void checkCollisions() override;
     void turn();
-    ofxAssimpModelLoader model;
 };
 
 

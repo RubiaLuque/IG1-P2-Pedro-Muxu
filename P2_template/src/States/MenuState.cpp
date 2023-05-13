@@ -1,12 +1,14 @@
 #include "PlayState.h"
 #include "MenuState.h"
+#include "../Utils/checkML.h"
 
-void MenuState::update(){
+void MenuState::update() {
+
 };
     
-void MenuState::draw(){
+void MenuState::draw() {
     ofBackground(0);
-    ofDrawBitmapString(name, 10, 20);
+    ofDrawBitmapString(getName(), 10, 20);
 };
 
 void MenuState::next(){

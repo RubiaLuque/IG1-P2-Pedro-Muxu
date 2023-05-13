@@ -1,6 +1,6 @@
 #include "Barrier.h"
-
 #include "Player.h"
+#include "../Utils/checkML.h"
 
 Barrier::Barrier(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos) {
     material.setDiffuseColor(ofColor::darkGrey);

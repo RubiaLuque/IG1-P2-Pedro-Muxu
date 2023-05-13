@@ -1,5 +1,6 @@
 #include "Well.h"
 #include "Player.h"
+#include "../Utils/checkML.h"
 
 Well::Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius) : GameObject(game, pos) {
 
@@ -12,7 +13,7 @@ Well::Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius) : GameObject(
     circleColl.set(radius * 2, 0, radius * 2);*/
 }
 
-Well::~Well(){}
+Well::~Well() {}
 
 void Well::update() {
 

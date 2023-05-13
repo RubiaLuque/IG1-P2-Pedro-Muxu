@@ -1,21 +1,22 @@
 #include "Game.h"
 #include "ResultState.h"
 #include "MenuState.h"
-
+#include "../Utils/checkML.h"
  
-ResultState::ResultState(Game *game): State(game, "Result State"){
+//ResultState::ResultState(Game* game) : State(game, ecs::_s_RESULTS) { };
+
+ResultState::~ResultState() {};
+
+void ResultState::update() {
+    game->updateGameObjects();
 };
 
-ResultState::~ResultState(){};
-
-void ResultState::update(){
-};
-
-void ResultState::draw(){
+void ResultState::draw() {
     ofBackground(127);
-    ofDrawBitmapString(name, 10, 20);
+    ofDrawBitmapString(getName(), 10, 20);
+    game->drawGameObjects();
 };
 
-void ResultState::next(){
+void ResultState::next() {
     game->setState(new MenuState(game));
 };

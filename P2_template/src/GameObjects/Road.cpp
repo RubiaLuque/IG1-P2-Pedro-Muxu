@@ -1,23 +1,27 @@
-
-
 #include "Road.h"
 #include "Game.h"
+#include "../Utils/checkML.h"
 
-Road::Road(Game *game, glm::vec3 pos, glm::vec3 dim): GameObject(game, pos){
-    material.setDiffuseColor(ofColor::darkGrey);
-    
+Road::Road(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos) {
     plane.setParent(transform);
+
+    // CARRETERA
+    // color
+    material.setDiffuseColor(ofColor::darkGrey);
+    // rotar el plano
     transform.rotateDeg(-90, 1, 0, 0);
+    // cambiar el tamaño
     plane.set(dim.x, dim.z);
-    
-    
+
+    // LUZ DE LA CARRETERA
+    // posición
     light.setPosition(200, 200, 200);
     light.setDiffuseColor(ofColor::white);
 }
+
 Road::~Road(){}
 
-void Road::draw(){
-    
+void Road::draw() {
     light.enable();
     material.begin();
     {
