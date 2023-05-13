@@ -1,13 +1,8 @@
 #include "PlayState.h"
 #include "ResultState.h"
+#include "PauseState.h"
 #include "Player.h"
 #include "../Utils/checkML.h"
-
-/*
-PlayState::PlayState(Game* game) : State(game, ecs::_s_PLAY) {
-    // game->initGame();
-};
-*/
 
 void PlayState::onEnter() {
     game->initGame();
@@ -57,7 +52,8 @@ void PlayState::draw() {
 };
 
 void PlayState::next() {
-    game->setState(new ResultState(game));
+    game->changeState(new ResultState(game));
+    //game->setState(new ResultState(game));
 };
 
 
@@ -73,5 +69,8 @@ void PlayState::keyPressed(int key){
     // intercambiar entre el modo debug y el normal
     if (key == 'd') {
         game->toggleDebug();
+    }
+    else if (key == game->OF_KEY_SPACE) {
+        game->pushState(new PauseState(game));
     }
 }

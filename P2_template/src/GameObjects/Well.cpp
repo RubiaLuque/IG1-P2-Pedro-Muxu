@@ -4,7 +4,7 @@
 
 Well::Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius) : GameObject(game, pos) {
 
-    material.setDiffuseColor({ofColor::aliceBlue, 100}); //es invisible
+    material.setDiffuseColor({ ofColor::aliceBlue, 100 }); //es invisible
     collider.setPosition(pos);
     collider.set(dim.x, dim.y, dim.z);
 

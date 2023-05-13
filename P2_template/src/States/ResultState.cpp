@@ -18,5 +18,6 @@ void ResultState::draw() {
 };
 
 void ResultState::next() {
-    game->setState(new MenuState(game));
+    game->changeState(new MenuState(game));
+    //game->setState(new MenuState(game));
 };

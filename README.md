@@ -3,16 +3,16 @@
 Vamos a crear un juego de coches basado en la plantilla que os he creado. Podéis modificar o extender cosas, conforme vayáis implementando las diferentes extensiones.
 Las descripciones de las extensiones son muy generales, vosotros deberéis decidir sus detalles de implementación.
 
-### Obstáculo:	(Muxu) HECHO   Nota: falta distribución aleatoria, pero eso es una vez hecha la 				pista definitiva
+### Obstáculo:	(Muxu) HECHO   Nota: falta distribución aleatoria, pero eso es una vez hecha la pista definitiva
 
 Vamos a crear obstáculos que están distribuidos aleatoriamente por la pista.
 Si el coche colisiona se frena.
 
-### Monedas: (Pedro)
+### Monedas: (Pedro)	HECHO
 
 Vamos a poner monedas distribuidas por la pista. 
 
-### Disparo: (Pedro)
+### Disparo: (Pedro)	HECHO
 
 Vamos a habilitar la posibilidad de que el coche dispare. Cada disparo cuesta una moneda y destruye los obstáculos.
 
@@ -62,13 +62,18 @@ Vamos a poner un avión que pasa volando y tira una bomba.
 Si la bomba le cae al coche encima vuelve al principio.
 Si la bomba le cae cerca, pero no encima, el coche se da la vuelta debido a la onda expansiva. 
 
-### La carretera:	(Mapa)
+### La carretera:
+
+(Pedro) -> Carretera
+(Muxu) -> Obstáculos
+
+El profesor ha dicho que NO lo hagamos porque el juego peta ¿?
 
 La carretera deberá ser circular, incluyendo, giros o curvas.
-Podéis añadir detalles como árboles, farolas, edificios, etc..	(Muxu)
+Podéis añadir detalles como árboles, farolas, edificios, etc..
 Podéis añadir una cámara cenital para ver el recorrido.
 
-### Pausa:	(Juntos)
+### Pausa:	(Pedro)	HECHO
 
 Haced un State nuevo de pausa (tened en cuenta que el cronómetro se debe parar).
 
@@ -77,9 +82,10 @@ Haced un State nuevo de pausa (tened en cuenta que el cronómetro se debe parar)
 Deberéis añadir al menos 3 extensiones propias.
 Ideas
 - Casilla que si la pisas, termina el juego
-- Pantalla de llegada a la meta
+- Pantalla de llegada a la meta	(Pedro)	HECHO
 - Muelle que hace que salte el jugador
-- Guardar record de tiempo
+- Guardar record de tiempo	(Pedro)	HECHO
+- Menú principal con botones (Pedro)	HECHO
 
 ### Detalles generales
 

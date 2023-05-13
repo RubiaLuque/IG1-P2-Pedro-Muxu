@@ -71,6 +71,10 @@ void Player::checkCollisions() {
     }
 }
 
+void keyPressed(int key) {
+
+}
+
 void Player::steerLeft() {
     transform.rotateDeg(1, 0, 2, 0);
 }

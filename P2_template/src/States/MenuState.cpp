@@ -12,5 +12,6 @@ void MenuState::draw() {
 };
 
 void MenuState::next(){
-    game->setState(new PlayState(game));
+    game->changeState(new PlayState(game));
+    //game->setState(new PlayState(game));
 };

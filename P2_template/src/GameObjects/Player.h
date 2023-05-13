@@ -31,6 +31,9 @@ public:
     void draw() override;
     void drawDebug() override;
     void checkCollisions() override;
+
+    void toggleLight();
+
     // creo que no se usa
     float getSpeed();
     // girar izquierda
@@ -40,11 +43,11 @@ public:
     // acelerar
     void accelerate();
     // intercalar luces
-    void toggleLight();
     // desacelerar
     void brake();
     // parar en seco
     void stop();
+
     // añadir monedas
     void addCoins(int n = 1);
     // obtener monedas actuales

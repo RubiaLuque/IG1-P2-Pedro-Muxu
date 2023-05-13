@@ -31,12 +31,16 @@ private:
     // momento en el que ha empezado
     // se utiliza para saber cuanto tiempo se lleva de partida
     float initTime;
+    float elapsedTime;
 
     inline GameObjectContainer* currentGameObjects() {
         return gameObjectsStates[currentState()->getId()];
     }
 
 public:
+    // Teclas que no están en el enum de openFrameworks
+    static const int OF_KEY_SPACE = 32;
+
     // TODO create settings
     /*
     const int ROAD_WIDTH = 2000;

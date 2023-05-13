@@ -3,7 +3,7 @@
 #include "../Utils/checkML.h"
 
 Game::Game() : bPlayerFinish(false), initTime(), player(nullptr), bDebug(false),
-gameObjectsStates(), generator(nullptr) {
+gameObjectsStates(), generator(nullptr), elapsedTime(0) {
     /*
     // TODO create settings
     ROAD_WIDTH = 2000;
@@ -71,6 +71,11 @@ void Game::initGame() {
 }
 
 void Game::updateGameObjects() {
+    // contador de tiempo, solo funciona durante el estado Play
+    if (currentState()->getId() == ecs::_s_PLAY) {
+        elapsedTime += ofGetLastFrameTime();
+    }
+
     currentGameObjects()->update();
     //gameObjects->update();
 }
@@ -138,5 +143,8 @@ void Game::toggleDebug() {
 }
 
 float Game::getEllapsedTime() {
-    return ofGetElapsedTimef() - initTime;
+    // diferencia de 1 segundo entre el de arriba y el de abajo
+    //cout << elapsedTime << "   " << (ofGetElapsedTimef() - initTime) << endl;
+    return elapsedTime;
+    //return ofGetElapsedTimef() - initTime;
 }
