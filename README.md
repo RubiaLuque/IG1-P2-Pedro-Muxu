@@ -86,6 +86,8 @@ Ideas
 - Muelle que hace que salte el jugador
 - Guardar record de tiempo	(Pedro)	HECHO
 - Menú principal con botones (Pedro)	HECHO
+- Rampa
+- Saltar
 
 ### Detalles generales
 

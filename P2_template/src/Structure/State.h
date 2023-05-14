@@ -12,11 +12,8 @@ protected:
     // puntero al juego
     Game* game;
 
+    State(Game* game, ecs::stateId id);
 public:
-    State(Game* game, ecs::stateId id);/* : game(game), id(id) {
-        ofLogNotice() << "Creating state: " << getName();
-    };
-    */
 
     virtual ~State() {
         ofLogNotice() << "Destroying state: " << getName();
@@ -30,13 +27,16 @@ public:
         return id;
     }
 
-    // conceptualmente todas los métodos serían abstractos
     virtual void onEnter() = 0;
-    virtual void update() = 0;
-    virtual void draw() = 0;
+    // updadte, draw y handleInput de todos los gameobjects que hay en el estado
+    virtual void update();
+    virtual void draw();
+    virtual void handleInput();
     // se llama cuando el estado ha terminado
     // se pasa al siguiente estado
-    virtual void next() = 0;
-    virtual void keyPressed(int key) {};
-    virtual void keyReleased(int key) {};
+    virtual void next() { };
+    /*
+    virtual void keyPressed(int key);
+    virtual void keyReleased(int key);
+    */
 };

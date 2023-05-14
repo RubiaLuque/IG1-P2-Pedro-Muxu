@@ -20,7 +20,6 @@ private:
     // cada estado tiene un contenedor de objetos
     // de modo que puede haber dos estados activos a la vez
     array<GameObjectContainer*, ecs::maxStateId> gameObjectsStates;
-    //GameObjectContainer* gameObjects;
     // generador del mapa, se utiliza solo en el PlayState
     // en el resto de estados, se añaden los objetos desde el propio estado
     GameObjectGenerator* generator;
@@ -28,9 +27,8 @@ private:
     bool bDebug;
     // saber cuando ha terminado el estado actual para pasar al siguiente
     bool bPlayerFinish;
-    // momento en el que ha empezado
-    // se utiliza para saber cuanto tiempo se lleva de partida
-    float initTime;
+    // contador con el tiempo que se está en el PlayState
+    // se reinicia si ha terminado el juego y se vuelve a jugar
     float elapsedTime;
 
     inline GameObjectContainer* currentGameObjects() {
@@ -41,12 +39,6 @@ public:
     // Teclas que no están en el enum de openFrameworks
     static const int OF_KEY_SPACE = 32;
 
-    // TODO create settings
-    /*
-    const int ROAD_WIDTH = 2000;
-    const int ROAD_LENGTH = 10000;
-    */
-
     Game();
 
     ~Game();
@@ -54,10 +46,12 @@ public:
     // iniciar el juego propiamente, es decir, lo que se ejecutaría en el PlayState
     void initGame();
 
-    // update de los GameObjects que haya en el estado
+    // update de los GameObjects que hay en el estado
     void updateGameObjects();
-    // draw de los GameObjects que haya en el estado
+    // draw de los GameObjects que hay en el estado
     void drawGameObjects();
+    // handleInput de los GameObjects que hay en el estado
+    void handleInputGameObjects();
 
     void finishGame();
     bool isFinished();

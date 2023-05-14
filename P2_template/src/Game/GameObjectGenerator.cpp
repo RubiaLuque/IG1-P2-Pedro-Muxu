@@ -1,4 +1,3 @@
-
 #include "GameObjectGenerator.h"
 #include "Game.h"
 #include "Road.h"
@@ -13,17 +12,12 @@
 GameObjectGenerator::GameObjectGenerator(Game* game) : game(game) { }
 
 void GameObjectGenerator::generateWorld() {
-    /*
-    int W = game->ROAD_WIDTH;
-    int L = game->ROAD_LENGTH;
-    */
-
     // carretera
     glm::vec3 roadPos(0, -50.1, L / 2 - 1000);
     auto road = new Road(game, roadPos, glm::vec3(W, 0, L));
     game->addGameObject(road);
 
-    // muros
+    // tamaño de las paredes
     int wallSize = 100;
 
     // muro formada por muchos bloques

@@ -2,18 +2,11 @@
 #include "Player.h"
 #include "../Utils/checkML.h"
 
-Game::Game() : bPlayerFinish(false), initTime(), player(nullptr), bDebug(false),
+Game::Game() : bPlayerFinish(false), player(nullptr), bDebug(false),
 gameObjectsStates(), generator(nullptr), elapsedTime(0) {
-    /*
-    // TODO create settings
-    ROAD_WIDTH = 2000;
-    ROAD_LENGTH = 10000;
-    */
-
-    // generator = new GameObjectGenerator(this);
 
     for (auto& gameObjects : gameObjectsStates) {
-        gameObjects = nullptr;//new GameObjectContainer();
+        gameObjects = nullptr;
     }
 }
 
@@ -24,11 +17,9 @@ Game::~Game() {
             delete gameObjects;
         }
     }
-    // delete gameObjects;
     if (generator != nullptr) {
         delete generator;
     }
-    //delete currentState();
 }
 
 void Game::initGame() {
@@ -40,20 +31,9 @@ void Game::initGame() {
 
     generator = new GameObjectGenerator(this);
 
-    /*
-    if (gameObjects != nullptr) {
-        delete gameObjects;
-    }
-    */
-
-    // se crea el contenedor de gameObjects
-    // gameObjects = new GameObjectContainer();
-
     // se crea el player
     player = new Player(this);
-    //player->init();
     addGameObject(player);
-    //gameObjects->add(player);
 
     // se setea la posición de la cámara
     cam.setPosition(0, 300, -600);
@@ -64,10 +44,9 @@ void Game::initGame() {
 
     // se crea el mundo
     generator->generateWorld();
-    //bPlayerFinish = false;
 
     // se inicia el contador
-    initTime = ofGetElapsedTimef();
+    // initTime = ofGetElapsedTimef();
 }
 
 void Game::updateGameObjects() {
@@ -77,7 +56,6 @@ void Game::updateGameObjects() {
     }
 
     currentGameObjects()->update();
-    //gameObjects->update();
 }
 
 void Game::drawGameObjects() {
@@ -88,11 +66,9 @@ void Game::drawGameObjects() {
     {
         if (bDebug) {
             currentGameObjects()->drawDebug();
-            //gameObjects->drawDebug();
         }
         else {
             currentGameObjects()->draw();
-            //gameObjects->draw();
         }
     }
     cam.end();
@@ -101,6 +77,9 @@ void Game::drawGameObjects() {
     ofDisableDepthTest();
 }
 
+void Game::handleInputGameObjects() {
+    currentGameObjects()->handleInput();
+}
 
 Player* Game::getPlayer() {
     return player;
@@ -108,12 +87,10 @@ Player* Game::getPlayer() {
 
 vector<GameObject*> Game::getCollisions(GameObject* gameObject) {
     return currentGameObjects()->getCollisions(gameObject);
-    //return gameObjects->getCollisions(gameObject);
 }
 
 void Game::addGameObject(GameObject* gameobject) {
     currentGameObjects()->add(gameobject);
-    //gameObjects->add(gameobject);
 }
 
 void Game::reset(ecs::stateId id) {
@@ -124,6 +101,10 @@ void Game::reset(ecs::stateId id) {
     }
     // se crea uno nuevo
     gameObjectsStates[id] = new GameObjectContainer();
+    // contador a cero si se ha vuelto a crear el PlayState
+    if (id == ecs::_s_PLAY) {
+        elapsedTime = 0;
+    }
 }
 
 void Game::finishGame() {
@@ -144,7 +125,6 @@ void Game::toggleDebug() {
 
 float Game::getEllapsedTime() {
     // diferencia de 1 segundo entre el de arriba y el de abajo
-    //cout << elapsedTime << "   " << (ofGetElapsedTimef() - initTime) << endl;
     return elapsedTime;
-    //return ofGetElapsedTimef() - initTime;
+    // return ofGetElapsedTimef() - initTime;
 }

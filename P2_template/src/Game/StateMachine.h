@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Structure/State.h"
-// no me deja meter checkML.h
 
 class StateMachine {
 private:
@@ -21,7 +20,6 @@ public:
             delete states.top();
             states.pop();
         }
-        //delete state;
     }
 
     // quitar el último estado
@@ -63,13 +61,19 @@ public:
     void draw() {
         currentState()->draw();
     }
+    void handleInput() {
+        currentState()->handleInput();
+    }
     void next() {
         currentState()->next();
     }
+
+    /*
     void keyPressed(int key) {
         currentState()->keyPressed(key);
     }
     void keyReleased(int key) {
         currentState()->keyReleased(key);
     }
+    */
 };

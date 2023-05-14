@@ -3,17 +3,16 @@
 #include "Game.h"
 #include "../Utils/checkML.h"
 
-Pedestrian::Pedestrian(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos),
+Pedestrian::Pedestrian(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos, dim),
 speed(6), bTurned(false), modelPath("astroBoy_walk.dae") {
 
     // ajustar el collider de acuerdo al modelo
-    collider.set(dim.x, dim.y, dim.z);
-    collider.move(0, dim.y / 2 - 25, 0);
+    boxCollider->move(0, dim.y / 2 - 25, 0);
 
     // cargar el modelo
     assert(model.loadModel(modelPath));
 
-    // colocar iniicalmente el modelo
+    // colocar inicialmente el modelo
     model.setRotation(0, 180, 1, 0, 0);
     model.setPosition(0, -25, 0);
     model.setScale(0.25, 0.25, 0.25);
@@ -23,10 +22,6 @@ speed(6), bTurned(false), modelPath("astroBoy_walk.dae") {
     // a partir de ahora todas las transformaciones se realizan
     // con nodo
     transform.rotateDeg(90, 0, 1, 0);
-}
-
-Pedestrian::~Pedestrian() {
-
 }
 
 void Pedestrian::update() {

@@ -5,23 +5,20 @@
 #include "Utils/checkML.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup() {
     game = new Game();
     game->pushState(new PlayState(game));
-    //game->setState(new PlayState(game));
     ofSetFrameRate(60);
 }
 
 // se delega en cada uno de los estados
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update() {
     game->update();
-    //game->currentState()->update();
-    
+
     // un estado sabe si ha terminado, de modo que se pasa al siguiente
-    if(game->isFinished()){
+    if (game->isFinished()) {
         game->next();
-        //game->currentState()->next();
         game->setFinished(false);
     }
 }
@@ -29,24 +26,22 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     game->draw();
-    //game->currentState()->draw();
 }
 
 
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key) {
     // pasar al siguiente estado
     // se hace por motivos de depuración
     if (key == ']') {
         game->next();
-        //game->currentState()->next();
     }
-    
-    game->keyPressed(key);
-    //game->currentState()->keyPressed(key);
+
+    game->handleInput();
+    //game->keyPressed(key);
 }
 
 
 void ofApp::keyReleased(int key){
-    game->keyReleased(key);
-    //game->currentState()->keyReleased(key);
+    game->handleInput();
+    //game->keyReleased(key);
 }

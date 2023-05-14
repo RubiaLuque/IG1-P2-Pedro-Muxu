@@ -17,7 +17,6 @@ private:
 
 public:
     Pedestrian(Game* game, glm::vec3 pos, glm::vec3 dim);
-    ~Pedestrian();
 
     virtual void update();
     void draw() override;
@@ -27,6 +26,4 @@ public:
     //void checkCollisions() override;
     void turn();
 };
-
-
 #endif /* Person_h */

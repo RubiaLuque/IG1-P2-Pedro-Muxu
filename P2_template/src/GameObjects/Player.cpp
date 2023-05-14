@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "../Utils/checkML.h"
 
-Player::Player(Game* game) :GameObject(game, glm::vec3(0, 0, 0)),
+Player::Player(Game* game) :GameObject(game, glm::vec3(0, 0, 0), glm::vec3(100)),
 speed(0), bLight(false), coins(0) {
     // usando el material se le da un color al objeto
     material.setDiffuseColor(ofColor::blue);
@@ -16,17 +16,31 @@ speed(0), bLight(false), coins(0) {
     faro.move(0, 0, 50);
     // rotarlo
     faro.rotateDeg(-200, 1, 0, 0);
-
-    // cambiar el tamaño del objeto
-    collider.set(100);
 }
 
 Player::~Player() {}
 
-void Player::update(){
+void Player::update() {
+    // INPUT
+    // como se trata de movimiento continuo es mejor ponerlo en el update
+    // rotar
+    if (ofGetKeyPressed(OF_KEY_LEFT)) {
+        steerLeft();
+    }
+    else if (ofGetKeyPressed(OF_KEY_RIGHT)) {
+        steerRight();
+    }
+    if (ofGetKeyPressed(OF_KEY_UP)) {
+        accelerate();
+    }
+    else if (ofGetKeyPressed(OF_KEY_DOWN)) {
+        brake();
+    }
+
+    // MOVERLO
     prevPos = transform.getPosition();
     transform.move(transform.getZAxis() * speed);
-    
+
     if (speed > MAX_SPEED) {
         speed = MAX_SPEED;
     }
@@ -44,22 +58,24 @@ void Player::draw() {
         faro.disable();
     }
 
-    // CLASE PADRE: se hace siempre si no se carga un modelo
-    material.begin();
-    {
-        collider.draw();
-    }
-    material.end();
+    // se hace siempre que el objeto que se quiera pintar corresponda con su collider
+    GameObject::draw();
 }
 
 void Player::drawDebug() {
-    // CLASE PADRE
-    collider.drawWireframe();
+    GameObject::drawDebug();
+    //collider.drawWireframe();
 
     transform.transformGL();
     // se dibujan también los axis
     ofDrawAxis(100);
     transform.restoreTransformGL();
+}
+
+void Player::handleInput() {
+    if (ofGetKeyPressed('l')) {
+        toggleLight();
+    }
 }
 
 void Player::checkCollisions() {
@@ -69,10 +85,6 @@ void Player::checkCollisions() {
         // los objetos con los que ha colisionado hacen lo oportuno
         c->receiveCarCollision(this);
     }
-}
-
-void keyPressed(int key) {
-
 }
 
 void Player::steerLeft() {
@@ -98,10 +110,6 @@ void Player::stop() {
 
 void Player::toggleLight() {
     bLight = !bLight;
-}
-
-float Player::getSpeed() {
-    return speed;
 }
 
 void Player::addCoins(int n) {

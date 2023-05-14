@@ -1,14 +1,20 @@
 #include "GameObject.h"
 #include "../Utils/checkML.h"
 
-GameObject::GameObject(Game* game, glm::vec3 pos) : game(game) {
-    collider.setParent(transform);
+GameObject::GameObject(Game* game, glm::vec3 pos, glm::vec3 dim) : game(game), fixed(false), bAlive(true) {
+    boxCollider->setParent(transform);
     transform.setPosition(pos);
-    bAlive = true;
+    boxCollider->set(dim.x, dim.y, dim.z);
 }
 
-GameObject::~GameObject() { }
+void GameObject::draw() {
+    material.begin();
+    {
+        boxCollider->draw();
+    }
+    material.end();
+}
 
 void GameObject::drawDebug() {
-    collider.drawWireframe();
+    boxCollider->drawDebug();
 }

@@ -5,3 +5,15 @@ State::State(Game* game, ecs::stateId id) : game(game), id(id) {
     game->reset(id);
     ofLogNotice() << "Creating state: " << getName();
 };
+
+void State::update() {
+    game->updateGameObjects();
+}
+
+void State::draw() {
+    game->drawGameObjects();
+}
+
+void State::handleInput() {
+    game->handleInputGameObjects();
+}

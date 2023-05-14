@@ -9,17 +9,13 @@
 #define Coin_h
 #include "../Structure/GameObject.h"
 
-class Coin : public GameObject{
-    
+class Coin : public GameObject {
+private:
+
 public:
-    Coin(Game *game, glm::vec3 pos, glm::vec3 dim);
-    ~Coin();
-    
-    void update() override;
-    void draw() override;
-    void drawDebug() override;
-    void receiveCarCollision(Player *car) override;
-    
+    Coin(Game* game, glm::vec3 pos, glm::vec3 dim);
+
+    void receiveCarCollision(Player* car) override;
 };
 
 #endif /* Coin_h */

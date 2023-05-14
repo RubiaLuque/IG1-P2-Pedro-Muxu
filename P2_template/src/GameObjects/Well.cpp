@@ -2,34 +2,21 @@
 #include "Player.h"
 #include "../Utils/checkML.h"
 
-Well::Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius) : GameObject(game, pos) {
+Well::Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius) : GameObject(game, pos, dim) {
 
-    material.setDiffuseColor({ ofColor::aliceBlue, 100 }); //es invisible
-    collider.setPosition(pos);
-    collider.set(dim.x, dim.y, dim.z);
+    material.setDiffuseColor({ ofColor::aliceBlue, 100 }); // es invisible
 
     /*circle.setDiffuseColor(ofColor::black);
     circleColl.setPosition(pos);
     circleColl.set(radius * 2, 0, radius * 2);*/
 }
 
-Well::~Well() {}
-
 void Well::update() {
 
 }
 
 void Well::draw() {
-    material.begin();
-    {
-        collider.draw();
-        drawDebug();
-    }
-    material.end();
-}
-
-void Well::drawDebug() {
-
+    GameObject::draw();
 }
 
 void Well::recieveCarCollision(Player* car) {

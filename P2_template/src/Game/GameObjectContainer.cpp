@@ -1,27 +1,54 @@
 #include "GameObjectContainer.h"
 #include "../Structure/GameObject.h"
-#include "../Utils/checkML.h"
+#include "CollisionEngine.h"
 
-GameObjectContainer::GameObjectContainer() {}
+// SE UTILIZA PARA ALTERNAR ENTRE LAS FÍSICAS CON Y SIN LIBRERÍA
+//#define LIBRARY
 
-void GameObjectContainer::add(GameObject* g){
+GameObjectContainer::GameObjectContainer() : collisionEngine(nullptr) {
+    // LIBRERÍA FÍSICAS
+#ifdef LIBRARY
+    collisionEngine = new CollisionEngine(gameObjects);
+#endif
+}
+
+void GameObjectContainer::add(GameObject* g) {
     gameObjects.push_back(g);
+    // LIBRERÍA FÍSICAS
+#ifdef LIBRARY
+    collisionEngine->add(g);
+#endif
 }
 
 GameObjectContainer::~GameObjectContainer(){
     clear();
+    if (collisionEngine != nullptr) {
+        delete collisionEngine;
+    }
 }
 
-void GameObjectContainer::update(){
-    for(auto g: gameObjects){
-        if(g->isAlive()){
-            // se actualizan todos los objetos
+void GameObjectContainer::update() {
+    // se actualizan todos los objetos
+    for (auto g : gameObjects) {
+        if (g->isAlive()) {
             g->update();
-            // se comprueban las colisiones de los objetos
+        }
+    }
+
+    // LIBRERÍA FÍSICAS
+    // se mueven sus colliders
+#ifdef LIBRARY
+    collisionEngine->update();
+#endif
+
+    // se comprueban las colisiones
+    for (auto g : gameObjects) {
+        if (g->isAlive()) {
             g->checkCollisions();
         }
     }
-    // se eliminan los objetos no vivos
+
+    // se eliminan los muertos
     removeDead();
 }
 
@@ -32,9 +59,18 @@ void GameObjectContainer::draw(){
         }
     }
 }
+
 void GameObjectContainer::drawDebug(){
     for(auto g: gameObjects){
         g->drawDebug();
+    }
+}
+
+void GameObjectContainer::handleInput() {
+    for (auto g : gameObjects) {
+        if (g->isAlive()) {
+            g->handleInput();
+        }
     }
 }
 
@@ -45,6 +81,10 @@ void GameObjectContainer::removeDead() {
             alive.push_back(g);
         }
         else {
+            // LIBRERÍA FÍSICAS
+#ifdef LIBRARY
+            collisionEngine->remove(g);
+#endif
             delete g;
         }
     }
@@ -54,12 +94,22 @@ void GameObjectContainer::removeDead() {
 
 void GameObjectContainer::clear() {
     for (auto g : gameObjects) {
+        // LIBRERÍA FÍSICAS
+#ifdef LIBRARY
+        collisionEngine->remove(g);
+#endif
         delete g;
     }
     gameObjects.clear();
 }
 
 vector<GameObject*> GameObjectContainer::getCollisions(GameObject* gameObject) {
+    // LIBRERÍA FÍSICAS
+#ifdef LIBRARY
+    return collisionEngine->getCollisions(gameObject);
+
+#else
+    // NO LIBRERÍA FÍSICAS
     vector<GameObject*> collisions;
     // se obtienen en un vector los objetos con los que ha colisionado el objeto
     for (auto other : gameObjects) {
@@ -71,4 +121,5 @@ vector<GameObject*> GameObjectContainer::getCollisions(GameObject* gameObject) {
         }
     }
     return collisions;
+#endif
 }

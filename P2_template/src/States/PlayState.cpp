@@ -12,6 +12,7 @@ void PlayState::update() {
     // INPUT DEL JUGADOR
     // movimiento
     // el input continuo es mejor procesarlo en el update
+    /*
     if (ofGetKeyPressed(OF_KEY_LEFT)) {
         game->getPlayer()->steerLeft();
     }
@@ -24,8 +25,10 @@ void PlayState::update() {
     else if (ofGetKeyPressed(OF_KEY_DOWN)) {
         game->getPlayer()->brake();
     }
+    */
 
-    game->updateGameObjects();
+    State::update();
+    //game->updateGameObjects();
 };
     
 void PlayState::draw() {
@@ -48,7 +51,8 @@ void PlayState::draw() {
     }
     ofPopMatrix();
 
-    game->drawGameObjects();
+    State::draw();
+    //game->drawGameObjects();
 };
 
 void PlayState::next() {
@@ -57,20 +61,23 @@ void PlayState::next() {
 };
 
 
-void PlayState::keyPressed(int key){
+void PlayState::handleInput() {
+    State::handleInput();
     // el input se maneja fuera del gameobject
     // INPUT DEL JUGADOR
     // luces
-    if (key == 'l') {
+    /*
+    if (ofGetKeyPressed('l')) {
         game->getPlayer()->toggleLight();
     }
+    */
 
     // INPUT GENERAL
     // intercambiar entre el modo debug y el normal
-    if (key == 'd') {
+    if (ofGetKeyPressed('d')) {
         game->toggleDebug();
     }
-    else if (key == game->OF_KEY_SPACE) {
+    else if (ofGetKeyPressed(game->OF_KEY_SPACE)) {
         game->pushState(new PauseState(game));
     }
 }

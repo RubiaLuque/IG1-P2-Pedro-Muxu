@@ -8,7 +8,7 @@ class Game;
 // TODO add speed settings
 // #define MAX_SPEED 100
 
-class Player : public GameObject{
+class Player : public GameObject {
 private:
     const int MAX_SPEED = 100;
 
@@ -21,38 +21,42 @@ private:
     glm::vec3 prevPos;
     // número de monedas
     int coins;
-    
-public:
-    
-    Player(Game *game);
-    ~Player();
-    
-    void update() override;
-    void draw() override;
-    void drawDebug() override;
-    void checkCollisions() override;
 
+    // intercalar luces
     void toggleLight();
 
-    // creo que no se usa
-    float getSpeed();
     // girar izquierda
     void steerLeft();
     // girar derecha
     void steerRight();
     // acelerar
     void accelerate();
-    // intercalar luces
     // desacelerar
     void brake();
-    // parar en seco
-    void stop();
+
+
+public:
+
+    Player(Game* game);
+    ~Player();
+
+    void update() override;
+    void draw() override;
+    void drawDebug() override;
+    void handleInput() override;
+    void checkCollisions() override;
+
+    inline float getSpeed() const {
+        return speed;
+    }
 
     // añadir monedas
     void addCoins(int n = 1);
     // obtener monedas actuales
     int getCoins();
-    
+
+    // parar en seco
+    void stop();
 };
 
 #endif 

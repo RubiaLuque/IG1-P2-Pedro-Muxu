@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "../Utils/checkML.h"
 
-Road::Road(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos) {
+Road::Road(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos, dim) {
     plane.setParent(transform);
 
     // CARRETERA
@@ -18,8 +18,6 @@ Road::Road(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos) {
     light.setPosition(200, 200, 200);
     light.setDiffuseColor(ofColor::white);
 }
-
-Road::~Road(){}
 
 void Road::draw() {
     light.enable();

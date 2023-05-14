@@ -2,23 +2,20 @@
 #include "Player.h"
 #include "../Utils/checkML.h"
 
-Barrier::Barrier(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos) {
+Barrier::Barrier(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos, dim) {
     material.setDiffuseColor(ofColor::darkGrey);
-    collider.setPosition(pos);
-    collider.set(dim.x, dim.y, dim.z);
+    boxCollider->setPosition(pos);
     bTime = 0;
 }
 
-Barrier::~Barrier(){}
-
 void Barrier::update() {
-    if (bTime < UPDOWN_TIME){
+    if (bTime < UPDOWN_TIME) {
         transform.move(0, OFFSET, 0);
-        collider.setPosition(transform.getPosition());
+        boxCollider->setPosition(transform.getPosition());
     }
     else if (bTime >= UPDOWN_TIME) {
         transform.move(0, -OFFSET, 0);
-        collider.setPosition(transform.getPosition());
+        boxCollider->setPosition(transform.getPosition());
     }
 
     bTime += ofGetLastFrameTime();
@@ -27,21 +24,15 @@ void Barrier::update() {
 }
 
 void Barrier::draw() {
-
     material.begin();
     {
-        transform.transformGL();
-        collider.draw();
-        drawDebug();
+        // transform.transformGL();
+        boxCollider->draw();
+        // drawDebug();
     }
     material.end();
 }
 
-void Barrier::drawDebug() {
-    collider.drawWireframe();
-}
-
 void Barrier::receiveCarCollision(Player* car) {
     car->stop();
-
 }

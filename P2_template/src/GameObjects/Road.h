@@ -10,11 +10,9 @@ private:
 
 public:
     Road(Game* game, glm::vec3 pos, glm::vec3 dim);
-    ~Road();
 
     void draw() override;
     void drawDebug() override;
-
 };
 
 #endif /* Road_h */
