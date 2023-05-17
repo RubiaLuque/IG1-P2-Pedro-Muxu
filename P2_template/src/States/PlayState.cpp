@@ -3,33 +3,15 @@
 #include "PauseState.h"
 #include "Player.h"
 #include "../Utils/checkML.h"
+#include "../GameObjects/Text.h"
 
 void PlayState::onEnter() {
     game->initGame();
+
+    Text* text = new Text(game, glm::vec2(ofGetWidth() - 50, 50), 20, "Press space to stop", game->getFont(), ofColor::white);
+    text->setOrigin(glm::vec2(1, 0));
+    game->addGameObject(text);
 }
-
-void PlayState::update() {
-    // INPUT DEL JUGADOR
-    // movimiento
-    // el input continuo es mejor procesarlo en el update
-    /*
-    if (ofGetKeyPressed(OF_KEY_LEFT)) {
-        game->getPlayer()->steerLeft();
-    }
-    else if (ofGetKeyPressed(OF_KEY_RIGHT)) {
-        game->getPlayer()->steerRight();
-    }
-    if (ofGetKeyPressed(OF_KEY_UP)) {
-        game->getPlayer()->accelerate();
-    }
-    else if (ofGetKeyPressed(OF_KEY_DOWN)) {
-        game->getPlayer()->brake();
-    }
-    */
-
-    State::update();
-    //game->updateGameObjects();
-};
     
 void PlayState::draw() {
     ofBackground(0);
@@ -52,31 +34,22 @@ void PlayState::draw() {
     ofPopMatrix();
 
     State::draw();
-    //game->drawGameObjects();
 };
 
 void PlayState::next() {
+    game->saveTime();
     game->changeState(new ResultState(game));
-    //game->setState(new ResultState(game));
 };
 
 
 void PlayState::handleInput() {
     State::handleInput();
-    // el input se maneja fuera del gameobject
-    // INPUT DEL JUGADOR
-    // luces
-    /*
-    if (ofGetKeyPressed('l')) {
-        game->getPlayer()->toggleLight();
-    }
-    */
 
-    // INPUT GENERAL
     // intercambiar entre el modo debug y el normal
     if (ofGetKeyPressed('d')) {
         game->toggleDebug();
     }
+    // pausar el juego
     else if (ofGetKeyPressed(game->OF_KEY_SPACE)) {
         game->pushState(new PauseState(game));
     }

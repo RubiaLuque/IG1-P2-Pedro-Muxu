@@ -20,9 +20,11 @@ protected:
     // marcar si está vivo o no para eliminarlo posteriormente
     bool bAlive;
     Game* game;
-    // se utiliza para determinar si se detectan las colisione si se utiliza la librería de físicas
+    // se utiliza para determinar si un objeto es estático o no
     // no es necesario utilizarlo, pero es para recargar menos al sistema
     bool fixed;
+    // determinar si un objeto es UI para saber si se somete a la cámara y al cálculo de profundidad
+    bool isUI;
 
     // posición y dimensiones del collider
     GameObject(Game* game, glm::vec3 pos, glm::vec3 dim);
@@ -50,6 +52,14 @@ public:
 
     inline bool isFixed() const {
         return fixed;
+    }
+
+    inline void enableFixed(bool enable) {
+        fixed = enable;
+    }
+
+    inline bool isUIElement() const {
+        return isUI;
     }
 };
 

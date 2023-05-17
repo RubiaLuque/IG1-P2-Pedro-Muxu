@@ -6,9 +6,11 @@
 
 class MenuState : public State {
 public:
+    const int OFFSET = 100;
+
     MenuState(Game* game) : State(game, ecs::_s_MAIN_MENU) { };
 
-    virtual void onEnter() { }
+    virtual void onEnter();
     virtual void draw();
     virtual void next();
 };

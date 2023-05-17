@@ -18,8 +18,6 @@ speed(0), bLight(false), coins(0) {
     faro.rotateDeg(-200, 1, 0, 0);
 }
 
-Player::~Player() {}
-
 void Player::update() {
     // INPUT
     // como se trata de movimiento continuo es mejor ponerlo en el update

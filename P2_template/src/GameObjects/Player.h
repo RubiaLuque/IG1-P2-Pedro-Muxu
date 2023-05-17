@@ -34,11 +34,8 @@ private:
     // desacelerar
     void brake();
 
-
 public:
-
     Player(Game* game);
-    ~Player();
 
     void update() override;
     void draw() override;

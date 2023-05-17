@@ -1,13 +1,12 @@
 #include "ofApp.h"
 #include "MenuState.h"
-#include "PlayState.h"
-#include "Player.h"
+#include "MenuState.h"
 #include "Utils/checkML.h"
 
 //--------------------------------------------------------------
 void ofApp::setup() {
     game = new Game();
-    game->pushState(new PlayState(game));
+    game->pushState(new MenuState(game));
     ofSetFrameRate(60);
 }
 
@@ -28,7 +27,6 @@ void ofApp::draw(){
     game->draw();
 }
 
-
 void ofApp::keyPressed(int key) {
     // pasar al siguiente estado
     // se hace por motivos de depuración
@@ -40,8 +38,7 @@ void ofApp::keyPressed(int key) {
     //game->keyPressed(key);
 }
 
-
-void ofApp::keyReleased(int key){
+void ofApp::keyReleased(int key) {
     game->handleInput();
     //game->keyReleased(key);
 }

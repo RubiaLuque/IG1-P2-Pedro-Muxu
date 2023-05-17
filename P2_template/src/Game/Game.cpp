@@ -2,12 +2,24 @@
 #include "Player.h"
 #include "../Utils/checkML.h"
 
+void Game::drawUIOrNot(bool isUIElement) {
+    if (bDebug) {
+        currentGameObjects()->drawDebug(isUIElement);
+    }
+    else {
+        currentGameObjects()->draw(isUIElement);
+    }
+}
+
 Game::Game() : bPlayerFinish(false), player(nullptr), bDebug(false),
-gameObjectsStates(), generator(nullptr), elapsedTime(0) {
+gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json") {
 
     for (auto& gameObjects : gameObjectsStates) {
         gameObjects = nullptr;
     }
+
+    font.load(FONT_PATH, FONT_SIZE);
+    assert(font.isLoaded());
 }
 
 Game::~Game() {
@@ -64,17 +76,14 @@ void Game::drawGameObjects() {
 
     cam.begin();
     {
-        if (bDebug) {
-            currentGameObjects()->drawDebug();
-        }
-        else {
-            currentGameObjects()->draw();
-        }
+        drawUIOrNot(false);
     }
     cam.end();
 
     ofDisableLighting();
     ofDisableDepthTest();
+
+    drawUIOrNot(true);
 }
 
 void Game::handleInputGameObjects() {
@@ -127,4 +136,52 @@ float Game::getEllapsedTime() {
     // diferencia de 1 segundo entre el de arriba y el de abajo
     return elapsedTime;
     // return ofGetElapsedTimef() - initTime;
+}
+
+void Game::saveTime() {
+
+    vector<float> times;
+    times.reserve(MAX_TIMES);
+
+    // la ruta es relativa a la carpeta data
+    ofFile file(ofToDataPath(timesPath));
+    if (file.exists()) {
+        ofJson json = ofLoadJson(file);
+        // serialización del archivo .json
+        // muestra lo que hay escrito
+        cout << json.dump() << endl;
+        auto jsonValue = json["times"];
+        if (jsonValue != nullptr && jsonValue.is_array()) {
+            for (auto& v : jsonValue) {
+                times.push_back(v);
+            }
+        }
+    }
+    else {
+        // crea el archivo
+        file.create();
+    }
+
+    times.push_back(elapsedTime);
+    std::sort(times.begin(), times.end());
+    if (times.size() > MAX_TIMES) {
+        times.pop_back();
+    }
+
+    ofJson json = ofLoadJson(timesPath);
+    json["times"] = times;
+
+    ofSavePrettyJson(timesPath, json);
+}
+
+vector<float> Game::loadTimes() {
+    // la ruta es relativa a la carpeta data
+    ofFile file(ofToDataPath(timesPath));
+    if (file.exists()) {
+        ofJson json = ofLoadJson(file);
+        auto jsonValue = json["times"];
+        if (jsonValue != nullptr && jsonValue.is_array()) {
+            return jsonValue;
+        }
+    }
 }

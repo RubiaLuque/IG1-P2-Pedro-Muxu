@@ -14,6 +14,11 @@ class Player;
 // Además, hereada de StateMachine
 class Game : public StateMachine {
 private:
+    static const int MAX_TIMES = 3;
+    const string FONT_PATH = "arial_narrow_7.ttf";
+    const int FONT_SIZE = 100;
+
+
     ofEasyCam cam;
     // el juego solo tiene referencia al player
     Player* player;
@@ -30,10 +35,14 @@ private:
     // contador con el tiempo que se está en el PlayState
     // se reinicia si ha terminado el juego y se vuelve a jugar
     float elapsedTime;
+    string timesPath;
+    ofTrueTypeFont font;
 
     inline GameObjectContainer* currentGameObjects() {
         return gameObjectsStates[currentState()->getId()];
     }
+
+    void drawUIOrNot(bool isUIElement);
 
 public:
     // Teclas que no están en el enum de openFrameworks
@@ -77,5 +86,21 @@ public:
     // en el estado PlayState
     float getEllapsedTime();
 
+    void saveTime();
+
+    vector<float> loadTimes();
+
+    inline ofTrueTypeFont getFont() const {
+        return font;
+    }
+
+    inline float getSizeRatio(float size) const {
+        return size / FONT_SIZE;
+    }
+
+    template<typename T>
+    inline T convertToProperSize(T value, float size) const {
+        return value * size / FONT_SIZE;
+    }
 };
 #endif

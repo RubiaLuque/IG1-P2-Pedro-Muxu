@@ -4,19 +4,19 @@
 #include "Game.h"
 #include "../Structure/State.h"
 
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp {
+private:
+	Game* game;
 
-	public:
-		virtual ~ofApp() {
-			delete game;
-		}
+public:
+	virtual ~ofApp() {
+		delete game;
+	}
 
-		void setup();
-		void update();
-		void draw();
+	void setup();
+	void update();
+	void draw();
 
-		void keyPressed(int key);
-		void keyReleased(int key);
-		
-        Game *game;
+	void keyPressed(int key);
+	void keyReleased(int key);
 };

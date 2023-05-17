@@ -7,9 +7,9 @@ class Game;
 
 class ResultState : public State {
 public:
-    ResultState(Game* game) : State(game, ecs::_s_RESULTS) { };
+    ResultState(Game* game) : State(game, ecs::_s_RESULTS) { }
 
-    virtual void onEnter() { }
+    virtual void onEnter();
     virtual void draw();
     virtual void next();
 };

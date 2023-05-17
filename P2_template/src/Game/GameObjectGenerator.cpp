@@ -40,6 +40,7 @@ void GameObjectGenerator::generateWorld() {
 
     // meta
     auto goal = new Goal(game, glm::vec3(0, roadPos.y, roadPos.z + L / 2), glm::vec3(W, 100, 100));
+    goal->enableFixed(true);
     game->addGameObject(goal);
 
     // moneda

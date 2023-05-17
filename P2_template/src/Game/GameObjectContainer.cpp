@@ -52,17 +52,21 @@ void GameObjectContainer::update() {
     removeDead();
 }
 
-void GameObjectContainer::draw(){
-    for(auto g: gameObjects){
-        if(g->isAlive()){
+void GameObjectContainer::draw(bool isUIElement) {
+    for (auto g : gameObjects) {
+        bool isUI = g->isUIElement() == isUIElement;
+        if (g->isAlive() && isUI) {
             g->draw();
         }
     }
 }
 
-void GameObjectContainer::drawDebug(){
-    for(auto g: gameObjects){
-        g->drawDebug();
+void GameObjectContainer::drawDebug(bool isUIElement) {
+    for (auto g : gameObjects) {
+        bool isUI = g->isUIElement() == isUIElement;
+        if (isUI) {
+            g->drawDebug();
+        }
     }
 }
 

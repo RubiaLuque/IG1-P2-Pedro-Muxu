@@ -29,9 +29,9 @@ public:
     // actualizar todos los objetos vivos
     void update();
     // dibujar todos los objetos vivos
-    void draw();
+    void draw(bool isUIElement);
     // dibujar las cajas de colisiones de los objetos vivos
-    void drawDebug();
+    void drawDebug(bool isUIElement);
     void handleInput();
 
     // obtener los objetos con los que está colisionando otro objeto

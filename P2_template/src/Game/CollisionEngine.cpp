@@ -28,7 +28,6 @@ void CollisionEngine::add(GameObject* g) {
     // añadir al sistema de físicas
     box->add();
     box->enableKinematic();
-    // se activa o no dependiendo de si conviene utilizar físicas o no
     if (!g->isFixed()) {
         box->activate();
     }
@@ -49,8 +48,8 @@ void CollisionEngine::updateObject(GameObject* g) {
 
 void CollisionEngine::update() {
     for (auto g : colliders) {
-        // si no está activado, no se mueve el collider porque no interesa
-        // comprobar las colisiones
+        // si no está activado, no se mueve el collider
+        // porque se trata de un objeto fijo
         if (!g->isFixed()) {
             updateObject(g);
         }

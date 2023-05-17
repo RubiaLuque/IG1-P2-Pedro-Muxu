@@ -1,5 +1,12 @@
 #include "PauseState.h"
 #include "../Utils/checkML.h"
+#include "../GameObjects/Text.h"
+
+void PauseState::onEnter() {
+    Text* text = new Text(game, glm::vec2(ofGetWidth() / 2, ofGetHeight() / 2), 50, "Press space to continue", game->getFont(), ofColor::white);
+    text->setOrigin(glm::vec2(0.5, 0.5));
+    game->addGameObject(text);
+}
 
 void PauseState::draw() {
     ofBackground(0);
