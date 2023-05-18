@@ -7,6 +7,11 @@
 class Game;
 class Player;
 
+// IMPORTANTE
+// EJE X -> ROJO
+// EJE Y -> VERDE
+// EJE Z -> AZUL
+
 // Clase abstracta
 class GameObject : public iCollide {
 public:

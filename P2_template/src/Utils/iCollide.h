@@ -5,6 +5,7 @@
 #include "BoxCollider.h"
 
 class Player;
+class Bullet;
 
 class iCollide {
 
@@ -23,6 +24,7 @@ public:
     // el propio objeto es el encargado de comprobar la colisiones con los demás objetos
     // los objetos que colisionen con el jugador deberán implementar este método
     virtual void receiveCarCollision(Player* car) {};
+    virtual void receiveBulletCollision(Bullet* bullet) {};
 
     BoxCollider* getCollider() {
         return boxCollider;

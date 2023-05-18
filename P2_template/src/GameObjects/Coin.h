@@ -11,9 +11,10 @@
 
 class Coin : public GameObject {
 private:
+    int coinsToAdd;
 
 public:
-    Coin(Game* game, glm::vec3 pos, glm::vec3 dim);
+    Coin(Game* game, glm::vec3 pos, glm::vec3 dim, int coinsToAdd);
 
     void receiveCarCollision(Player* car) override;
 };

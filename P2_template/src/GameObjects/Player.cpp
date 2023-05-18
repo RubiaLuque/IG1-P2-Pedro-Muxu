@@ -1,9 +1,11 @@
 #include "Player.h"
 #include "Game.h"
 #include "../Utils/checkML.h"
+#include "Bullet.h"
+#include "AreaRound.h"
 
-Player::Player(Game* game) :GameObject(game, glm::vec3(0, 0, 0), glm::vec3(100)),
-speed(0), bLight(false), coins(0) {
+Player::Player(Game* game) :GameObject(game, glm::vec3(0, 0, 0), glm::vec3(SIZE)),
+speed(0), bLight(false), coins(0), elapsedTime(0), bulletFired(false), rotation(0) {
     // usando el material se le da un color al objeto
     material.setDiffuseColor(ofColor::blue);
 
@@ -16,6 +18,9 @@ speed(0), bLight(false), coins(0) {
     faro.move(0, 0, 50);
     // rotarlo
     faro.rotateDeg(-200, 1, 0, 0);
+
+    AreaRound* areaRound = new AreaRound(game, &transform, SIZE);
+    game->addGameObject(areaRound);
 }
 
 void Player::update() {
@@ -45,6 +50,14 @@ void Player::update() {
     else if (speed < 0) {
         speed = 0;
     }
+
+    if (bulletFired) {
+        elapsedTime += ofGetLastFrameTime();
+        if (elapsedTime > BULLET_TIMER) {
+            elapsedTime = 0;
+            bulletFired = false;
+        }
+    }
 }
 
 void Player::draw() {
@@ -62,7 +75,6 @@ void Player::draw() {
 
 void Player::drawDebug() {
     GameObject::drawDebug();
-    //collider.drawWireframe();
 
     transform.transformGL();
     // se dibujan también los axis
@@ -74,6 +86,16 @@ void Player::handleInput() {
     if (ofGetKeyPressed('l')) {
         toggleLight();
     }
+    else if (ofGetKeyPressed('s')) {
+        if (coins > 0 && !bulletFired) {
+            --coins;
+            bulletFired = true;
+            // disparar bala
+            // pasamos siempre datos globales
+            Bullet* bullet = new Bullet(game, transform.getGlobalPosition(), SIZE / 2, transform.getGlobalOrientation());
+            game->addGameObject(bullet);
+        }
+    }
 }
 
 void Player::checkCollisions() {
@@ -83,37 +105,4 @@ void Player::checkCollisions() {
         // los objetos con los que ha colisionado hacen lo oportuno
         c->receiveCarCollision(this);
     }
-}
-
-void Player::steerLeft() {
-    transform.rotateDeg(1, 0, 2, 0);
-}
-
-void Player::steerRight() {
-    transform.rotateDeg(-1, 0, 2, 0);
-}
-
-void Player::accelerate() {
-    speed += 0.1;
-}
-
-void Player::brake() {
-    speed -= 0.1;
-}
-
-void Player::stop() {
-    speed = 0;
-    transform.setPosition(prevPos);
-}
-
-void Player::toggleLight() {
-    bLight = !bLight;
-}
-
-void Player::addCoins(int n) {
-    coins += n;
-}
-
-int Player::getCoins() {
-    return coins;
 }

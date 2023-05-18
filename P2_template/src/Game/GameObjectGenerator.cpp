@@ -7,56 +7,94 @@
 #include "Blockage.h"
 #include "Barrier.h"
 #include "Pedestrian.h"
+#include "Plane.h"
 #include "../Utils/checkML.h"
 
 GameObjectGenerator::GameObjectGenerator(Game* game) : game(game) { }
 
 void GameObjectGenerator::generateWorld() {
-    // carretera
-    glm::vec3 roadPos(0, -50.1, L / 2 - 1000);
-    auto road = new Road(game, roadPos, glm::vec3(W, 0, L));
-    game->addGameObject(road);
+    // CARRETERAS
+    auto road_left = new Road(game, glm::vec3(0, OFFSET_Y, 0), glm::vec3(WIDTH_ROAD, 0, LENGTH_ROAD));
+    game->addGameObject(road_left);
 
-    // tamaño de las paredes
-    int wallSize = 100;
+    auto road_right = new Road(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(WIDTH_ROAD, 0, LENGTH_ROAD));
+    game->addGameObject(road_right);
 
-    // muro formada por muchos bloques
-    /*
-    for (int l = 0; l < L; l += wallSize) {
-        auto wall_r = new Wall(game,
-            glm::vec3(-W / 2, roadPos.y, l - 1000 + wallSize / 2),
-            glm::vec3(wallSize));
-        game->addGameObject(wall_r);
-    }
-    */
+    auto road_top = new Road(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(LENGTH_ROAD - 2 * WIDTH_ROAD, 0, WIDTH_ROAD));
+    game->addGameObject(road_top);
 
-    // muro derecho de un solo bloque
-    auto wall_r = new Wall(game, glm::vec3(-W / 2, roadPos.y, roadPos.z), glm::vec3(100, 100, L));
-    game->addGameObject(wall_r);
+    auto road_back = new Road(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), glm::vec3(LENGTH_ROAD - 2 * WIDTH_ROAD, 0, WIDTH_ROAD));
+    game->addGameObject(road_back);
 
-    // muro izquierdo de un solo bloque
-    auto wall_l = new Wall(game, glm::vec3(W / 2, roadPos.y, roadPos.z), glm::vec3(wallSize, wallSize, L));
-    game->addGameObject(wall_l);
+    auto road_center = new Road(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(WIDTH_ROAD, 0, LENGTH_ROAD - 2 * WIDTH_ROAD), false);
+    game->addGameObject(road_center);
 
-    // meta
-    auto goal = new Goal(game, glm::vec3(0, roadPos.y, roadPos.z + L / 2), glm::vec3(W, 100, 100));
+
+    // MUROS EXTERIORES
+    auto wall_LEFT = new Wall(game, glm::vec3(WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(WALL_SIZE, WALL_SIZE, LENGTH_ROAD));
+    game->addGameObject(wall_LEFT);
+
+    auto wall_BACK = new Wall(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, -LENGTH_ROAD / 2), glm::vec3(LENGTH_ROAD + WALL_SIZE, WALL_SIZE, WALL_SIZE));
+    game->addGameObject(wall_BACK);
+
+    auto wall_RIGHT = new Wall(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD, OFFSET_Y, 0), glm::vec3(WALL_SIZE, WALL_SIZE, LENGTH_ROAD));
+    game->addGameObject(wall_RIGHT);
+
+    auto wall_TOP = new Wall(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, LENGTH_ROAD / 2), glm::vec3(LENGTH_ROAD + WALL_SIZE, WALL_SIZE, WALL_SIZE));
+    game->addGameObject(wall_TOP);
+
+    // MUROS INTERIORES
+    auto wall_left = new Wall(game, glm::vec3(-WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(WALL_SIZE, WALL_SIZE, LENGTH_ROAD - 2 * WIDTH_ROAD));
+    game->addGameObject(wall_left);
+    auto wall_right = new Wall(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD, OFFSET_Y, 0), glm::vec3(WALL_SIZE, WALL_SIZE, LENGTH_ROAD - 2 * WIDTH_ROAD));
+    game->addGameObject(wall_right);
+    // paredes verticales del centro
+    auto wall_1 = new Wall(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2 + WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(WALL_SIZE, WALL_SIZE, LENGTH_ROAD - 2 * WIDTH_ROAD));
+    game->addGameObject(wall_1);
+    auto wall_2 = new Wall(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2 - WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(WALL_SIZE, WALL_SIZE, LENGTH_ROAD - 2 * WIDTH_ROAD));
+    game->addGameObject(wall_2);
+
+    int centerHoleWidth = (LENGTH_ROAD - 2 * WIDTH_ROAD - WIDTH_ROAD) / 2;
+
+    auto wall_top_left = new Wall(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2 + WIDTH_ROAD / 2 + centerHoleWidth / 2, OFFSET_Y, LENGTH_ROAD / 2 - WIDTH_ROAD), glm::vec3(centerHoleWidth + WALL_SIZE, WALL_SIZE, WALL_SIZE));
+    game->addGameObject(wall_top_left);
+    auto wall_top_right = new Wall(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2 - WIDTH_ROAD / 2 - centerHoleWidth / 2, OFFSET_Y, LENGTH_ROAD / 2 - WIDTH_ROAD), glm::vec3(centerHoleWidth + WALL_SIZE, WALL_SIZE, WALL_SIZE));
+    game->addGameObject(wall_top_right);
+    auto wall_back_left = new Wall(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2 + WIDTH_ROAD / 2 + centerHoleWidth / 2, OFFSET_Y, -LENGTH_ROAD / 2 + WIDTH_ROAD), glm::vec3(centerHoleWidth + WALL_SIZE, WALL_SIZE, WALL_SIZE));
+    game->addGameObject(wall_back_left);
+    auto wall_back_right = new Wall(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2 - WIDTH_ROAD / 2 - centerHoleWidth / 2, OFFSET_Y, -LENGTH_ROAD / 2 + WIDTH_ROAD), glm::vec3(centerHoleWidth + WALL_SIZE, WALL_SIZE, WALL_SIZE));
+    game->addGameObject(wall_back_right);
+
+    // META
+    // lo importante es el ancho
+    auto goal = new Goal(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(WIDTH_ROAD, WALL_SIZE, WALL_SIZE));
     goal->enableFixed(true);
     game->addGameObject(goal);
 
-    // moneda
-    auto coin = new Coin(game, glm::vec3(0, 0, 2000), glm::vec3(50, 50, 50));
-    game->addGameObject(coin);
+    // MONEDAS
+    auto coin1 = new Coin(game, glm::vec3(0, 0, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(50), 2);
+    game->addGameObject(coin1);
+    auto coin2 = new Coin(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, 0, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(50), 2);
+    game->addGameObject(coin2);
+    auto coin3 = new Coin(game, glm::vec3(0, 0, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), glm::vec3(50), 2);
+    game->addGameObject(coin3);
+    auto coin4 = new Coin(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, 0, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), glm::vec3(50), 2);
+    game->addGameObject(coin4);
 
-    // obstaculo
-    auto blockage = new Blockage(game, glm::vec3(0, roadPos.y + 100, 300), glm::vec3(500, 200, 20)); // (ancho, altura, profundidad)
+    // OBSTACULO
+    auto blockage = new Blockage(game, glm::vec3(0, 0, 400), glm::vec3(500, 200, 20)); // (ancho, altura, profundidad)
     game->addGameObject(blockage);
 
-    // barrera
-    auto barrier = new Barrier(game, glm::vec3(500, roadPos.y + 100, 0), glm::vec3(400, 200, 50));
+    // BARRERA
+    auto barrier = new Barrier(game, glm::vec3(0, 100, -400), glm::vec3(400, 200, 50));
     game->addGameObject(barrier);
 
-    // peaton
-    auto pedestrian = new Pedestrian(game, glm::vec3(W / 2, roadPos.y, 1000), glm::vec3(50, 200, 50));
+    // PEATON
+    auto pedestrian = new Pedestrian(game, glm::vec3(WIDTH_ROAD / 2, 0, 1000), glm::vec3(50, 200, 50));
     game->addGameObject(pedestrian);
 
+    // AVION
+    // a lo ancho, hacia arriba, a lo largo
+    auto plane = new Plane(game, glm::vec3(0, 300, 2000), glm::vec3(50));
+    game->addGameObject(plane);
 }

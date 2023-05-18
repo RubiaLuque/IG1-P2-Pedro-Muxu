@@ -11,6 +11,10 @@ class Game;
 class Player : public GameObject {
 private:
     const int MAX_SPEED = 100;
+    const int BULLET_TIMER = 5;
+    const float SPEED_VARIATION = 0.1;
+    const float ROTATION_VARIATION = 1;
+    static const int SIZE = 100;
 
     // luz del coche
     ofLight faro;
@@ -21,18 +25,32 @@ private:
     glm::vec3 prevPos;
     // número de monedas
     int coins;
+    float elapsedTime;
+    bool bulletFired;
+    float rotation;
 
     // intercalar luces
-    void toggleLight();
+    inline void toggleLight() {
+        bLight = !bLight;
+    }
 
     // girar izquierda
-    void steerLeft();
+    inline void steerLeft() {
+        // DUDA: ¿por qué se pone un 2?
+        transform.rotateDeg(ROTATION_VARIATION, 0, 2, 0);
+    }
     // girar derecha
-    void steerRight();
+    inline void steerRight() {
+        transform.rotateDeg(-ROTATION_VARIATION, 0, 2, 0);
+    }
     // acelerar
-    void accelerate();
+    inline void accelerate() {
+        speed += SPEED_VARIATION;
+    }
     // desacelerar
-    void brake();
+    inline void brake() {
+        speed -= SPEED_VARIATION;
+    }
 
 public:
     Player(Game* game);
@@ -48,12 +66,19 @@ public:
     }
 
     // añadir monedas
-    void addCoins(int n = 1);
+    inline void addCoins(int n = 1) {
+        coins += n;
+    }
     // obtener monedas actuales
-    int getCoins();
+    inline int getCoins() const {
+        return coins;
+    }
 
     // parar en seco
-    void stop();
+    inline void stop() {
+        speed = 0;
+        transform.setPosition(prevPos);
+    }
 };
 
 #endif 

@@ -34,7 +34,7 @@ Si el coche le atropella, le daremos 100 monedas al Player.
 
 Usando una textura en el suelo vamos a implementar una mancha de aceite. Si el coche pisa la mancha, patinará durante los siguientes segundos (podéis usar random para mover el coche de izquierda a derecha).
 
-### Tierra:	(Pedro)
+### Tierra:	(Pedro)	HECHO
 
 Vamos a usar una textura en el suelo que al pasar por la misma el coche reduce su velocidad, no se frena completamente. 
 
@@ -64,7 +64,7 @@ Si la bomba le cae cerca, pero no encima, el coche se da la vuelta debido a la o
 
 ### La carretera:
 
-(Pedro) -> Carretera
+(Pedro) -> Carretera	HECHO
 (Muxu) -> Obstáculos
 
 El profesor ha dicho que NO lo hagamos porque el juego peta ¿?

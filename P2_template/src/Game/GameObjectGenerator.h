@@ -10,8 +10,10 @@ class GameObjectGenerator{
 private:
     // CONSTANTES CON LAS POSICIONES
     // tamaños de los muros de los lados
-    const int W = 2000;
-    const int L = 10000;
+    const int WIDTH_ROAD = 2000;
+    const int LENGTH_ROAD = 10000;
+    const int WALL_SIZE = 100;
+    const float OFFSET_Y = -50.1;
 
     Game *game;
     
@@ -20,6 +22,4 @@ public:
     
     void generateWorld();
 };
-
-
 #endif

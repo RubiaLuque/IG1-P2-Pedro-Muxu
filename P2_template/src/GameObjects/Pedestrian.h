@@ -5,14 +5,14 @@
 #define Person_h
 
 #include "../Structure/GameObject.h"
-
 #include "ofxAssimpModelLoader.h"
 
 class Pedestrian : public GameObject {
 private:
+    const string MODEL_PATH = "astroBoy_walk.dae";
+
     float speed;
     bool bTurned;
-    string modelPath;
     ofxAssimpModelLoader model;
 
 public:
@@ -21,9 +21,8 @@ public:
     virtual void update();
     void draw() override;
     void receiveCarCollision(Player* car) override;
-    //void receiveBulletCollision(GameObject* bullet) override;
+    void receiveBulletCollision(Bullet* bullet) override;
 
-    //void checkCollisions() override;
     void turn();
 };
 #endif /* Person_h */

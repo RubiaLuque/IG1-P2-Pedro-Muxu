@@ -2,10 +2,21 @@
 #include "Game.h"
 #include "../Utils/checkML.h"
 
-Road::Road(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos, dim) {
-    plane.setParent(transform);
+void Road::enableLight(bool enable) {
+    if (enable) {
+        light.enable();
+    }
+    else {
+        light.disable();
+    }
+}
+
+Road::Road(Game* game, glm::vec3 pos, glm::vec3 dim, bool lightEnabled) :
+    GameObject(game, pos, dim), lightEnabled(lightEnabled) {
 
     // CARRETERA
+    plane.setParent(transform);
+
     // color
     material.setDiffuseColor(ofColor::darkGrey);
     // rotar el plano
@@ -15,12 +26,14 @@ Road::Road(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos, dim
 
     // LUZ DE LA CARRETERA
     // posición
-    light.setPosition(200, 200, 200);
+    light.setPosition(pos.x, 350, pos.z);
+    light.setAttenuation(2);
+    //light.setPosition(200, 200, 200);
     light.setDiffuseColor(ofColor::white);
 }
 
 void Road::draw() {
-    light.enable();
+    enableLight(lightEnabled);
     material.begin();
     {
         plane.draw();

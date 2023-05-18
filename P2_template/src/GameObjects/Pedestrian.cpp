@@ -2,15 +2,16 @@
 #include "Player.h"
 #include "Game.h"
 #include "../Utils/checkML.h"
+#include "Bullet.h"
 
 Pedestrian::Pedestrian(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos, dim),
-speed(6), bTurned(false), modelPath("astroBoy_walk.dae") {
+speed(6), bTurned(false) {
 
     // ajustar el collider de acuerdo al modelo
     boxCollider->move(0, dim.y / 2 - 25, 0);
 
     // cargar el modelo
-    assert(model.loadModel(modelPath));
+    assert(model.loadModel(MODEL_PATH));
 
     // colocar inicialmente el modelo
     model.setRotation(0, 180, 1, 0, 0);
@@ -45,13 +46,15 @@ void Pedestrian::receiveCarCollision(Player* car) {
     //game->doScream();
 };
 
-//void Pedestrian::receiveBulletCollision(GameObject* bullet) {
-//
-//    bullet->kill();
-//    kill();
-//    game->getPlayer()->addCoins(1000);
-//
-//};
+void Pedestrian::receiveBulletCollision(Bullet* bullet) {
+    // se elimina la bala
+    bullet->kill();
+    // se elimina a sí mismo
+    kill();
+    // se añade dinero
+    game->getPlayer()->addCoins(10);
+
+};
 
 void Pedestrian::turn() {
     if (!bTurned) {
@@ -60,10 +63,3 @@ void Pedestrian::turn() {
         bTurned = true;
     }
 }
-
-//void Pedestrian::checkCollisions() {
-//    vector<GameObject*> collisions = game->getCollisions(this);
-//    for (auto c : collisions) {
-//        c->receivePedestrianCollision(this);
-//    }
-//}
