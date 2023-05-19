@@ -111,8 +111,8 @@ void GameObjectGenerator::generateWorld() {
 
     // AVION
     // a lo ancho, hacia arriba, a lo largo
-    /*auto plane = new Plane(game, glm::vec3(0, 150, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(0, 150, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), 100, OFFSET_Y);
-    game->addGameObject(plane);*/
+    auto plane = new Plane(game, glm::vec3(0, 150, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(0, 150, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), 100, OFFSET_Y);
+    game->addGameObject(plane);
 
     // HUECOS
     auto hole_left = new Hole(game, glm::vec3(3 * WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(2 * WIDTH_ROAD, WALL_SIZE / 100, LENGTH_ROAD + WIDTH_ROAD * 4));

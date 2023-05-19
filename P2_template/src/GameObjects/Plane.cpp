@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Bomb.h"
 #include "../Game/Game.h"
+#include "../ofApp.h"
 
 bool Plane::hasReachedPoint() {
 	glm::vec3 actPos = transform.getPosition();
@@ -45,7 +46,7 @@ Plane::Plane(Game* game, glm::vec3 start, glm::vec3 end, float height, float lim
 	GameObject(game, start, glm::vec3(6 * height, height, 3 * height)), start(start), end(end), pointToReach(end),
 	elapsedTime(0), limitY(limitY) {
 
-	assert(model.loadModel(MODEL_PATH));
+	//assert(model.loadModel(ofToDataPath(MODEL_PATH)));
 	model.setRotation(0, 180, 0, 0, 1);
 	model.setScale(height / 100, height / 100, height / 100);
 
