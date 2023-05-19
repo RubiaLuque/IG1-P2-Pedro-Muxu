@@ -3,20 +3,19 @@
 #include "../Structure/GameObject.h"
 
 
-//#define MUXU
-#define PEDRO
+#define MUXU
+//#define PEDRO
 
 class Plane : public GameObject {
 private:
 	// no tiene animaciones
 #ifdef PEDRO
-	const string MODEL_PATH = "aircraft.obj";
-#endif
-
-#ifdef MUXU
 	const string MODEL_PATH = "aircraft.mtl";
 #endif
 
+#ifdef MUXU
+	const string MODEL_PATH = "aircraft.obj";
+#endif
 	// mitad del lado del cubo que se utiliza para comprobar si el avión
 	// ha llegado a cierto punto
 	const int OFFSET = 10;

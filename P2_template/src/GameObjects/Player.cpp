@@ -16,15 +16,9 @@ void Player::move() {
     }
 }
 
-void Player::fall() {
-    setInputActivated(false);
-    falling = true;
-    
-}
-
 void Player::continuousInput() {
     // como se trata de movimiento continuo es mejor ponerlo en el update
-    if (inputActivated && !falling) {
+    if (inputActivated) {
         if (ofGetKeyPressed(OF_KEY_LEFT)) {
             steerLeft();
         }
@@ -55,7 +49,7 @@ void Player::jump() {
 
 Player::Player(Game* game, glm::vec3 pos) :GameObject(game, pos, glm::vec3(SIZE)),
 speed(0), bLight(false), coins(0), elapsedTime(0), bulletFired(false), rotation(0), inputActivated(true), originalPos(0),
-verticalSpeed(0), falling(false), fallingTime(0) {
+verticalSpeed(0) {
     // usando el material se le da un color al objeto
     material.setDiffuseColor(ofColor::blue);
 
@@ -88,17 +82,6 @@ void Player::update() {
             bulletFired = false;
         }
     }
-
-    if (falling) {
-        transform.setPosition({ transform.getX(), transform.getY() - FALL_OFFSET, transform.getZ() });
-        fallingTime += ofGetLastFrameTime();
-        if (fallingTime >= FALLING_TIMER) {
-            fallingTime = 0;
-            falling = false;
-            setInputActivated(true);
-            resetPos();
-        }
-    }
 }
 
 void Player::draw() {
@@ -124,7 +107,7 @@ void Player::drawDebug() {
 }
 
 void Player::handleInput() {
-    if (inputActivated && !falling) {
+    if (inputActivated) {
         if (ofGetKeyPressed('l')) {
             toggleLight();
         }
