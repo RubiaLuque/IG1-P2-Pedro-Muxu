@@ -1,3 +1,4 @@
+/*
 #include "CollisionEngine.h"
 #include "../Structure/GameObject.h"
 #include "Game.h"
@@ -91,6 +92,8 @@ vector<GameObject*> CollisionEngine::getCollisions(GameObject* g) {
 };
 
 void CollisionEngine::remove(GameObject* g) {
-    g->getCollider()->collisionObject->remove();
+    // solo se puede uno de los dos
+    //g->getCollider()->collisionObject->remove();
     delete g->getCollider()->collisionObject;
 };
+*/

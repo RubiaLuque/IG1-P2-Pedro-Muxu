@@ -9,8 +9,10 @@
 #include "Pedestrian.h"
 #include "Plane.h"
 #include "Hole.h"
-#include "../Utils/checkML.h"
 #include "Ground.h"
+#include "CrazyBow.h"
+#include "Well.h"
+#include "../Utils/checkML.h"
 
 GameObjectGenerator::GameObjectGenerator(Game* game) : game(game) { }
 
@@ -129,4 +131,15 @@ void GameObjectGenerator::generateWorld() {
     // TIERRA QUE REDUCE LA VELOCIDAD
     auto ground = new Ground(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(500, 50, 500), 80);
     game->addGameObject(ground);
+
+    //POZO
+    auto well = new Well(game, glm::vec3(WIDTH_ROAD - LENGTH_ROAD, OFFSET_Y, 0), glm::vec3(400, 30, 400), 500);
+    game->addGameObject(well);
+
+    //ARCO LOCO
+    auto crazyBow = new CrazyBow(game, glm::vec3(-WIDTH_ROAD, OFFSET_Y + HEIGHT_BOW / 2, LENGTH_ROAD / 2 - WIDTH_ROAD / 2),
+        glm::vec3(WIDTH_ROAD, HEIGHT_BOW, WALL_SIZE), 18, 4, 30, glm::vec4(-90, 0, 1, 0), 10);
+    crazyBow->enableFixed(true);
+    game->addGameObject(crazyBow);
+
 }

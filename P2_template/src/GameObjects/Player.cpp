@@ -16,6 +16,11 @@ void Player::move() {
     }
 }
 
+void Player::fall() {
+    setInputActivated(false);
+    falling = true;
+}
+
 void Player::continuousInput() {
     // como se trata de movimiento continuo es mejor ponerlo en el update
     if (inputActivated) {
@@ -49,7 +54,7 @@ void Player::jump() {
 
 Player::Player(Game* game, glm::vec3 pos) :GameObject(game, pos, glm::vec3(SIZE)),
 speed(0), bLight(false), coins(0), elapsedTime(0), bulletFired(false), rotation(0), inputActivated(true), originalPos(0),
-verticalSpeed(0) {
+verticalSpeed(0), falling(false), fallingTime(0) {
     // usando el material se le da un color al objeto
     material.setDiffuseColor(ofColor::blue);
 
@@ -75,11 +80,24 @@ void Player::update() {
 
     move();
 
+    // contador para poder volver a disparar una bala
     if (bulletFired) {
         elapsedTime += ofGetLastFrameTime();
         if (elapsedTime > BULLET_TIMER) {
             elapsedTime = 0;
             bulletFired = false;
+        }
+    }
+
+    if (falling) {
+        transform.move(transform.getYAxis() * FALL_OFFSET * ofGetLastFrameTime());
+        //transform.setPosition({ transform.getX(), transform.getY() - FALL_OFFSET, transform.getZ() });
+        fallingTime += ofGetLastFrameTime();
+        if (fallingTime >= FALLING_TIMER) {
+            fallingTime = 0;
+            falling = false;
+            setInputActivated(true);
+            resetPos();
         }
     }
 }

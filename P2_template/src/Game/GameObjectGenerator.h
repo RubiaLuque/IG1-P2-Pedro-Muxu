@@ -16,6 +16,7 @@ private:
     const float OFFSET_Y = -50.1;
     const int HEIGHT_GOAL = 500;
     const int SIZE_GOAL_BARS = 50;
+    const int HEIGHT_BOW = 300;
 
     Game *game;
     

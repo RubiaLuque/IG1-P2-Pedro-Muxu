@@ -1,5 +1,6 @@
 #include "Barrier.h"
 #include "Player.h"
+#include "Bullet.h"
 #include "../Utils/checkML.h"
 
 Barrier::Barrier(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos, dim), bTime(0) {
@@ -23,4 +24,9 @@ void Barrier::update() {
 
 void Barrier::receiveCarCollision(Player* car) {
     car->stop();
+}
+
+void Barrier::receiveBulletCollision(Bullet* bullet) {
+    bullet->kill();
+    kill();
 }

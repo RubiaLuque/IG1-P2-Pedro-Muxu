@@ -17,6 +17,7 @@ public:
 
 	virtual void update();
 	void receiveCarCollision(Player* car) override;
+	void receiveBulletCollision(Bullet* bullet) override;
 
 };
 #endif

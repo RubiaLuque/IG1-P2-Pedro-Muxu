@@ -1,5 +1,6 @@
 #ifndef CollisionEngine_h
 #define CollisionEngine_h
+/*
 
 #include "ofMain.h"
 #include "ofxBullet.h"
@@ -34,4 +35,5 @@ public:
     vector<GameObject*> getCollisions(GameObject* g);
 };
 
+*/
 #endif /* CollisionEngine_h */
