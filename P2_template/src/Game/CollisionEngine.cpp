@@ -1,5 +1,3 @@
-#ifdef LIBRARY
-
 #include "CollisionEngine.h"
 #include "../Structure/GameObject.h"
 #include "Game.h"
@@ -96,5 +94,3 @@ void CollisionEngine::remove(GameObject* g) {
     g->getCollider()->collisionObject->remove();
     delete g->getCollider()->collisionObject;
 };
-
-#endif

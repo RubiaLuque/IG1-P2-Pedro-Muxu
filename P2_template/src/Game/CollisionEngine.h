@@ -1,11 +1,8 @@
-
-#ifdef LIBRARY
-
 #ifndef CollisionEngine_h
 #define CollisionEngine_h
 
 #include "ofMain.h"
-#include "../addons/ofxBullet/src/ofxBullet.h"
+#include "ofxBullet.h"
 class Game;
 class GameObject;
 
@@ -38,5 +35,3 @@ public:
 };
 
 #endif /* CollisionEngine_h */
-
-#endif //LIBRARY

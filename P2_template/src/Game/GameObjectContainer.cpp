@@ -1,16 +1,13 @@
 #include "GameObjectContainer.h"
 #include "../Structure/GameObject.h"
-#ifdef LIBRARY
 #include "CollisionEngine.h"
-#endif
 
 // SE UTILIZA PARA ALTERNAR ENTRE LAS FÍSICAS CON Y SIN LIBRERÍA
 //#define LIBRARY
 
-GameObjectContainer::GameObjectContainer() {
+GameObjectContainer::GameObjectContainer() : collisionEngine(nullptr) {
     // LIBRERÍA FÍSICAS
 #ifdef LIBRARY
-    collisionEngine = nullptr;
     collisionEngine = new CollisionEngine(gameObjects);
 #endif
 }
@@ -25,11 +22,9 @@ void GameObjectContainer::add(GameObject* g) {
 
 GameObjectContainer::~GameObjectContainer(){
     clear();
-#ifdef LIBRARY
     if (collisionEngine != nullptr) {
         delete collisionEngine;
     }
-#endif
 }
 
 void GameObjectContainer::update() {
