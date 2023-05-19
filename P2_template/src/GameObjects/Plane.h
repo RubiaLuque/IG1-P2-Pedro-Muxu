@@ -4,27 +4,31 @@
 
 class Plane : public GameObject {
 private:
-	const string MODEL_PATH = "Heli_bell.fbx";
+	// no tiene animaciones
+	const string MODEL_PATH = "aircraft.obj";
+	// mitad del lado del cubo que se utiliza para comprobar si el avión
+	// ha llegado a cierto punto
+	const int OFFSET = 10;
+	const int SPEED = 300;
+	const int BOMB_TIMER = 10;
 
-		ofxAssimpModelLoader model;
+	ofxAssimpModelLoader model;
+	glm::vec3 start;
+	glm::vec3 end;
+	glm::vec3 pointToReach;
+	float elapsedTime;
+	float limitY;
+
+	bool hasReachedPoint();
+
+	glm::vec3 direction();
 
 public:
-	Plane(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos, dim) {
+	Plane(Game* game, glm::vec3 start, glm::vec3 end, float height, float limitY);
 
-		assert(model.loadModel(MODEL_PATH));
-		model.setRotation(0, -180, 1, 0, 0);
-	}
+	virtual void draw();
 
-	virtual void update() {
-		model.update();
-	}
+	virtual void update();
 
-	virtual void draw() {
-		ofDisableArbTex();
-		transform.transformGL();
-		{
-			model.drawFaces();
-		}
-		transform.restoreTransformGL();
-	}
+	virtual void receiveCarCollision(Player* car);
 };

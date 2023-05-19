@@ -10,19 +10,21 @@
 class Pedestrian : public GameObject {
 private:
     const string MODEL_PATH = "astroBoy_walk.dae";
+    const int SPEED = 300;
+    const int COINS = 100;
 
-    float speed;
-    bool bTurned;
     ofxAssimpModelLoader model;
 
 public:
-    Pedestrian(Game* game, glm::vec3 pos, glm::vec3 dim);
+    Pedestrian(Game* game, glm::vec3 pos, float height, glm::vec4 rotation);
 
     virtual void update();
     void draw() override;
+    virtual void checkCollisions();
     void receiveCarCollision(Player* car) override;
     void receiveBulletCollision(Bullet* bullet) override;
 
-    void turn();
+    void turnBack();
 };
+
 #endif /* Person_h */

@@ -2,7 +2,7 @@
 #include "../Structure/GameObject.h"
 
 class Text : public GameObject {
-private:
+protected:
 	string text;
 	glm::vec2 pos;
 	ofColor color;
@@ -10,35 +10,14 @@ private:
 	int size;
 	ofTrueTypeFont font;
 
-	void show() {
-		ofPushMatrix();
-		ofPushStyle();
-		{
-			ofSetColor(color);
-			ofTranslate(pos.x + offset.x, pos.y + offset.y);
-			ofScale(game->getSizeRatio(size));
-			font.drawString(text, 0, 0);
-		}
-		ofPopStyle();
-		ofPopMatrix();
-	}
+	void show();
 
 public:
-	Text(Game* game, glm::vec2 pos, int size, string text, ofTrueTypeFont font, ofColor color) :
-		GameObject(game, glm::vec3(pos, 0), glm::vec3(size)), text(text), pos(pos), color(color), offset(0, 0), size(size), font(font) {
-		isUI = true;
-	}
+	Text(Game* game, glm::vec2 pos, int size, string text, ofTrueTypeFont font, ofColor color);
 
-	inline void setOrigin(glm::vec2 origin) {
-		offset = glm::vec2(-font.stringWidth(text) * origin.x, -font.stringHeight(text) * origin.y);
-		offset = game->convertToProperSize<glm::vec2>(offset, size);
-	}
+	void setOrigin(glm::vec2 origin);
 
-	virtual void draw() {
-		show();
-	}
+	virtual void draw();
 
-	virtual void drawDebug() {
-		show();
-	}
+	virtual void drawDebug();
 };

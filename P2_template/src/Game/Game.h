@@ -17,7 +17,8 @@ private:
     static const int MAX_TIMES = 3;
     const string FONT_PATH = "arial_narrow_7.ttf";
     const int FONT_SIZE = 100;
-
+    const string EXPLOSION_PATH = "explosion.wav";
+    const string GROUND_TEXTURE_PATH = "TexturesCom_Ground_ForestMoss02_header.jpg";
 
     ofEasyCam cam;
     // el juego solo tiene referencia al player
@@ -36,7 +37,12 @@ private:
     // se reinicia si ha terminado el juego y se vuelve a jugar
     float elapsedTime;
     string timesPath;
+    bool gameHasStarted;
+
+    // RECURSOS
     ofTrueTypeFont font;
+    ofSoundPlayer explosionSound;
+    ofTexture groundTexture;
 
     inline GameObjectContainer* currentGameObjects() {
         return gameObjectsStates[currentState()->getId()];
@@ -94,6 +100,14 @@ public:
         return font;
     }
 
+    inline ofSoundPlayer getExplosionSound() const {
+        return explosionSound;
+    }
+
+    inline ofTexture getGroundTexture() const {
+        return groundTexture;
+    }
+
     inline float getSizeRatio(float size) const {
         return size / FONT_SIZE;
     }
@@ -101,6 +115,10 @@ public:
     template<typename T>
     inline T convertToProperSize(T value, float size) const {
         return value * size / FONT_SIZE;
+    }
+
+    inline void setGameHasStarted(bool hasStarted) {
+        gameHasStarted = hasStarted;
     }
 };
 #endif

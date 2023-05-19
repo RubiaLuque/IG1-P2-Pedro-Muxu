@@ -3,7 +3,7 @@
 #include "../GameObjects/Text.h"
 
 void PauseState::onEnter() {
-    Text* text = new Text(game, glm::vec2(ofGetWidth() / 2, ofGetHeight() / 2), 50, "Press space to continue", game->getFont(), ofColor::white);
+    Text* text = new Text(game, glm::vec2(ofGetWidth() / 2, ofGetHeight() / 2), 50, "Press p to continue", game->getFont(), ofColor::white);
     text->setOrigin(glm::vec2(0.5, 0.5));
     game->addGameObject(text);
 }
@@ -21,7 +21,7 @@ void PauseState::handleInput() {
     // siempre se pone al final
     // porque sino se habrá eliminado el estado, pero quedará por ejecutar el handleInput de los gameobjects
     // y no se podrá hacer
-    if (ofGetKeyPressed(game->OF_KEY_SPACE)) {
+    if (ofGetKeyPressed('p')) {
         game->popState();
     }
 }

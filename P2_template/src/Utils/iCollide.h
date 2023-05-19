@@ -6,6 +6,8 @@
 
 class Player;
 class Bullet;
+class Pedestrian;
+class Bomb;
 
 class iCollide {
 
@@ -21,10 +23,11 @@ public:
         delete boxCollider;
     }
 
-    // el propio objeto es el encargado de comprobar la colisiones con los demás objetos
-    // los objetos que colisionen con el jugador deberán implementar este método
+    // el propio objeto es el encargado de comprobar las colisiones con los demás objetos
     virtual void receiveCarCollision(Player* car) {};
     virtual void receiveBulletCollision(Bullet* bullet) {};
+    virtual void receivePedestrianCollision(Pedestrian* pedestrian) {};
+    virtual void receiveBombCollision(Bomb* bomb) {}
 
     BoxCollider* getCollider() {
         return boxCollider;

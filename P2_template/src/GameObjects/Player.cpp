@@ -4,8 +4,52 @@
 #include "Bullet.h"
 #include "AreaRound.h"
 
-Player::Player(Game* game) :GameObject(game, glm::vec3(0, 0, 0), glm::vec3(SIZE)),
-speed(0), bLight(false), coins(0), elapsedTime(0), bulletFired(false), rotation(0) {
+void Player::move() {
+    prevPos = transform.getPosition();
+    transform.move(transform.getZAxis() * speed * ofGetLastFrameTime());
+
+    if (speed > MAX_SPEED) {
+        speed = MAX_SPEED;
+    }
+    else if (speed < 0) {
+        speed = 0;
+    }
+}
+
+void Player::continuousInput() {
+    // como se trata de movimiento continuo es mejor ponerlo en el update
+    if (inputActivated) {
+        if (ofGetKeyPressed(OF_KEY_LEFT)) {
+            steerLeft();
+        }
+        else if (ofGetKeyPressed(OF_KEY_RIGHT)) {
+            steerRight();
+        }
+        if (ofGetKeyPressed(OF_KEY_UP)) {
+            accelerate();
+        }
+        else if (ofGetKeyPressed(OF_KEY_DOWN)) {
+            brake();
+        }
+    }
+}
+
+void Player::jump() {
+    verticalSpeed += -GRAVITY * GRAVITY_SCALE * ofGetLastFrameTime();
+    if (isOnGround() && verticalSpeed < 0) {
+        verticalSpeed = 0;
+        glm::vec3 actPos = transform.getPosition();
+        transform.setPosition(actPos.x, originalPos.y, actPos.z);
+    }
+    if (ofGetKeyPressed(game->OF_KEY_SPACE) && isOnGround() && inputActivated) {
+        verticalSpeed = JUMPFORCE;
+    }
+    transform.move(transform.getYAxis() * verticalSpeed * ofGetLastFrameTime());
+}
+
+Player::Player(Game* game, glm::vec3 pos) :GameObject(game, pos, glm::vec3(SIZE)),
+speed(0), bLight(false), coins(0), elapsedTime(0), bulletFired(false), rotation(0), inputActivated(true), originalPos(0),
+verticalSpeed(0) {
     // usando el material se le da un color al objeto
     material.setDiffuseColor(ofColor::blue);
 
@@ -24,32 +68,12 @@ speed(0), bLight(false), coins(0), elapsedTime(0), bulletFired(false), rotation(
 }
 
 void Player::update() {
-    // INPUT
-    // como se trata de movimiento continuo es mejor ponerlo en el update
-    // rotar
-    if (ofGetKeyPressed(OF_KEY_LEFT)) {
-        steerLeft();
-    }
-    else if (ofGetKeyPressed(OF_KEY_RIGHT)) {
-        steerRight();
-    }
-    if (ofGetKeyPressed(OF_KEY_UP)) {
-        accelerate();
-    }
-    else if (ofGetKeyPressed(OF_KEY_DOWN)) {
-        brake();
-    }
 
-    // MOVERLO
-    prevPos = transform.getPosition();
-    transform.move(transform.getZAxis() * speed);
+    jump();
 
-    if (speed > MAX_SPEED) {
-        speed = MAX_SPEED;
-    }
-    else if (speed < 0) {
-        speed = 0;
-    }
+    continuousInput();
+
+    move();
 
     if (bulletFired) {
         elapsedTime += ofGetLastFrameTime();
@@ -83,17 +107,19 @@ void Player::drawDebug() {
 }
 
 void Player::handleInput() {
-    if (ofGetKeyPressed('l')) {
-        toggleLight();
-    }
-    else if (ofGetKeyPressed('s')) {
-        if (coins > 0 && !bulletFired) {
-            --coins;
-            bulletFired = true;
-            // disparar bala
-            // pasamos siempre datos globales
-            Bullet* bullet = new Bullet(game, transform.getGlobalPosition(), SIZE / 2, transform.getGlobalOrientation());
-            game->addGameObject(bullet);
+    if (inputActivated) {
+        if (ofGetKeyPressed('l')) {
+            toggleLight();
+        }
+        else if (ofGetKeyPressed('s')) {
+            if (coins > 0 && !bulletFired) {
+                --coins;
+                bulletFired = true;
+                // disparar bala
+                // pasamos siempre datos globales
+                Bullet* bullet = new Bullet(game, transform.getGlobalPosition(), transform.getGlobalOrientation());
+                game->addGameObject(bullet);
+            }
         }
     }
 }

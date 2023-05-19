@@ -12,14 +12,32 @@ void Game::drawUIOrNot(bool isUIElement) {
 }
 
 Game::Game() : bPlayerFinish(false), player(nullptr), bDebug(false),
-gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json") {
+gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json"), gameHasStarted(false) {
 
     for (auto& gameObjects : gameObjectsStates) {
         gameObjects = nullptr;
     }
 
+    // RECURSOS
+    // TEXTURAS
+    // se dejan de usar texturas rectangulares y se utilizan texturas 2D,
+    // que son las que se utilizan en los dispositivos modernos
+    ofDisableArbTex();
+    // un mipmap es una imagen que contine la textura en diferentes resoluciones
+    // cuando se mira desde cerca, se utiliza la de mayor resolución
+    // y cuando se mira desde lejos, se usa de la menor resolución
+    groundTexture.enableMipmap();
+    ofLoadImage(groundTexture, GROUND_TEXTURE_PATH);
+
+    // FUENTES
     font.load(FONT_PATH, FONT_SIZE);
     assert(font.isLoaded());
+
+    // SONIDOS
+    explosionSound.load(EXPLOSION_PATH);
+    // se puede reproducir un sonido varias veces a la vez
+    explosionSound.setMultiPlay(true);
+    assert(explosionSound.isLoaded());
 }
 
 Game::~Game() {
@@ -44,7 +62,7 @@ void Game::initGame() {
     generator = new GameObjectGenerator(this);
 
     // se crea el player
-    player = new Player(this);
+    player = new Player(this, glm::vec3(0, 0, 0));
     addGameObject(player);
 
     // se setea la posición de la cámara
@@ -63,7 +81,7 @@ void Game::initGame() {
 
 void Game::updateGameObjects() {
     // contador de tiempo, solo funciona durante el estado Play
-    if (currentState()->getId() == ecs::_s_PLAY) {
+    if (currentState()->getId() == ecs::_s_PLAY && gameHasStarted) {
         elapsedTime += ofGetLastFrameTime();
     }
 

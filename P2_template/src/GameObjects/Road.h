@@ -7,9 +7,8 @@ class Road : public GameObject {
 private:
     ofLight light;
     ofPlanePrimitive plane;
-    bool lightEnabled;
 
-    void enableLight(bool enable);
+    void enableLight(bool enable, glm::vec2 roadCenter);
 
 public:
     Road(Game* game, glm::vec3 pos, glm::vec3 dim, bool lightEnabled = true);

@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "../Utils/checkML.h"
 
-Goal::Goal(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos, dim) {
+Goal::Goal(Game* game, glm::vec3 pos, glm::vec3 dim, int sizeBars) : GameObject(game, pos, dim), sizeBars(sizeBars) {
     // material
     material.setEmissiveColor(ofColor::green);
 }
@@ -15,10 +15,11 @@ void Goal::draw() {
     {
         // la meta está formada por varios cubos del mismo tamaño
         // todos los cubos se tienen que colocar con las transformaciones del nodo
-        transform.transformGL(); {
-            ofDrawBox(-boxCollider->getWidth() / 2, 250, 0, 50, 500, 50);
-            ofDrawBox(boxCollider->getWidth() / 2, 250, 0, 50, 500, 50);
-            ofDrawBox(0, 500, 0, boxCollider->getWidth(), 50, 50);
+        transform.transformGL();
+        {
+            ofDrawBox(-boxCollider->getWidth() / 2, 0, 0, sizeBars, boxCollider->getHeight(), sizeBars);
+            ofDrawBox(boxCollider->getWidth() / 2, 0, 0, sizeBars, boxCollider->getHeight(), sizeBars);
+            ofDrawBox(0, boxCollider->getHeight() / 2, 0, boxCollider->getWidth(), sizeBars, sizeBars);
         }
         transform.restoreTransformGL();
     }

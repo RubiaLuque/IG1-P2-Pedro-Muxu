@@ -3,7 +3,7 @@
 Vamos a crear un juego de coches basado en la plantilla que os he creado. Podéis modificar o extender cosas, conforme vayáis implementando las diferentes extensiones.
 Las descripciones de las extensiones son muy generales, vosotros deberéis decidir sus detalles de implementación.
 
-### Obstáculo:	(Muxu) HECHO   Nota: falta distribución aleatoria, pero eso es una vez hecha la pista definitiva
+### Obstáculo:	(Muxu) HECHO
 
 Vamos a crear obstáculos que están distribuidos aleatoriamente por la pista.
 Si el coche colisiona se frena.
@@ -44,7 +44,7 @@ Vamos a usar una textura en el suelo que al pasar por la misma el coche reduce s
 Vamos a colocar una grúa en la carretera, tiene que ser un objeto que gire y que tenga gancho que suba y baje
 Si el coche colisiona con el gancho pierde todas las monedas.
 
-### El arco loco:	(Pedro)
+### El arco loco:	(Pedro)	HECHO
 
 Vamos a poner un arco con una textura animada (usando ofFbo). 
 La textura tendrá un número que cambiará aleatoriamente.
@@ -56,18 +56,13 @@ Cuando el coche pase por debajo le dará tantas monedas como estén en la textur
 Si el coche se cae al pozo, volverá al principio.
 
 
-### El bombardero:	(Pedro)
+### El bombardero:	(Pedro)	HECHO
 
 Vamos a poner un avión que pasa volando y tira una bomba. 
 Si la bomba le cae al coche encima vuelve al principio.
 Si la bomba le cae cerca, pero no encima, el coche se da la vuelta debido a la onda expansiva. 
 
-### La carretera:
-
-(Pedro) -> Carretera	HECHO
-(Muxu) -> Obstáculos
-
-El profesor ha dicho que NO lo hagamos porque el juego peta ¿?
+### La carretera:	(Pedro)	HECHO
 
 La carretera deberá ser circular, incluyendo, giros o curvas.
 Podéis añadir detalles como árboles, farolas, edificios, etc..
@@ -80,14 +75,16 @@ Haced un State nuevo de pausa (tened en cuenta que el cronómetro se debe parar)
 ### Extensiones personales.
 
 Deberéis añadir al menos 3 extensiones propias.
+MUXU -> Pendiente de hacer mínimo una
 Ideas
-- Casilla que si la pisas, termina el juego
-- Pantalla de llegada a la meta	(Pedro)	HECHO
+- Casilla con una textura, que si la pisas terminar el juego
+- Pantalla de llegada a la meta y guardar récord tiempo	(Pedro)	HECHO
 - Muelle que hace que salte el jugador
-- Guardar record de tiempo	(Pedro)	HECHO
-- Menú principal con botones (Pedro)	HECHO
+- Menú principal con botones  (Pedro)	HECHO
 - Rampa
-- Saltar
+- Saltar  (Pedro)	HECHO
+- Números al principio a modo de contador  (Pedro)  HECHO
+- Alternar entre las dos físicas (Pedro)  HECHO
 
 ### Detalles generales
 

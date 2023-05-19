@@ -117,8 +117,8 @@ vector<GameObject*> GameObjectContainer::getCollisions(GameObject* gameObject) {
     vector<GameObject*> collisions;
     // se obtienen en un vector los objetos con los que ha colisionado el objeto
     for (auto other : gameObjects) {
-        // no se tienen en cuenta ni el propio objeto ni los no vivos
-        if (gameObject != other && other->isAlive()) {
+        // no se tienen en cuenta ni el propio objeto ni los no vivos ni los elementos del UI
+        if (gameObject != other && other->isAlive() && !other->isUIElement()) {
             if (gameObject->collide(other)) {
                 collisions.push_back(other);
             }

@@ -10,11 +10,14 @@ class Game;
 
 class Player : public GameObject {
 private:
-    const int MAX_SPEED = 100;
-    const int BULLET_TIMER = 5;
-    const float SPEED_VARIATION = 0.1;
+    const int MAX_SPEED = 2500;
+    const int BULLET_TIMER = 1;
+    const float SPEED_VARIATION = 5;
     const float ROTATION_VARIATION = 1;
     static const int SIZE = 100;
+    const float GRAVITY = 9.81;
+    const float GRAVITY_SCALE = 60;
+    const float JUMPFORCE = 450;
 
     // luz del coche
     ofLight faro;
@@ -28,6 +31,9 @@ private:
     float elapsedTime;
     bool bulletFired;
     float rotation;
+    bool inputActivated;
+    glm::vec3 originalPos;
+    float verticalSpeed;
 
     // intercalar luces
     inline void toggleLight() {
@@ -52,8 +58,18 @@ private:
         speed -= SPEED_VARIATION;
     }
 
+    void move();
+
+    void continuousInput();
+
+    void jump();
+
+    inline bool isOnGround() const {
+        return transform.getPosition().y <= originalPos.y;
+    }
+
 public:
-    Player(Game* game);
+    Player(Game* game, glm::vec3 pos);
 
     void update() override;
     void draw() override;
@@ -78,6 +94,28 @@ public:
     inline void stop() {
         speed = 0;
         transform.setPosition(prevPos);
+    }
+
+    inline bool getInputActivated() const {
+        return inputActivated;
+    }
+
+    inline void setInputActivated(bool enable) {
+        inputActivated = enable;
+    }
+
+    inline void resetPos() {
+        transform.setPosition(originalPos);
+        transform.setOrientation(glm::vec3(0, 0, 0));
+        speed = 0;
+    }
+
+    inline void turnBack() {
+        transform.rotateDeg(180, 0, 1, 0);
+    }
+
+    inline void reduceSpeed(float reduction) {
+        speed -= reduction;
     }
 };
 
