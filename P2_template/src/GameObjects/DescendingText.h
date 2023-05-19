@@ -3,7 +3,7 @@
 
 class DescendingText : public Text {
 private:
-	const int TIMER = 2;
+	const int TIMER = 1;
 	float elapsedTime;
 	int maxNumber;
 	int actNumber;

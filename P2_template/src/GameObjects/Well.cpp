@@ -2,9 +2,9 @@
 #include "Player.h"
 #include "../Utils/checkML.h"
 
-Well::Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius_) : GameObject(game, pos, dim) {
+Well::Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius_, ofColor color) : GameObject(game, pos, dim) {
     radius = radius_;
-    material.setDiffuseColor(ofColor::crimson);
+    material.setDiffuseColor(color);
 }
 
 void Well::update() {

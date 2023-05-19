@@ -18,7 +18,7 @@ private:
     const float GRAVITY = 9.81;
     const float GRAVITY_SCALE = 60;
     const float JUMPFORCE = 450;
-    const float FALL_OFFSET = 2;
+    const float FALL_OFFSET = -2;
     const float FALLING_TIMER = 3;
 
     // luz del coche

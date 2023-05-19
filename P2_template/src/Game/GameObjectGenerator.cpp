@@ -110,8 +110,8 @@ void GameObjectGenerator::generateWorld() {
 
     // AVION
     // a lo ancho, hacia arriba, a lo largo
-    auto plane = new Plane(game, glm::vec3(0, 150, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(0, 150, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), 100, OFFSET_Y);
-    game->addGameObject(plane);
+    /*auto plane = new Plane(game, glm::vec3(0, 150, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(0, 150, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), 100, OFFSET_Y);
+    game->addGameObject(plane);*/
 
     // HUECOS
     auto hole_left = new Hole(game, glm::vec3(3 * WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(2 * WIDTH_ROAD, WALL_SIZE / 100, LENGTH_ROAD + WIDTH_ROAD * 4));
@@ -132,8 +132,10 @@ void GameObjectGenerator::generateWorld() {
     game->addGameObject(ground);
 
     //POZO
-    auto well = new Well(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(400, 30, 400), 500);
-    game->addGameObject(well);
+    auto well = new Well(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(600, 10, 600), 700, ofColor::crimson);
+    game->addGameObject(well); //pared exterior del pozo
+    auto well_2 = new Well(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, OFFSET_Y + 1, 0), glm::vec3(500, 10, 500), 600, ofColor::black);
+    game->addGameObject(well_2); //interior del pozo
 
     // ARCO LOCO
     auto crazyBow = new CrazyBow(game, glm::vec3(-WIDTH_ROAD, OFFSET_Y + HEIGHT_BOW / 2, LENGTH_ROAD / 2 - WIDTH_ROAD / 2),
