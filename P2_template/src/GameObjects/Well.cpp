@@ -8,7 +8,7 @@ Well::Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius_, ofColor colo
 }
 
 void Well::update() {
-    
+
 }
 
 void Well::draw() {

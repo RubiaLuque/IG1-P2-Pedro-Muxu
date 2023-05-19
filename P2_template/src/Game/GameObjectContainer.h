@@ -3,28 +3,14 @@
 #define GameObjectContainer_h
 
 #include "ofMain.h"
+
 class GameObject;
-
-// incluir la librería de físicas en el proyecto
-// BoxCollider, CollisionEngine, GameObjectContainer
-//#define INCLUDE_LIBRARY
-// usar la librería de física o no
-// tiene que estar incluida la librería de físicas en el proyecto
-//#define USE_LIBRARY
-
-#ifdef INCLUDE_LIBRARY
 class CollisionEngine;
-#endif
 
 class GameObjectContainer {
 private:
-    const int APROX_GAMEOBJECTS = 100;
-
     vector<GameObject*> gameObjects;
-
-#ifdef INCLUDE_LIBRARY
     CollisionEngine* collisionEngine;
-#endif
 
     // eliminar todos los objetos no vivos
     // se ejecuta después del update

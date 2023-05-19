@@ -11,7 +11,7 @@ CrazyBow::CrazyBow(Game* game, glm::vec3 pos, glm::vec3 dim, int nBlocksLong, in
 
 void CrazyBow::update() {
     if (!canPass) {
-        elapsedTime *= ofGetLastFrameTime();
+        elapsedTime += ofGetLastFrameTime();
         if (elapsedTime > TIMER) {
             canPass = true;
             elapsedTime = 0;

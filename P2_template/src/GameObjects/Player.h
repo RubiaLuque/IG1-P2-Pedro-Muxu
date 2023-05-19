@@ -5,9 +5,6 @@
 #include "../Structure/GameObject.h"
 class Game;
 
-// TODO add speed settings
-// #define MAX_SPEED 100
-
 class Player : public GameObject {
 private:
     const int MAX_SPEED = 2500;

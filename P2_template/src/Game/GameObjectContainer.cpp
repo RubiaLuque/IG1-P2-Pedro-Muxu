@@ -1,40 +1,32 @@
 #include "GameObjectContainer.h"
 #include "../Structure/GameObject.h"
+//#include "CollisionEngine.h"
 
-#ifdef INCLUDE_LIBRARY
-#include "CollisionEngine.h"
-#endif
+// SE UTILIZA PARA ALTERNAR ENTRE LAS FÍSICAS CON Y SIN LIBRERÍA
+//#define LIBRARY
 
-GameObjectContainer::GameObjectContainer() {
-    gameObjects.reserve(APROX_GAMEOBJECTS);
-
-#ifdef INCLUDE_LIBRARY
-    collisionEngine = nullptr;
+GameObjectContainer::GameObjectContainer() : collisionEngine(nullptr) {
+    gameObjects.reserve(100);
 
     // LIBRERÍA FÍSICAS
-#ifdef USE_LIBRARY
+#ifdef LIBRARY
     collisionEngine = new CollisionEngine(gameObjects);
-#endif
-
 #endif
 }
 
 void GameObjectContainer::add(GameObject* g) {
     gameObjects.push_back(g);
     // LIBRERÍA FÍSICAS
-#if defined(INCLUDE_LIBRARY) && defined(USE_LIBRARY)
+#ifdef LIBRARY
     collisionEngine->add(g);
 #endif
 }
 
-GameObjectContainer::~GameObjectContainer() {
+GameObjectContainer::~GameObjectContainer(){
     clear();
-
-#ifdef INCLUDE_LIBRARY
     if (collisionEngine != nullptr) {
         delete collisionEngine;
     }
-#endif
 }
 
 void GameObjectContainer::update() {
@@ -47,7 +39,7 @@ void GameObjectContainer::update() {
 
     // LIBRERÍA FÍSICAS
     // se mueven sus colliders
-#if defined(INCLUDE_LIBRARY) && defined(USE_LIBRARY)
+#ifdef LIBRARY
     collisionEngine->update();
 #endif
 
@@ -96,7 +88,7 @@ void GameObjectContainer::removeDead() {
         }
         else {
             // LIBRERÍA FÍSICAS
-#if defined (INCLUDE_LIBRARY) && defined(USE_LIBRARY)
+#ifdef LIBRARY
             collisionEngine->remove(g);
 #endif
             delete g;
@@ -109,7 +101,7 @@ void GameObjectContainer::removeDead() {
 void GameObjectContainer::clear() {
     for (auto g : gameObjects) {
         // LIBRERÍA FÍSICAS
-#if defined (INCLUDE_LIBRARY) && defined(USE_LIBRARY)
+#ifdef LIBRARY
         collisionEngine->remove(g);
 #endif
         delete g;
@@ -119,7 +111,7 @@ void GameObjectContainer::clear() {
 
 vector<GameObject*> GameObjectContainer::getCollisions(GameObject* gameObject) {
     // LIBRERÍA FÍSICAS
-#if defined (INCLUDE_LIBRARY) && defined(USE_LIBRARY)
+#ifdef LIBRARY
     return collisionEngine->getCollisions(gameObject);
 
 #else

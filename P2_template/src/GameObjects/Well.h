@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef WELL_H
 #define WELL_H
 

@@ -1,10 +1,6 @@
 #ifndef CollisionEngine_h
 #define CollisionEngine_h
-
-// incluir en el proyecto la librería de físicas
-//#define INCLUDE_LIBRARY
-
-#ifdef INCLUDE_LIBRARY
+/*
 
 #include "ofMain.h"
 #include "ofxBullet.h"
@@ -39,6 +35,5 @@ public:
     vector<GameObject*> getCollisions(GameObject* g);
 };
 
+*/
 #endif /* CollisionEngine_h */
-
-#endif //LIBRARY
