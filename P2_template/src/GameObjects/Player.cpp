@@ -19,11 +19,12 @@ void Player::move() {
 void Player::fall() {
     setInputActivated(false);
     falling = true;
+    
 }
 
 void Player::continuousInput() {
     // como se trata de movimiento continuo es mejor ponerlo en el update
-    if (inputActivated) {
+    if (inputActivated && !falling) {
         if (ofGetKeyPressed(OF_KEY_LEFT)) {
             steerLeft();
         }
@@ -80,7 +81,6 @@ void Player::update() {
 
     move();
 
-    // contador para poder volver a disparar una bala
     if (bulletFired) {
         elapsedTime += ofGetLastFrameTime();
         if (elapsedTime > BULLET_TIMER) {
@@ -90,8 +90,7 @@ void Player::update() {
     }
 
     if (falling) {
-        transform.move(transform.getYAxis() * FALL_OFFSET * ofGetLastFrameTime());
-        //transform.setPosition({ transform.getX(), transform.getY() - FALL_OFFSET, transform.getZ() });
+        transform.setPosition({ transform.getX(), transform.getY() - FALL_OFFSET, transform.getZ() });
         fallingTime += ofGetLastFrameTime();
         if (fallingTime >= FALLING_TIMER) {
             fallingTime = 0;
@@ -125,7 +124,7 @@ void Player::drawDebug() {
 }
 
 void Player::handleInput() {
-    if (inputActivated) {
+    if (inputActivated && !falling) {
         if (ofGetKeyPressed('l')) {
             toggleLight();
         }

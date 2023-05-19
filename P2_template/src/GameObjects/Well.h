@@ -16,7 +16,7 @@ public:
 
 	virtual void update();
 	virtual void draw();
-	void receiveCarCollision(Player* car) override;
+	virtual void recieveCarCollision(Player* car);
 };
 #endif
 

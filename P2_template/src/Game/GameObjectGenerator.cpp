@@ -132,6 +132,6 @@ void GameObjectGenerator::generateWorld() {
     game->addGameObject(ground);
 
     //POZO
-    auto well = new Well(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(400, 30, 400), 500);
+    auto well = new Well(game, glm::vec3(WIDTH_ROAD - LENGTH_ROAD , OFFSET_Y, 0), glm::vec3(400, 30, 400), 500);
     game->addGameObject(well);
 }

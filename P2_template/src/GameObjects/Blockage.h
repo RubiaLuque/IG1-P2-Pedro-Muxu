@@ -12,7 +12,6 @@ public:
 	Blockage(Game* game, glm::vec3 pos, glm::vec3 dim);
 
 	void receiveCarCollision(Player* car) override;
-	void receiveBulletCollision(Bullet* bullet) override;
 };
 #endif //Blockage.h
 
