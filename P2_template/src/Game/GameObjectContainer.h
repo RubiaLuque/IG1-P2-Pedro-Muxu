@@ -18,8 +18,6 @@ class CollisionEngine;
 
 class GameObjectContainer {
 private:
-    const int APROX_GAMEOBJECTS = 100;
-
     vector<GameObject*> gameObjects;
 
 #ifdef INCLUDE_LIBRARY
