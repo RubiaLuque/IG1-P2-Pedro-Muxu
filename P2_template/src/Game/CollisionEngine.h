@@ -1,11 +1,13 @@
-
-#ifdef LIBRARY
-
 #ifndef CollisionEngine_h
 #define CollisionEngine_h
 
+// incluir en el proyecto la librería de físicas
+//#define INCLUDE_LIBRARY
+
+#ifdef INCLUDE_LIBRARY
+
 #include "ofMain.h"
-#include "../addons/ofxBullet/src/ofxBullet.h"
+#include "ofxBullet.h"
 class Game;
 class GameObject;
 

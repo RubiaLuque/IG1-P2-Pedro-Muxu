@@ -1,5 +1,6 @@
 #include "Blockage.h"
 #include "Player.h"
+#include "Bullet.h"
 #include "../Utils/checkML.h"
 
 Blockage::Blockage(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, pos, dim) {
@@ -8,4 +9,8 @@ Blockage::Blockage(Game* game, glm::vec3 pos, glm::vec3 dim) : GameObject(game, 
 
 void Blockage::receiveCarCollision(Player* car) {
     car->stop();
+}
+
+void Blockage::receiveBulletCollision(Bullet* bullet) {
+    bullet->kill();
 }

@@ -1,31 +1,34 @@
 #include "GameObjectContainer.h"
 #include "../Structure/GameObject.h"
-#ifdef LIBRARY
+
+#ifdef INCLUDE_LIBRARY
 #include "CollisionEngine.h"
 #endif
 
-// SE UTILIZA PARA ALTERNAR ENTRE LAS FÍSICAS CON Y SIN LIBRERÍA
-//#define LIBRARY
-
 GameObjectContainer::GameObjectContainer() {
-    // LIBRERÍA FÍSICAS
-#ifdef LIBRARY
+#ifdef INCLUDE_LIBRARY
     collisionEngine = nullptr;
+
+    // LIBRERÍA FÍSICAS
+#ifdef USE_LIBRARY
     collisionEngine = new CollisionEngine(gameObjects);
+#endif
+
 #endif
 }
 
 void GameObjectContainer::add(GameObject* g) {
     gameObjects.push_back(g);
     // LIBRERÍA FÍSICAS
-#ifdef LIBRARY
+#if defined(INCLUDE_LIBRARY) && defined(USE_LIBRARY)
     collisionEngine->add(g);
 #endif
 }
 
-GameObjectContainer::~GameObjectContainer(){
+GameObjectContainer::~GameObjectContainer() {
     clear();
-#ifdef LIBRARY
+
+#ifdef INCLUDE_LIBRARY
     if (collisionEngine != nullptr) {
         delete collisionEngine;
     }
@@ -42,7 +45,7 @@ void GameObjectContainer::update() {
 
     // LIBRERÍA FÍSICAS
     // se mueven sus colliders
-#ifdef LIBRARY
+#if defined(INCLUDE_LIBRARY) && defined(USE_LIBRARY)
     collisionEngine->update();
 #endif
 
@@ -91,7 +94,7 @@ void GameObjectContainer::removeDead() {
         }
         else {
             // LIBRERÍA FÍSICAS
-#ifdef LIBRARY
+#if defined (INCLUDE_LIBRARY) && defined(USE_LIBRARY)
             collisionEngine->remove(g);
 #endif
             delete g;
@@ -104,7 +107,7 @@ void GameObjectContainer::removeDead() {
 void GameObjectContainer::clear() {
     for (auto g : gameObjects) {
         // LIBRERÍA FÍSICAS
-#ifdef LIBRARY
+#if defined (INCLUDE_LIBRARY) && defined(USE_LIBRARY)
         collisionEngine->remove(g);
 #endif
         delete g;
@@ -114,7 +117,7 @@ void GameObjectContainer::clear() {
 
 vector<GameObject*> GameObjectContainer::getCollisions(GameObject* gameObject) {
     // LIBRERÍA FÍSICAS
-#ifdef LIBRARY
+#if defined (INCLUDE_LIBRARY) && defined(USE_LIBRARY)
     return collisionEngine->getCollisions(gameObject);
 
 #else

@@ -1,6 +1,7 @@
-#ifdef LIBRARY
-
 #include "CollisionEngine.h"
+
+#ifdef INCLUDE_LIBRARY
+
 #include "../Structure/GameObject.h"
 #include "Game.h"
 #include "../Utils/checkML.h"
@@ -93,8 +94,9 @@ vector<GameObject*> CollisionEngine::getCollisions(GameObject* g) {
 };
 
 void CollisionEngine::remove(GameObject* g) {
-    g->getCollider()->collisionObject->remove();
+    // solo se puede usar uno de los dos
     delete g->getCollider()->collisionObject;
+    //g->getCollider()->collisionObject->remove();
 };
 
 #endif
