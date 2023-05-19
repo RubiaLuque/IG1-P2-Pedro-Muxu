@@ -5,8 +5,11 @@
 #include "ofMain.h"
 
 class GameObject;
+
+#ifdef LIBRARY
 class ofxBulletRigidBody;
 class CollisionEngine;
+#endif
 
 // Collider caja
 // Funciona como un almacén de la caja primitiva de openFrameworks y la caja de la librería de físicas
@@ -15,16 +18,24 @@ class CollisionEngine;
 // a la caja primitiva de openFrameworks
 class BoxCollider : public ofBoxPrimitive {
 public:
+#ifdef LIBRARY
     friend CollisionEngine;
-
+#endif
 private:
+#ifdef LIBRARY
     // caja de la librería de físicas
     ofxBulletRigidBody* collisionObject;
+#endif
 
 public:
-    BoxCollider() : collisionObject(nullptr) { }
+    BoxCollider() {
+#ifdef LIBRARY
+        collisionObject = nullptr;
+#endif
+    }
 
     void drawDebug();
 };
 
 #endif /* BoxCollider_h */
+

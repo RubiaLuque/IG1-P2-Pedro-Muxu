@@ -5,12 +5,17 @@
 #include "ofMain.h"
 
 class GameObject;
+#ifdef LIBRARY
 class CollisionEngine;
+#endif
 
 class GameObjectContainer {
 private:
     vector<GameObject*> gameObjects;
+
+#ifdef LIBRARY
     CollisionEngine* collisionEngine;
+#endif
 
     // eliminar todos los objetos no vivos
     // se ejecuta después del update
