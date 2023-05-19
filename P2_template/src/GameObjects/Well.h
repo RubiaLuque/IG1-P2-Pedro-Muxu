@@ -7,16 +7,16 @@
 // POZO
 class Well : public GameObject {
 private:
-	ofMaterial circle;
-	ofBoxPrimitive circleColl;
+	const int HEIGHT = 100;
+	const int OFFSET = 50;
+	float radius;
 
 public:
-	Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius);
+	Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius_);
 
 	virtual void update();
 	virtual void draw();
 	virtual void recieveCarCollision(Player* car);
-	void onTriggerEnter(Player* car);
 };
 #endif
 

@@ -18,6 +18,8 @@ private:
     const float GRAVITY = 9.81;
     const float GRAVITY_SCALE = 60;
     const float JUMPFORCE = 450;
+    const float FALL_OFFSET = 2;
+    const float FALLING_TIMER = 3;
 
     // luz del coche
     ofLight faro;
@@ -29,11 +31,13 @@ private:
     // número de monedas
     int coins;
     float elapsedTime;
+    float fallingTime;
     bool bulletFired;
     float rotation;
     bool inputActivated;
     glm::vec3 originalPos;
     float verticalSpeed;
+    bool falling;
 
     // intercalar luces
     inline void toggleLight() {
@@ -76,6 +80,11 @@ public:
     void drawDebug() override;
     void handleInput() override;
     void checkCollisions() override;
+    void fall();
+
+    inline bool getFalling() const {
+        return falling;
+    }
 
     inline float getSpeed() const {
         return speed;

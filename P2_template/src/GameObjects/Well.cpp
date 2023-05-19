@@ -2,29 +2,32 @@
 #include "Player.h"
 #include "../Utils/checkML.h"
 
-Well::Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius) : GameObject(game, pos, dim) {
-
-    material.setDiffuseColor({ ofColor::aliceBlue, 100 }); // es invisible
-
-    /*circle.setDiffuseColor(ofColor::black);
-    circleColl.setPosition(pos);
-    circleColl.set(radius * 2, 0, radius * 2);*/
+Well::Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius_) : GameObject(game, pos, dim) {
+    radius = radius_;
+    material.setDiffuseColor({ ofColor::crimson }); 
 }
 
 void Well::update() {
-
+    
 }
 
 void Well::draw() {
-    GameObject::draw();
+    material.begin();
+    {
+        transform.transformGL();
+        {
+            ofDrawCylinder(radius, HEIGHT);
+            boxCollider->draw();
+        }
+        transform.restoreTransformGL();
+    }
+    material.end();
+
+    //GameObject::draw();
 }
 
 void Well::recieveCarCollision(Player* car) {
     car->stop();
-    onTriggerEnter(car);
+    car->fall();
 }
 
-void Well::onTriggerEnter(Player* car) {
-    //activar gravedad sobre coche
-    //hacer que caiga por el agujero sobre la carretera
-}
