@@ -6,6 +6,8 @@
 #endif
 
 GameObjectContainer::GameObjectContainer() {
+    gameObjects.reserve(APROX_GAMEOBJECTS);
+
 #ifdef INCLUDE_LIBRARY
     collisionEngine = nullptr;
 
