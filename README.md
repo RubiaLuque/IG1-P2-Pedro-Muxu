@@ -76,8 +76,8 @@ Haced un State nuevo de pausa (tened en cuenta que el cronómetro se debe parar)
 
 Deberéis añadir al menos 3 extensiones propias.
 Ideas
-- Casilla con una textura, que si la pisas pierdes el juego (Muxu)
-- Pantalla de Game Over (Muxu)
+- Casilla con una textura, que si la pisas pierdes el juego (Muxu) HECHO
+- Pantalla de Game Over (Muxu) HECHO
 - Pantalla de llegada a la meta y guardar récord tiempo	(Pedro)	HECHO
 - Muelle que hace que salte el jugador
 - Menú principal con botones  (Pedro)	HECHO
