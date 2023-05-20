@@ -15,8 +15,9 @@ private:
     const float GRAVITY = 9.81;
     const float GRAVITY_SCALE = 60;
     const float JUMPFORCE = 450;
-    const float FALL_OFFSET = -2;
+    const float FALL_OFFSET = -1000000000000000;
     const float FALLING_TIMER = 3;
+    const float SKIDDING_TIME = 0.3;
 
     // luz del coche
     ofLight faro;
@@ -29,12 +30,15 @@ private:
     int coins;
     float elapsedTime;
     float fallingTime;
+    float skiddingTime;
     bool bulletFired;
     float rotation;
     bool inputActivated;
     glm::vec3 originalPos;
     float verticalSpeed;
     bool falling;
+    bool skidding;
+    int counter;
 
     // intercalar luces
     inline void toggleLight() {
@@ -78,6 +82,7 @@ public:
     void handleInput() override;
     void checkCollisions() override;
     void fall();
+    void skid();
 
     inline bool getFalling() const {
         return falling;
@@ -85,6 +90,10 @@ public:
 
     inline float getSpeed() const {
         return speed;
+    }
+
+    inline void setSkidding(bool newSkidding) {
+        skidding = newSkidding;
     }
 
     // añadir monedas

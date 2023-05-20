@@ -29,6 +29,9 @@ gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json")
     groundTexture.enableMipmap();
     ofLoadImage(groundTexture, GROUND_TEXTURE_PATH);
 
+    oilSpillTexture.enableMipmap();
+    ofLoadImage(oilSpillTexture, OIL_TEXTURE_PATH);
+
     // FUENTES
     font.load(FONT_PATH, FONT_SIZE);
     assert(font.isLoaded());
@@ -38,6 +41,10 @@ gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json")
     // se puede reproducir un sonido varias veces a la vez
     explosionSound.setMultiPlay(true);
     assert(explosionSound.isLoaded());
+
+    screamSound.load(SCREAM_PATH);
+    explosionSound.setMultiPlay(true);
+    assert(screamSound.isLoaded());
 }
 
 Game::~Game() {

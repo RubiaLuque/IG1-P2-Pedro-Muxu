@@ -12,6 +12,7 @@
 #include "Ground.h"
 #include "CrazyBow.h"
 #include "Well.h"
+#include "OilSpill.h"
 #include "../Utils/checkML.h"
 
 GameObjectGenerator::GameObjectGenerator(Game* game) : game(game) { }
@@ -143,5 +144,10 @@ void GameObjectGenerator::generateWorld() {
         glm::vec3(WIDTH_ROAD, HEIGHT_BOW, WALL_SIZE), 18, 4, 30, glm::vec4(-90, 0, 1, 0), 10);
     crazyBow->enableFixed(true);
     game->addGameObject(crazyBow);
+
+    //MANCHA DE ACEITE QUE CAMBIA TU DIRECCIÓN
+    auto oilSpill = new OilSpill(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, - LENGTH_ROAD / 2 + WIDTH_ROAD / 2), 
+        glm::vec3(500, 50, 500));
+    game->addGameObject(oilSpill);
 
 }

@@ -18,7 +18,9 @@ private:
     const string FONT_PATH = "arial_narrow_7.ttf";
     const int FONT_SIZE = 100;
     const string EXPLOSION_PATH = "explosion.wav";
+    const string SCREAM_PATH = "scream.mp3";
     const string GROUND_TEXTURE_PATH = "TexturesCom_Ground_ForestMoss02_header.jpg";
+    const string OIL_TEXTURE_PATH = "oil_spill.jpg";
 
     ofEasyCam cam;
     // el juego solo tiene referencia al player
@@ -42,7 +44,9 @@ private:
     // RECURSOS
     ofTrueTypeFont font;
     ofSoundPlayer explosionSound;
+    ofSoundPlayer screamSound;
     ofTexture groundTexture;
+    ofTexture oilSpillTexture;
 
     inline GameObjectContainer* currentGameObjects() {
         return gameObjectsStates[currentState()->getId()];
@@ -104,8 +108,16 @@ public:
         return explosionSound;
     }
 
+    inline ofSoundPlayer getScreamSound() const {
+        return screamSound;
+    }
+
     inline ofTexture getGroundTexture() const {
         return groundTexture;
+    }
+
+    inline ofTexture getOilSpillTexture() const {
+        return oilSpillTexture;
     }
 
     inline float getSizeRatio(float size) const {

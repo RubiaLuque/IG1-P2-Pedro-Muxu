@@ -21,6 +21,12 @@ void Player::fall() {
     falling = true;
 }
 
+void Player::skid() {
+    counter++;
+    setInputActivated(false);
+    transform.rotateRad(ofRandom(0, PI), 0, 1, 0);
+}
+
 void Player::continuousInput() {
     // como se trata de movimiento continuo es mejor ponerlo en el update
     if (inputActivated) {
@@ -54,7 +60,7 @@ void Player::jump() {
 
 Player::Player(Game* game, glm::vec3 pos) :GameObject(game, pos, glm::vec3(SIZE)),
 speed(0), bLight(false), coins(0), elapsedTime(0), bulletFired(false), rotation(0), inputActivated(true), originalPos(0),
-verticalSpeed(0), falling(false), fallingTime(0) {
+verticalSpeed(0), falling(false), fallingTime(0), skidding(false), skiddingTime(0), counter(0) {
     // usando el material se le da un color al objeto
     material.setDiffuseColor(ofColor::blue);
 
@@ -90,7 +96,7 @@ void Player::update() {
     }
 
     if (falling) {
-        transform.move(transform.getYAxis() * FALL_OFFSET * ofGetLastFrameTime());
+        transform.move(0,transform.getY() * FALL_OFFSET * GRAVITY * ofGetLastFrameTime(), 0);
         //transform.setPosition({ transform.getX(), transform.getY() - FALL_OFFSET, transform.getZ() });
         fallingTime += ofGetLastFrameTime();
         if (fallingTime >= FALLING_TIMER) {
@@ -100,6 +106,21 @@ void Player::update() {
             resetPos();
         }
     }
+
+    if (skidding && counter<1) {
+        skid();
+        skiddingTime += ofGetLastFrameTime();
+    }
+    if (skidding && skiddingTime < SKIDDING_TIME) {
+        skiddingTime += ofGetLastFrameTime();
+        if (skiddingTime > SKIDDING_TIME) {
+            setInputActivated(true);
+            skidding = false;
+            counter = 0;
+            skiddingTime = 0;
+        }
+    }
+
 }
 
 void Player::draw() {

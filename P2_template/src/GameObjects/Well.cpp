@@ -23,7 +23,7 @@ void Well::draw() {
     material.end();
 
     drawDebug();
-    //GameObject::draw();
+    
 }
 
 void Well::receiveCarCollision(Player* car) {

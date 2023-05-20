@@ -6,6 +6,7 @@
 
 #include "../Structure/GameObject.h"
 #include "ofxAssimpModelLoader.h"
+#include "../Game/Game.h"
 
 class Pedestrian : public GameObject {
 private:
