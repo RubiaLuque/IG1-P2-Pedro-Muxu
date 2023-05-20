@@ -10,6 +10,7 @@ namespace ecs {
 		_s_PLAY,
 		_s_PAUSE,
 		_s_RESULTS,
+		_s_GAMEOVER,
 
 		_LAST_STATE_ID
 	};
@@ -23,6 +24,7 @@ namespace ecs {
 		case _s_PLAY:   return "Play State";
 		case _s_PAUSE: return "Pause State";
 		case _s_RESULTS: return "Results State";
+		case _s_GAMEOVER: return "Game Over State";
 		}
 	}
 }

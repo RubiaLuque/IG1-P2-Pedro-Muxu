@@ -12,7 +12,7 @@ void Game::drawUIOrNot(bool isUIElement) {
 }
 
 Game::Game() : bPlayerFinish(false), player(nullptr), bDebug(false),
-gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json"), gameHasStarted(false) {
+gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json"), gameHasStarted(false), bGameOver(false) {
 
     for (auto& gameObjects : gameObjectsStates) {
         gameObjects = nullptr;
@@ -31,6 +31,9 @@ gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json")
 
     oilSpillTexture.enableMipmap();
     ofLoadImage(oilSpillTexture, OIL_TEXTURE_PATH);
+
+    warningTexture.enableMipmap();
+    ofLoadImage(warningTexture, WARNING_TEXTURE_PATH);
 
     // FUENTES
     font.load(FONT_PATH, FONT_SIZE);
@@ -139,6 +142,18 @@ void Game::reset(ecs::stateId id) {
     if (id == ecs::_s_PLAY) {
         elapsedTime = 0;
     }
+}
+
+void Game::gameOver() {
+    bGameOver = true;
+}
+
+bool Game::isGameOver() {
+    return bGameOver;
+}
+
+void Game::setGameOver(bool v) {
+    bGameOver = v;
 }
 
 void Game::finishGame() {

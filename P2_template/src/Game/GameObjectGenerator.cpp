@@ -13,6 +13,8 @@
 #include "CrazyBow.h"
 #include "Well.h"
 #include "OilSpill.h"
+#include "DeadlyTile.h"
+#include "Crane.h"
 #include "../Utils/checkML.h"
 
 GameObjectGenerator::GameObjectGenerator(Game* game) : game(game) { }
@@ -130,7 +132,7 @@ void GameObjectGenerator::generateWorld() {
     game->addGameObject(hole_center_right);
 
     // TIERRA QUE REDUCE LA VELOCIDAD
-    auto ground = new Ground(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(500, 50, 500), 80);
+    auto ground = new Ground(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(500, 5, 500), 80);
     game->addGameObject(ground);
 
     //POZO
@@ -147,7 +149,12 @@ void GameObjectGenerator::generateWorld() {
 
     //MANCHA DE ACEITE QUE CAMBIA TU DIRECCIÓN
     auto oilSpill = new OilSpill(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, - LENGTH_ROAD / 2 + WIDTH_ROAD / 2), 
-        glm::vec3(500, 50, 500));
+        glm::vec3(500, 5, 500));
     game->addGameObject(oilSpill);
+
+    //BALDOSA MORTIFERA (te hace perder el juego si la pisas)
+    auto deadlyTile = new DeadlyTile(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, -WIDTH_ROAD),
+        glm::vec3(500, 5, 500));
+    game->addGameObject(deadlyTile);
 
 }

@@ -1,7 +1,7 @@
 #ifndef WELL_H
 #define WELL_H
 
-#include "../Structure/GameObject.h"
+#include "GameObject.h"
 // POZO
 class Well : public GameObject {
 private:

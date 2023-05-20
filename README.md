@@ -17,20 +17,20 @@ Vamos a poner monedas distribuidas por la pista.
 Vamos a habilitar la posibilidad de que el coche dispare. Cada disparo cuesta una moneda y destruye los obstáculos.
 
 
-### Barrera:	(Muxu)
+### Barrera:	(Muxu) HECHO
 
 Vamos a crear un obstáculo que se mueve de arriba a abajo como si fuera una compuerta. 
 Si el coche colisiona con la compuerta, el coche se para.
 El coche puede disparar y destruir la compuerta.
 
-### Paso de peatones:	(Muxu)
+### Paso de peatones:	(Muxu) HECHO
 
 Vamos a crear un paso de peatones, en el que cada cierto tiempo pasa una persona caminando. 
 Utilizaremos algún modelo animado.
 Si el coche le atropella, le daremos 100 monedas al Player.
 
 
-### La mancha de aceite:	(Muxu)
+### La mancha de aceite:	(Muxu) HECHO
 
 Usando una textura en el suelo vamos a implementar una mancha de aceite. Si el coche pisa la mancha, patinará durante los siguientes segundos (podéis usar random para mover el coche de izquierda a derecha).
 
@@ -51,7 +51,7 @@ La textura tendrá un número que cambiará aleatoriamente.
 Cuando el coche pase por debajo le dará tantas monedas como estén en la textura.
 
 
-### El pozo:	(Muxu)
+### El pozo:	(Muxu) HECHO (mas o menos)
 
 Si el coche se cae al pozo, volverá al principio.
 
@@ -75,9 +75,9 @@ Haced un State nuevo de pausa (tened en cuenta que el cronómetro se debe parar)
 ### Extensiones personales.
 
 Deberéis añadir al menos 3 extensiones propias.
-MUXU -> Pendiente de hacer mínimo una
 Ideas
-- Casilla con una textura, que si la pisas terminar el juego
+- Casilla con una textura, que si la pisas pierdes el juego (Muxu)
+- Pantalla de Game Over (Muxu)
 - Pantalla de llegada a la meta y guardar récord tiempo	(Pedro)	HECHO
 - Muelle que hace que salte el jugador
 - Menú principal con botones  (Pedro)	HECHO

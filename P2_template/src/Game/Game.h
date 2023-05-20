@@ -21,6 +21,7 @@ private:
     const string SCREAM_PATH = "scream.mp3";
     const string GROUND_TEXTURE_PATH = "TexturesCom_Ground_ForestMoss02_header.jpg";
     const string OIL_TEXTURE_PATH = "oil_spill.jpg";
+    const string WARNING_TEXTURE_PATH = "warning.jpg";
 
     ofEasyCam cam;
     // el juego solo tiene referencia al player
@@ -40,6 +41,7 @@ private:
     float elapsedTime;
     string timesPath;
     bool gameHasStarted;
+    bool bGameOver;
 
     // RECURSOS
     ofTrueTypeFont font;
@@ -47,6 +49,7 @@ private:
     ofSoundPlayer screamSound;
     ofTexture groundTexture;
     ofTexture oilSpillTexture;
+    ofTexture warningTexture;
 
     inline GameObjectContainer* currentGameObjects() {
         return gameObjectsStates[currentState()->getId()];
@@ -71,6 +74,10 @@ public:
     void drawGameObjects();
     // handleInput de los GameObjects que hay en el estado
     void handleInputGameObjects();
+
+    void gameOver();
+    bool isGameOver();
+    void setGameOver(bool v);
 
     void finishGame();
     bool isFinished();
@@ -118,6 +125,10 @@ public:
 
     inline ofTexture getOilSpillTexture() const {
         return oilSpillTexture;
+    }
+
+    inline ofTexture getWarningTexture() const {
+        return warningTexture;
     }
 
     inline float getSizeRatio(float size) const {

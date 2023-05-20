@@ -68,12 +68,4 @@ public:
         currentState()->next();
     }
 
-    /*
-    void keyPressed(int key) {
-        currentState()->keyPressed(key);
-    }
-    void keyReleased(int key) {
-        currentState()->keyReleased(key);
-    }
-    */
 };

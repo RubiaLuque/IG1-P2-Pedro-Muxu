@@ -1,6 +1,7 @@
 #include "ofApp.h"
 #include "MenuState.h"
 #include "MenuState.h"
+#include "GameOverState.h"
 #include "Utils/checkML.h"
 
 //--------------------------------------------------------------
@@ -19,6 +20,11 @@ void ofApp::update() {
     if (game->isFinished()) {
         game->next();
         game->setFinished(false);
+    }
+    //el juego se puede perder, en ese caso, se cambia de estado a game Over
+    if (game->isGameOver()) {
+        game->changeState(new GameOverState(game));
+        game->setGameOver(false);
     }
 }
 
