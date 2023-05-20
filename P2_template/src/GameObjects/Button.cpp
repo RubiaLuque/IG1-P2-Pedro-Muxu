@@ -64,7 +64,7 @@ Button::Button(Game* game, glm::vec2 pos, float size, ofTrueTypeFont font, strin
 }
 
 void Button::setOrigin(glm::vec2 origin) {
-	offset = glm::vec2(-font.stringWidth(text) * origin.x, -font.stringHeight(text) * origin.y);
+	offset = glm::vec2(-font.stringWidth(text) * origin.x, font.stringHeight(text) * origin.y);
 	offset = game->convertToProperSize<glm::vec2>(offset, size);
 }
 

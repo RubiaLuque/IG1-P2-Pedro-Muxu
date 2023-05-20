@@ -1,7 +1,6 @@
 #ifndef CollisionEngine_h
 #define CollisionEngine_h
 /*
-
 #include "ofMain.h"
 #include "ofxBullet.h"
 class Game;
@@ -34,6 +33,5 @@ public:
     // devuelve los objetos con los que está colisionando un gameobject
     vector<GameObject*> getCollisions(GameObject* g);
 };
-
 */
 #endif /* CollisionEngine_h */

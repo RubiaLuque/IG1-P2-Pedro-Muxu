@@ -46,7 +46,7 @@ Plane::Plane(Game* game, glm::vec3 start, glm::vec3 end, float height, float lim
 	GameObject(game, start, glm::vec3(6 * height, height, 3 * height)), start(start), end(end), pointToReach(end),
 	elapsedTime(0), limitY(limitY) {
 
-	//assert(model.loadModel(ofToDataPath(MODEL_PATH)));
+	model.loadModel(ofToDataPath(MODEL_PATH));
 	model.setRotation(0, 180, 0, 0, 1);
 	model.setScale(height / 100, height / 100, height / 100);
 

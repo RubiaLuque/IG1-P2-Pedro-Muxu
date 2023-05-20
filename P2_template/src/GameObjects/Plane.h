@@ -10,7 +10,7 @@ private:
 	// ha llegado a cierto punto
 	const int OFFSET = 10;
 	const int SPEED = 300;
-	const int BOMB_TIMER = 10;
+	const int BOMB_TIMER = 5;
 
 	ofxAssimpModelLoader model;
 	glm::vec3 start;

@@ -7,8 +7,8 @@ void BoxCollider::drawDebug() {
     ofPushStyle();
     {
         drawWireframe();
-        // NOTE uncomment to see bullet collider
         /*
+        // NOTE uncomment to see bullet collider
         if (collisionObject != nullptr) {
             collisionObject->draw();
         }
