@@ -17,13 +17,13 @@ void Player::move() {
 }
 
 void Player::fall() {
-    setInputActivated(false);
+    inputActivated = false;
     falling = true;
 }
 
 void Player::skid() {
     counter++;
-    setInputActivated(false);
+    inputActivated = false;
     transform.rotateRad(ofRandom(0, PI), 0, 1, 0);
 }
 
@@ -45,17 +45,44 @@ void Player::continuousInput() {
     }
 }
 
-void Player::jump() {
-    verticalSpeed += -GRAVITY * GRAVITY_SCALE * ofGetLastFrameTime();
-    if (isOnGround() && verticalSpeed < 0) {
-        verticalSpeed = 0;
-        glm::vec3 actPos = transform.getPosition();
-        transform.setPosition(actPos.x, originalPos.y, actPos.z);
+void Player::counterShot() {
+    // contador para poder volver a disparar una bala
+    if (bulletFired) {
+        elapsedTime += ofGetLastFrameTime();
+        if (elapsedTime > BULLET_TIMER) {
+            elapsedTime = 0;
+            bulletFired = false;
+        }
     }
-    if (ofGetKeyPressed(game->OF_KEY_SPACE) && isOnGround() && inputActivated) {
-        verticalSpeed = JUMPFORCE;
+}
+
+void Player::counterFalling() {
+    if (falling) {
+        fallingTime += ofGetLastFrameTime();
+        if (fallingTime >= FALLING_TIMER) {
+            fallingTime = 0;
+            falling = false;
+            inputActivated = true;
+            resetPos();
+        }
     }
-    transform.move(transform.getYAxis() * verticalSpeed * ofGetLastFrameTime());
+}
+
+void Player::counterSkidding() {
+    if (skidding && counter < 1) {
+        skid();
+        skiddingTime += ofGetLastFrameTime();
+    }
+
+    if (skidding && skiddingTime < SKIDDING_TIME) {
+        skiddingTime += ofGetLastFrameTime();
+        if (skiddingTime > SKIDDING_TIME) {
+            inputActivated = true;
+            skidding = false;
+            counter = 0;
+            skiddingTime = 0;
+        }
+    }
 }
 
 Player::Player(Game* game, glm::vec3 pos) :GameObject(game, pos, glm::vec3(SIZE)),
@@ -79,48 +106,33 @@ verticalSpeed(0), falling(false), fallingTime(0), skidding(false), skiddingTime(
 }
 
 void Player::update() {
+    // velocidad vertical que se reduce por la velocida si está en el aire
+    verticalSpeed += -GRAVITY * GRAVITY_SCALE * ofGetLastFrameTime();
 
-    jump();
+    // parar al jugador si llega al suelo y no está cayendo
+    if (isOnGround() && verticalSpeed < 0 && !falling) {
+        verticalSpeed = 0;
+        glm::vec3 actPos = transform.getPosition();
+        transform.setPosition(actPos.x, originalPos.y, actPos.z);
+    }
+
+    // salto
+    if (ofGetKeyPressed(game->OF_KEY_SPACE) && isOnGround() && inputActivated) {
+        verticalSpeed = JUMPFORCE;
+    }
+
+    // mover al jugador hacia abajo
+    transform.move(transform.getYAxis() * verticalSpeed * ofGetLastFrameTime());
 
     continuousInput();
 
     move();
 
-    // contador para poder volver a disparar una bala
-    if (bulletFired) {
-        elapsedTime += ofGetLastFrameTime();
-        if (elapsedTime > BULLET_TIMER) {
-            elapsedTime = 0;
-            bulletFired = false;
-        }
-    }
+    counterShot();
 
-    if (falling) {
-        transform.move(0,transform.getY() * FALL_OFFSET * GRAVITY * ofGetLastFrameTime(), 0);
-        //transform.setPosition({ transform.getX(), transform.getY() - FALL_OFFSET, transform.getZ() });
-        fallingTime += ofGetLastFrameTime();
-        if (fallingTime >= FALLING_TIMER) {
-            fallingTime = 0;
-            falling = false;
-            setInputActivated(true);
-            resetPos();
-        }
-    }
+    counterFalling();
 
-    if (skidding && counter<1) {
-        skid();
-        skiddingTime += ofGetLastFrameTime();
-    }
-    if (skidding && skiddingTime < SKIDDING_TIME) {
-        skiddingTime += ofGetLastFrameTime();
-        if (skiddingTime > SKIDDING_TIME) {
-            setInputActivated(true);
-            skidding = false;
-            counter = 0;
-            skiddingTime = 0;
-        }
-    }
-
+    counterSkidding();
 }
 
 void Player::draw() {

@@ -12,7 +12,6 @@ private:
 public:
 	Well(Game* game, glm::vec3 pos, glm::vec3 dim, float radius_, ofColor color);
 
-	virtual void update();
 	virtual void draw();
 	void receiveCarCollision(Player* car) override;
 };

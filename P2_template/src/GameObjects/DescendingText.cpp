@@ -4,7 +4,7 @@
 
 DescendingText::DescendingText(Game* game, glm::vec2 pos, int maxSize, int decrease, int number, ofTrueTypeFont font, vector<ofColor>colors) :
 	Text(game, pos, maxSize, to_string(number), font, colors[0]), maxNumber(number), actNumber(number), colors(colors), decrease(decrease), elapsedTime(0), origin() {
-	game->getPlayer()->setInputActivated(false);
+	//game->getPlayer()->setInputActivated(false);
 	game->setGameHasStarted(false);
 }
 

@@ -3,7 +3,7 @@
 
 class CrazyBow : public GameObject {
 private:
-    const int TIMER = 5;
+    const int TIMER = 2;
     const int BANNER_WIDTH = 600;
     const int BANNER_HEIGHT = 200;
     const int BANNER_LETTER_SIZE = 75;
@@ -23,6 +23,7 @@ private:
     ofFbo fbo;
     ofTexture texture;
     ofTrueTypeFont font;
+    ofSoundPlayer coinSound;
 
     void bannerText(int num);
 

@@ -11,14 +11,7 @@ void Game::drawUIOrNot(bool isUIElement) {
     }
 }
 
-Game::Game() : bPlayerFinish(false), player(nullptr), bDebug(false),
-gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json"), gameHasStarted(false), bGameOver(false) {
-
-    for (auto& gameObjects : gameObjectsStates) {
-        gameObjects = nullptr;
-    }
-
-    // RECURSOS
+void Game::loadResources() {
     // TEXTURAS
     // se dejan de usar texturas rectangulares y se utilizan texturas 2D,
     // que son las que se utilizan en los dispositivos modernos
@@ -40,14 +33,27 @@ gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json")
     assert(font.isLoaded());
 
     // SONIDOS
-    explosionSound.load(EXPLOSION_PATH);
+    explosionSound.load(EXPLOSION_SOUND_PATH);
     // se puede reproducir un sonido varias veces a la vez
     explosionSound.setMultiPlay(true);
     assert(explosionSound.isLoaded());
 
-    screamSound.load(SCREAM_PATH);
-    explosionSound.setMultiPlay(true);
+    screamSound.load(SCREAM_SOUND_PATH);
     assert(screamSound.isLoaded());
+
+    coinSound.load(COIN_SOUND_PATH);
+    assert(coinSound.isLoaded());
+}
+
+
+Game::Game() : bPlayerFinish(false), player(nullptr), bDebug(false),
+gameObjectsStates(), generator(nullptr), elapsedTime(0), timesPath("times.json"), gameHasStarted(false), bGameOver(false) {
+
+    for (auto& gameObjects : gameObjectsStates) {
+        gameObjects = nullptr;
+    }
+
+    loadResources();
 }
 
 Game::~Game() {

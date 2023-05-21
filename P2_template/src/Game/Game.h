@@ -17,8 +17,9 @@ private:
     static const int MAX_TIMES = 3;
     const string FONT_PATH = "arial_narrow_7.ttf";
     const int FONT_SIZE = 100;
-    const string EXPLOSION_PATH = "explosion.wav";
-    const string SCREAM_PATH = "scream.mp3";
+    const string EXPLOSION_SOUND_PATH = "explosion.wav";
+    const string SCREAM_SOUND_PATH = "scream.mp3";
+    const string COIN_SOUND_PATH = "super_mario_coin.wav";
     const string GROUND_TEXTURE_PATH = "TexturesCom_Ground_ForestMoss02_header.jpg";
     const string OIL_TEXTURE_PATH = "oil_spill.jpg";
     const string WARNING_TEXTURE_PATH = "warning.jpg";
@@ -47,6 +48,7 @@ private:
     ofTrueTypeFont font;
     ofSoundPlayer explosionSound;
     ofSoundPlayer screamSound;
+    ofSoundPlayer coinSound;
     ofTexture groundTexture;
     ofTexture oilSpillTexture;
     ofTexture warningTexture;
@@ -56,6 +58,8 @@ private:
     }
 
     void drawUIOrNot(bool isUIElement);
+
+    void loadResources();
 
 public:
     // Teclas que no están en el enum de openFrameworks
@@ -117,6 +121,10 @@ public:
 
     inline ofSoundPlayer getScreamSound() const {
         return screamSound;
+    }
+
+    inline ofSoundPlayer getCoinSound() const {
+        return coinSound;
     }
 
     inline ofTexture getGroundTexture() const {

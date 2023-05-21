@@ -8,14 +8,21 @@
 #ifndef Coin_h
 #define Coin_h
 #include "../Structure/GameObject.h"
+#include "ofxAssimpModelLoader.h"
 
 class Coin : public GameObject {
 private:
+    const string MODEL_PATH = "Dollar.obj";
+    const float SPEED_ROTATION = 0.8;
+
     int coinsToAdd;
+    ofCylinderPrimitive cylinder;
 
 public:
-    Coin(Game* game, glm::vec3 pos, glm::vec3 dim, int coinsToAdd);
+    Coin(Game* game, glm::vec3 pos, float height, float radius, int coinsToAdd);
 
+    virtual void update();
+    virtual void draw();
     void receiveCarCollision(Player* car) override;
 };
 

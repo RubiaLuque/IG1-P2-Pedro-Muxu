@@ -7,14 +7,21 @@ Ground::Ground(Game* game, glm::vec3 pos, glm::vec3 dim, float playerSpeedReduct
 	// establece como se escala la imagen hacia arriba y hacia abajo, cuando se dibuja
 	// más pequeña (primer param) y más grande (segundo param)
 	groundTexture.setTextureMinMagFilter(GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+
+	plane.set(dim.x, dim.z);
+	plane.rotateDeg(90, 1, 0, 0);
 }
 
 void Ground::draw() {
-	groundTexture.bind();
+	transform.transformGL();
 	{
-		boxCollider->draw();
+		groundTexture.bind();
+		{
+			plane.draw();
+		}
+		groundTexture.unbind();
 	}
-	groundTexture.unbind();
+	transform.restoreTransformGL();
 }
 
 void Ground::receiveCarCollision(Player* car) {

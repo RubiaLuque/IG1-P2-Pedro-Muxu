@@ -3,13 +3,9 @@
 
 class AreaRound : public GameObject {
 private:
-	ofNode* playerTransform;
-	float playerSize;
 
 public:
 	AreaRound(Game* game, ofNode* playerTransform, float playerSize);
-
-	virtual void update();
 
 	// no se dibuja nada
 	virtual void draw() { }

@@ -15,8 +15,7 @@ private:
     const float GRAVITY = 9.81;
     const float GRAVITY_SCALE = 60;
     const float JUMPFORCE = 450;
-    const float FALL_OFFSET = -1000000000000000;
-    const float FALLING_TIMER = 3;
+    const float FALLING_TIMER = 2;
     const float SKIDDING_TIME = 0.3;
 
     // luz del coche
@@ -67,7 +66,11 @@ private:
 
     void continuousInput();
 
-    void jump();
+    void counterShot();
+
+    void counterFalling();
+
+    void counterSkidding();
 
     inline bool isOnGround() const {
         return transform.getPosition().y <= originalPos.y;
@@ -81,7 +84,9 @@ public:
     void drawDebug() override;
     void handleInput() override;
     void checkCollisions() override;
+
     void fall();
+
     void skid();
 
     inline bool getFalling() const {
@@ -90,6 +95,10 @@ public:
 
     inline float getSpeed() const {
         return speed;
+    }
+
+    inline void setSpeed(float newSpeed) {
+        speed = newSpeed;
     }
 
     inline void setSkidding(bool newSkidding) {

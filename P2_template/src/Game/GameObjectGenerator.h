@@ -17,6 +17,8 @@ private:
     const int HEIGHT_GOAL = 500;
     const int SIZE_GOAL_BARS = 50;
     const int HEIGHT_BOW = 300;
+    const int HEIGHT_COIN = 25;
+    const int RADIUS_COIN = 75;
 
     Game *game;
     

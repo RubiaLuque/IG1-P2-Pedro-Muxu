@@ -91,13 +91,13 @@ void GameObjectGenerator::generateWorld() {
     game->addGameObject(goal);
 
     // MONEDAS
-    auto coin1 = new Coin(game, glm::vec3(0, 0, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(50), 2);
+    auto coin1 = new Coin(game, glm::vec3(0, RADIUS_COIN / 3, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), HEIGHT_COIN, RADIUS_COIN, 2);
     game->addGameObject(coin1);
-    auto coin2 = new Coin(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, 0, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(50), 2);
+    auto coin2 = new Coin(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, RADIUS_COIN / 3, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), HEIGHT_COIN, RADIUS_COIN, 2);
     game->addGameObject(coin2);
-    auto coin3 = new Coin(game, glm::vec3(0, 0, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), glm::vec3(50), 2);
+    auto coin3 = new Coin(game, glm::vec3(0, RADIUS_COIN / 3, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), HEIGHT_COIN, RADIUS_COIN, 2);
     game->addGameObject(coin3);
-    auto coin4 = new Coin(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, 0, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), glm::vec3(50), 2);
+    auto coin4 = new Coin(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD + WIDTH_ROAD / 2, RADIUS_COIN / 3, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), HEIGHT_COIN, RADIUS_COIN, 2);
     game->addGameObject(coin4);
 
     // OBSTACULO
@@ -132,7 +132,7 @@ void GameObjectGenerator::generateWorld() {
     game->addGameObject(hole_center_right);
 
     // TIERRA QUE REDUCE LA VELOCIDAD
-    auto ground = new Ground(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(500, 5, 500), 80);
+    auto ground = new Ground(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y + 1, LENGTH_ROAD / 2 - WIDTH_ROAD / 2), glm::vec3(500, 10, 500), 80);
     game->addGameObject(ground);
 
     //POZO
@@ -148,7 +148,7 @@ void GameObjectGenerator::generateWorld() {
     game->addGameObject(crazyBow);
 
     //MANCHA DE ACEITE QUE CAMBIA TU DIRECCIÓN
-    auto oilSpill = new OilSpill(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, - LENGTH_ROAD / 2 + WIDTH_ROAD / 2), 
+    auto oilSpill = new OilSpill(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2),
         glm::vec3(500, 5, 500));
     game->addGameObject(oilSpill);
 

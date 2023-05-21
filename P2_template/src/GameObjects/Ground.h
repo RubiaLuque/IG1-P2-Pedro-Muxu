@@ -8,6 +8,7 @@ private:
 
 	float playerSpeedReduction;
 	ofTexture groundTexture;
+	ofPlanePrimitive plane;
 
 public:
 	Ground(Game* game, glm::vec3 pos, glm::vec3 dim, float playerSpeedReduction);

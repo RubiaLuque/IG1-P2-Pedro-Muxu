@@ -46,6 +46,8 @@ void CrazyBow::bannerText(int num) {
 CrazyBow::CrazyBow(Game* game, glm::vec3 pos, glm::vec3 dim, int nBlocksLong, int nBlocksHigh, int blockSize, glm::vec4 rotation, int nMaxCoins) :
     GameObject(game, pos, dim), blockSize(blockSize), nBlocksLong(nBlocksLong), nBlocksHigh(nBlocksHigh), nMaxCoins(nMaxCoins), canPass(true), elapsedTime(0) {
 
+    coinSound = game->getCoinSound();
+
     material.setEmissiveColor(ofColor::red);
     transform.rotateDeg(rotation.x, rotation.y, rotation.z, rotation.w);
 
@@ -109,6 +111,7 @@ void CrazyBow::draw() {
 
 void CrazyBow::receiveCarCollision(Player* car) {
     if (canPass) {
+        coinSound.play();
         car->addCoins(nRandomCoins);
         nRandomCoins = (int)ofRandom(1, nMaxCoins + 1);
         bannerText(nRandomCoins);
