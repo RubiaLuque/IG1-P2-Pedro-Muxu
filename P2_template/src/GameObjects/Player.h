@@ -3,7 +3,6 @@
 
 #include "ofMain.h"
 #include "../Structure/GameObject.h"
-#include "ofxAssimpModelLoader.h"
 class Game;
 
 class Player : public GameObject {
@@ -12,16 +11,12 @@ private:
     const int BULLET_TIMER = 1;
     const float SPEED_VARIATION = 5;
     const float ROTATION_VARIATION = 1;
+    static const int SIZE = 100;
     const float GRAVITY = 9.81;
     const float GRAVITY_SCALE = 60;
     const float JUMPFORCE = 450;
     const float FALLING_TIMER = 2;
     const float SKIDDING_TIME = 0.4;
-    const glm::vec3 CAR_DIM = { 300, 150, 100 };
-
-    const string MODEL_PATH = "Car.dae";
-
-    ofxAssimpModelLoader car;
 
     // luz del coche
     ofLight faro;

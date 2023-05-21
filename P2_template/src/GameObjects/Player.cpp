@@ -87,21 +87,11 @@ void Player::counterSkidding() {
     }
 }
 
-Player::Player(Game* game, glm::vec3 pos) :GameObject(game, pos, CAR_DIM),
+Player::Player(Game* game, glm::vec3 pos) :GameObject(game, pos, glm::vec3(SIZE)),
 speed(0), bLight(false), coins(0), elapsedTime(0), bulletFired(false), rotation(0), inputActivated(true), originalPos(0),
 verticalSpeed(0), falling(false), fallingTime(0), skidding(false), skiddingTime(0), counter(0) {
     // usando el material se le da un color al objeto
-    //material.setDiffuseColor(ofColor::blue);
-
-    // cargar el modelo
-    assert(car.loadModel(ofToDataPath(MODEL_PATH)));
-
-    // rotar el modelo
-    car.setRotation(0, 180, 1, 0, 0);
-
-    // ajustar el collider de acuerdo al modelo
-    boxCollider->move(pos);
-    car.setScale(CAR_DIM.x, CAR_DIM.y, CAR_DIM.z);
+    material.setDiffuseColor(ofColor::blue);
 
     // todos los objetos se mueven a partir de su nodo
     // se hace que el faro se hija de un nodo
@@ -113,7 +103,7 @@ verticalSpeed(0), falling(false), fallingTime(0), skidding(false), skiddingTime(
     // rotarlo
     faro.rotateDeg(-200, 1, 0, 0);
 
-    AreaRound* areaRound = new AreaRound(game, &transform, CAR_DIM);
+    AreaRound* areaRound = new AreaRound(game, &transform, SIZE);
     game->addGameObject(areaRound);
 }
 
@@ -164,7 +154,6 @@ void Player::drawDebug() {
     GameObject::drawDebug();
 
     transform.transformGL();
-    car.drawFaces();
     // se dibujan también los axis
     ofDrawAxis(100);
     transform.restoreTransformGL();
