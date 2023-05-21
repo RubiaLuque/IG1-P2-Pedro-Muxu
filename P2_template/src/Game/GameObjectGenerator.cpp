@@ -16,6 +16,7 @@
 #include "DeadlyTile.h"
 #include "Crane.h"
 #include "../Utils/checkML.h"
+#include "HoistLeg.h"
 
 GameObjectGenerator::GameObjectGenerator(Game* game) : game(game) { }
 
@@ -156,5 +157,9 @@ void GameObjectGenerator::generateWorld() {
     auto deadlyTile = new DeadlyTile(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, -WIDTH_ROAD),
         glm::vec3(500, 5, 500));
     game->addGameObject(deadlyTile);
+
+    // GRÚA
+    auto hoist = new HoistLeg(game, glm::vec3(-WIDTH_ROAD / 2 - 200, OFFSET_Y + 250, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2), glm::vec3(80, 500, 80));
+    game->addGameObject(hoist);
 
 }

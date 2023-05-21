@@ -141,6 +141,10 @@ public:
     inline void reduceSpeed(float reduction) {
         speed -= reduction;
     }
+
+    inline void setCoins(int coins) {
+        this->coins = coins;
+    }
 };
 
 #endif 
