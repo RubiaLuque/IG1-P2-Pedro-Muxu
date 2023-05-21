@@ -32,7 +32,7 @@ void Coin::update() {
 
 void Coin::receiveCarCollision(Player* car) {
     car->addCoins(coinsToAdd);
-    ofSoundPlayer coin = game->getCoinSound();
+    ofSoundPlayer coin = game->getSound(ecs::_sound_COIN);
     coin.play();
     kill();
 }

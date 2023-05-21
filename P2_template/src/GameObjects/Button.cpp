@@ -62,7 +62,7 @@ Button::Button(Game* game, glm::vec2 pos, float size, ofTrueTypeFont font, strin
 	// ensanchamiento real de la caja
 	this->widen = game->convertToProperSize<glm::vec2>(widen, size);
 
-	sound = game->getClickSound();
+	sound = game->getSound(ecs::_sound_CLICK);
 }
 
 void Button::setOrigin(glm::vec2 origin) {

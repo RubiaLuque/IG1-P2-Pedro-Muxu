@@ -43,7 +43,7 @@ void Pedestrian::draw() {
 void Pedestrian::receiveCarCollision(Player* car) {
     kill();
     car->addCoins(100);
-    ofSoundPlayer scream = game->getScreamSound();
+    ofSoundPlayer scream = game->getSound(ecs::_sound_SCREAM);
     scream.play();
 };
 
@@ -52,7 +52,7 @@ void Pedestrian::receiveBulletCollision(Bullet* bullet) {
     bullet->kill();
 
     //grita
-    ofSoundPlayer scream = game->getScreamSound();
+    ofSoundPlayer scream = game->getSound(ecs::_sound_SCREAM);
     scream.play();
 
     // se elimina a sí mismo

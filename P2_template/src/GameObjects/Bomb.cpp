@@ -25,7 +25,7 @@ void Bomb::update() {
 }
 
 void Bomb::kill() {
-	ofSoundPlayer explosion = game->getExplosionSound();
+	ofSoundPlayer explosion = game->getSound(ecs::_sound_EXPLOSION);
 	explosion.play();
 	// punto desde el que comienza el sonido, en milisegundos
 	explosion.setPositionMS(700);

@@ -27,4 +27,20 @@ namespace ecs {
 		case _s_GAMEOVER: return "Game Over State";
 		}
 	}
+
+	using soundId_type = uint8_t;
+	enum soundId : soundId_type {
+		_sound_EXPLOSION,
+		_sound_SCREAM,
+		_sound_COIN,
+		_sound_COIN_DROP,
+		_sound_GAMEOVER,
+		_sound_SKID,
+		_sound_WINNER,
+		_sound_SUPER_MARIO_COIN,
+		_sound_CLICK,
+
+		_LAST_SOUND_ID
+	};
+	constexpr soundId_type maxSoundId = _LAST_SOUND_ID;
 }

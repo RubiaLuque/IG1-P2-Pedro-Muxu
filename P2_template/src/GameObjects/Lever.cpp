@@ -25,7 +25,7 @@ void Lever::update() {
 
 void Lever::receiveCarCollision(Player* car) {
 	car->stop();
-	ofSoundPlayer drop = game->getCoinDropSound();
+	ofSoundPlayer drop = game->getSound(ecs::_sound_COIN_DROP);
 	drop.play();
 	car->setCoins(0);
 }

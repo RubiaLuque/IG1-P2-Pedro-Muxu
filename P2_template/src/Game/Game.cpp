@@ -34,35 +34,35 @@ void Game::loadResources() {
     assert(font.isLoaded());
 
     // SONIDOS
-    explosionSound.load(EXPLOSION_SOUND_PATH);
+    sounds[ecs::_sound_EXPLOSION].load(EXPLOSION_SOUND_PATH);
     // se puede reproducir un sonido varias veces a la vez
-    explosionSound.setMultiPlay(true);
-    assert(explosionSound.isLoaded());
+    sounds[ecs::_sound_EXPLOSION].setMultiPlay(true);
+    assert(sounds[ecs::_sound_EXPLOSION].isLoaded());
 
-    screamSound.load(SCREAM_SOUND_PATH);
-    assert(screamSound.isLoaded());
+    sounds[ecs::_sound_SCREAM].load(SCREAM_SOUND_PATH);
+    assert(sounds[ecs::_sound_SCREAM].isLoaded());
 
-    coinSound.load(COIN_SOUND_PATH);
-    assert(coinSound.isLoaded());
+    sounds[ecs::_sound_COIN].load(COIN_SOUND_PATH);
+    assert(sounds[ecs::_sound_COIN].isLoaded());
 
-    coinDropSound.load(COIN_DROP_SOUND_PATH);
-    assert(coinDropSound.isLoaded());
+    sounds[ecs::_sound_COIN_DROP].load(COIN_DROP_SOUND_PATH);
+    assert(sounds[ecs::_sound_COIN_DROP].isLoaded());
 
-    gameOverSound.load(GAMEOVER_SOUND_PATH);
-    assert(gameOverSound.isLoaded());
+    sounds[ecs::_sound_GAMEOVER].load(GAMEOVER_SOUND_PATH);
+    assert(sounds[ecs::_sound_GAMEOVER].isLoaded());
 
-    skidSound.load(SKID_SOUND_PATH);
-    skidSound.setMultiPlay(true);
-    assert(skidSound.isLoaded());
+    sounds[ecs::_sound_SKID].load(SKID_SOUND_PATH);
+    sounds[ecs::_sound_SKID].setMultiPlay(true);
+    assert(sounds[ecs::_sound_SKID].isLoaded());
 
-    winnerSound.load(WINNER_SOUND_PATH);
-    assert(winnerSound.isLoaded());
+    sounds[ecs::_sound_WINNER].load(WINNER_SOUND_PATH);
+    assert(sounds[ecs::_sound_WINNER].isLoaded());
 
-    superMarioCoinSound.load(SUPER_MARIO_COIN_SOUND_PATH);
-    assert(superMarioCoinSound.isLoaded());
+    sounds[ecs::_sound_SUPER_MARIO_COIN].load(SUPER_MARIO_COIN_SOUND_PATH);
+    assert(sounds[ecs::_sound_SUPER_MARIO_COIN].isLoaded());
 
-    clickSound.load(CLICK_SOUND_PATH);
-    assert(clickSound.isLoaded());
+    sounds[ecs::_sound_CLICK].load(CLICK_SOUND_PATH);
+    assert(sounds[ecs::_sound_CLICK].isLoaded());
 }
 
 

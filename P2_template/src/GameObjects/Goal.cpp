@@ -28,7 +28,7 @@ void Goal::draw() {
 
 void  Goal::receiveCarCollision(Player *car){
     car->stop();
-    ofSoundPlayer winner = game->getWinnerSound();
+    ofSoundPlayer winner = game->getSound(ecs::_sound_WINNER);
     winner.play();
     game->finishGame();
 }

@@ -53,15 +53,7 @@ private:
     // RECURSOS
     ofTrueTypeFont font;
 
-    ofSoundPlayer explosionSound;
-    ofSoundPlayer screamSound;
-    ofSoundPlayer coinSound;
-    ofSoundPlayer coinDropSound;
-    ofSoundPlayer gameOverSound;
-    ofSoundPlayer skidSound;
-    ofSoundPlayer winnerSound;
-    ofSoundPlayer superMarioCoinSound;
-    ofSoundPlayer clickSound;
+    array<ofSoundPlayer, ecs::_LAST_SOUND_ID> sounds;
 
     ofTexture groundTexture;
     ofTexture oilSpillTexture;
@@ -129,40 +121,8 @@ public:
         return font;
     }
 
-    inline ofSoundPlayer getExplosionSound() const {
-        return explosionSound;
-    }
-
-    inline ofSoundPlayer getScreamSound() const {
-        return screamSound;
-    }
-
-    inline ofSoundPlayer getCoinSound() const {
-        return coinSound;
-    }
-
-    inline ofSoundPlayer getCoinDropSound() const {
-        return coinDropSound;
-    }
-
-    inline ofSoundPlayer getGameOverSound() const {
-        return gameOverSound;
-    }
-
-    inline ofSoundPlayer getSkidSound() const {
-        return skidSound;
-    }
-
-    inline ofSoundPlayer getWinnerSound() const {
-        return winnerSound;
-    }
-
-    inline ofSoundPlayer getClickSound() const {
-        return clickSound;
-    }
-
-    inline ofSoundPlayer getSuperMarioCoinSound() const {
-        return superMarioCoinSound;
+    inline ofSoundPlayer getSound(ecs::soundId id) {
+        return sounds[id];
     }
 
     inline ofTexture getGroundTexture() const {

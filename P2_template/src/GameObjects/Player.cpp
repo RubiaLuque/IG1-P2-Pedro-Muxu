@@ -25,7 +25,7 @@ void Player::skid() {
     counter++;
     inputActivated = false;
     transform.rotateRad(ofRandom(0, PI), 0, 1, 0);
-    ofSoundPlayer skidSound = game->getSkidSound();
+    ofSoundPlayer skidSound = game->getSound(ecs::_sound_SKID);
     skidSound.play();
 }
 
