@@ -1,6 +1,6 @@
 #include "GameObjectContainer.h"
 #include "../Structure/GameObject.h"
-//#include "CollisionEngine.h"
+#include "CollisionEngine.h"
 
 // SE UTILIZA PARA ALTERNAR ENTRE LAS FÍSICAS CON Y SIN LIBRERÍA
 //#define LIBRARY
