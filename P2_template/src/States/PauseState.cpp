@@ -22,7 +22,6 @@ void PauseState::handleInput() {
     // porque sino se habrá eliminado el estado, pero quedará por ejecutar el handleInput de los gameobjects
     // y no se podrá hacer
     if (ofGetKeyPressed('p')) {
-        clickSound.play();
         game->popState();
     }
 }

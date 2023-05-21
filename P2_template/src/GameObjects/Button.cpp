@@ -61,6 +61,8 @@ Button::Button(Game* game, glm::vec2 pos, float size, ofTrueTypeFont font, strin
 
 	// ensanchamiento real de la caja
 	this->widen = game->convertToProperSize<glm::vec2>(widen, size);
+
+	sound = game->getClickSound();
 }
 
 void Button::setOrigin(glm::vec2 origin) {
@@ -80,6 +82,7 @@ void Button::update() {
 	if (mouseIsOnRect()) {
 		currentState = MOUSE_OVER;
 		if (ofGetMousePressed(0) && released) {
+			sound.play();
 			released = false;
 			currentState = CLICKED;
 			callback();

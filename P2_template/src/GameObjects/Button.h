@@ -26,6 +26,7 @@ private:
 	bool released;
 	// función void sin parámetros
 	std::function<void()> callback;
+	ofSoundPlayer sound;
 
 	void show();
 

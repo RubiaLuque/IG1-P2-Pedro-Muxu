@@ -3,6 +3,7 @@
 
 #include "ofMain.h"
 #include "../Structure/GameObject.h"
+#include "ofxAssimpModelLoader.h"
 class Game;
 
 class Player : public GameObject {
@@ -11,12 +12,13 @@ private:
     const int BULLET_TIMER = 1;
     const float SPEED_VARIATION = 5;
     const float ROTATION_VARIATION = 1;
-    static const int SIZE = 100;
+    static const int HEIGHT = 90;
     const float GRAVITY = 9.81;
     const float GRAVITY_SCALE = 60;
     const float JUMPFORCE = 450;
     const float FALLING_TIMER = 2;
     const float SKIDDING_TIME = 0.4;
+    const string MODEL_PATH = "car.dae";
 
     // luz del coche
     ofLight faro;
@@ -38,6 +40,7 @@ private:
     bool falling;
     bool skidding;
     int counter;
+    ofxAssimpModelLoader model;
 
     // intercalar luces
     inline void toggleLight() {

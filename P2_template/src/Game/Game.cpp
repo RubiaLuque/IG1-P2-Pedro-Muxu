@@ -57,6 +57,12 @@ void Game::loadResources() {
 
     winnerSound.load(WINNER_SOUND_PATH);
     assert(winnerSound.isLoaded());
+
+    superMarioCoinSound.load(SUPER_MARIO_COIN_SOUND_PATH);
+    assert(superMarioCoinSound.isLoaded());
+
+    clickSound.load(CLICK_SOUND_PATH);
+    assert(clickSound.isLoaded());
 }
 
 

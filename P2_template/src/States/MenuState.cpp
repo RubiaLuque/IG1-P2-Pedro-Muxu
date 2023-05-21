@@ -9,8 +9,7 @@ void MenuState::onEnter() {
     // que hay donde se crea
     // Se indica en [] exactamente a que partes puede tener referencia
     Button* playButton = new Button(game, glm::vec2(ofGetWidth() / 2, ofGetHeight() / 3), 100, game->getFont(), "PLAY", ofColor::lightGray, playColors, glm::vec2(120, 70),
-        [&]() {
-            clickSound.play();
+        [this]() {
             game->changeState(new PlayState(game));
         });
     playButton->setOrigin(glm::vec2(0.5, 0.5));
@@ -18,8 +17,7 @@ void MenuState::onEnter() {
 
     array<ofColor, 3> quitColors = { ofColor::blue, ofColor::mediumBlue, ofColor::darkBlue };
     Button* quitButton = new Button(game, glm::vec2(ofGetWidth() / 2, 2 * ofGetHeight() / 3), 100, game->getFont(), "QUIT", ofColor::lightGray, quitColors, glm::vec2(155, 70),
-        [&]() {
-            clickSound.play();
+        []() {
             ofExit();
         });
     quitButton->setOrigin(glm::vec2(0.5, 0.5));

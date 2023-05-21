@@ -87,11 +87,17 @@ void Player::counterSkidding() {
     }
 }
 
-Player::Player(Game* game, glm::vec3 pos) :GameObject(game, pos, glm::vec3(SIZE)),
+Player::Player(Game* game, glm::vec3 pos) :GameObject(game, pos, glm::vec3(1.5 * HEIGHT, HEIGHT, 3 * HEIGHT)),
 speed(0), bLight(false), coins(0), elapsedTime(0), bulletFired(false), rotation(0), inputActivated(true), originalPos(0),
 verticalSpeed(0), falling(false), fallingTime(0), skidding(false), skiddingTime(0), counter(0) {
-    // usando el material se le da un color al objeto
-    material.setDiffuseColor(ofColor::blue);
+
+    assert(model.loadModel(MODEL_PATH));
+    // ajustar el modelo al collider
+    model.setRotation(0, 180, 1, 0, 100);
+    float scale = HEIGHT / (500.0 / 3.0);
+    model.setScale(scale, scale, scale);
+    glm::vec3 modelPos = model.getPosition();
+    model.setPosition(modelPos.x, modelPos.y - HEIGHT / 2.3, modelPos.z);
 
     // todos los objetos se mueven a partir de su nodo
     // se hace que el faro se hija de un nodo
@@ -103,7 +109,7 @@ verticalSpeed(0), falling(false), fallingTime(0), skidding(false), skiddingTime(
     // rotarlo
     faro.rotateDeg(-200, 1, 0, 0);
 
-    AreaRound* areaRound = new AreaRound(game, &transform, SIZE);
+    AreaRound* areaRound = new AreaRound(game, &transform, boxCollider);
     game->addGameObject(areaRound);
 }
 
@@ -146,8 +152,11 @@ void Player::draw() {
         faro.disable();
     }
 
-    // se hace siempre que el objeto que se quiera pintar corresponda con su collider
-    GameObject::draw();
+    transform.transformGL();
+    {
+        model.drawFaces();
+    }
+    transform.restoreTransformGL();
 }
 
 void Player::drawDebug() {

@@ -12,8 +12,7 @@ void GameOverState::onEnter() {
 
 	array<ofColor, 3> colors = { ofColor::red, ofColor::mediumVioletRed, ofColor::darkRed };
 	Button* newGame = new Button(game, glm::vec2(ofGetWidth() / 2, 2 * ofGetHeight() / 3), 100, game->getFont(), "NEW GAME", ofColor::white, colors, glm::vec2(120, 70),
-		[&] {
-			
+		[this] {
 			game->changeState(new PlayState(game));
 		});
 

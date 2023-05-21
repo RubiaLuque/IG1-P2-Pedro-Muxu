@@ -5,7 +5,7 @@ class AreaRound : public GameObject {
 private:
 
 public:
-	AreaRound(Game* game, ofNode* playerTransform, float playerSize);
+	AreaRound(Game* game, ofNode* playerTransform, BoxCollider* playerCollider);
 
 	// no se dibuja nada
 	virtual void draw() { }

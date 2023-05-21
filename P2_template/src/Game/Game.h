@@ -27,6 +27,8 @@ private:
     const string GAMEOVER_SOUND_PATH = "game_over.mp3";
     const string SKID_SOUND_PATH = "car_skid.mp3";
     const string WINNER_SOUND_PATH = "winner.mp3";
+    const string SUPER_MARIO_COIN_SOUND_PATH = "super_mario_coin.wav";
+    const string CLICK_SOUND_PATH = "click.mp3";
 
     ofEasyCam cam;
     // el juego solo tiene referencia al player
@@ -50,6 +52,7 @@ private:
 
     // RECURSOS
     ofTrueTypeFont font;
+
     ofSoundPlayer explosionSound;
     ofSoundPlayer screamSound;
     ofSoundPlayer coinSound;
@@ -57,6 +60,8 @@ private:
     ofSoundPlayer gameOverSound;
     ofSoundPlayer skidSound;
     ofSoundPlayer winnerSound;
+    ofSoundPlayer superMarioCoinSound;
+    ofSoundPlayer clickSound;
 
     ofTexture groundTexture;
     ofTexture oilSpillTexture;
@@ -150,6 +155,14 @@ public:
 
     inline ofSoundPlayer getWinnerSound() const {
         return winnerSound;
+    }
+
+    inline ofSoundPlayer getClickSound() const {
+        return clickSound;
+    }
+
+    inline ofSoundPlayer getSuperMarioCoinSound() const {
+        return superMarioCoinSound;
     }
 
     inline ofTexture getGroundTexture() const {

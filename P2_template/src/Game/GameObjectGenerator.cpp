@@ -119,17 +119,17 @@ void GameObjectGenerator::generateWorld() {
     game->addGameObject(plane);
 
     // HUECOS
-    auto hole_left = new Hole(game, glm::vec3(3 * WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(2 * WIDTH_ROAD, WALL_SIZE / 100, LENGTH_ROAD + WIDTH_ROAD * 4));
+    auto hole_left = new Hole(game, glm::vec3(3 * WIDTH_ROAD / 2, OFFSET_Y, 0), glm::vec3(2 * WIDTH_ROAD, WALL_SIZE / 80, LENGTH_ROAD + WIDTH_ROAD * 4));
     game->addGameObject(hole_left);
-    auto hole_right = new Hole(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD - WIDTH_ROAD, OFFSET_Y, 0), glm::vec3(2 * WIDTH_ROAD, WALL_SIZE / 100, LENGTH_ROAD + WIDTH_ROAD * 4));
+    auto hole_right = new Hole(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD - WIDTH_ROAD, OFFSET_Y, 0), glm::vec3(2 * WIDTH_ROAD, WALL_SIZE / 80, LENGTH_ROAD + WIDTH_ROAD * 4));
     game->addGameObject(hole_right);
-    auto hole_top = new Hole(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, LENGTH_ROAD / 2 + WIDTH_ROAD), glm::vec3(LENGTH_ROAD, WALL_SIZE / 100, 2 * WIDTH_ROAD));
+    auto hole_top = new Hole(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, LENGTH_ROAD / 2 + WIDTH_ROAD), glm::vec3(LENGTH_ROAD, WALL_SIZE / 80, 2 * WIDTH_ROAD));
     game->addGameObject(hole_top);
-    auto hole_back = new Hole(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, -LENGTH_ROAD / 2 - WIDTH_ROAD), glm::vec3(LENGTH_ROAD, WALL_SIZE / 100, 2 * WIDTH_ROAD));
+    auto hole_back = new Hole(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, -LENGTH_ROAD / 2 - WIDTH_ROAD), glm::vec3(LENGTH_ROAD, WALL_SIZE / 80, 2 * WIDTH_ROAD));
     game->addGameObject(hole_back);
-    auto hole_center_left = new Hole(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2 + WIDTH_ROAD / 2 + widthCenterHole / 2, OFFSET_Y, 0), glm::vec3(widthCenterHole, WALL_SIZE / 100, LENGTH_ROAD - 2 * WIDTH_ROAD));
+    auto hole_center_left = new Hole(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2 + WIDTH_ROAD / 2 + widthCenterHole / 2, OFFSET_Y, 0), glm::vec3(widthCenterHole, WALL_SIZE / 80, LENGTH_ROAD - 2 * WIDTH_ROAD));
     game->addGameObject(hole_center_left);
-    auto hole_center_right = new Hole(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2 - WIDTH_ROAD / 2 - widthCenterHole / 2, OFFSET_Y, 0), glm::vec3(widthCenterHole, WALL_SIZE / 100, LENGTH_ROAD - 2 * WIDTH_ROAD));
+    auto hole_center_right = new Hole(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2 - WIDTH_ROAD / 2 - widthCenterHole / 2, OFFSET_Y, 0), glm::vec3(widthCenterHole, WALL_SIZE / 80, LENGTH_ROAD - 2 * WIDTH_ROAD));
     game->addGameObject(hole_center_right);
 
     // TIERRA QUE REDUCE LA VELOCIDAD
@@ -150,12 +150,12 @@ void GameObjectGenerator::generateWorld() {
 
     //MANCHA DE ACEITE QUE CAMBIA TU DIRECCIÓN
     auto oilSpill = new OilSpill(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, -LENGTH_ROAD / 2 + WIDTH_ROAD / 2),
-        glm::vec3(500, 5, 500));
+        glm::vec3(500, 20, 500));
     game->addGameObject(oilSpill);
 
     //BALDOSA MORTIFERA (te hace perder el juego si la pisas)
     auto deadlyTile = new DeadlyTile(game, glm::vec3(WIDTH_ROAD / 2 - LENGTH_ROAD / 2, OFFSET_Y, -WIDTH_ROAD),
-        glm::vec3(500, 5, 500));
+        glm::vec3(500, 20, 500));
     game->addGameObject(deadlyTile);
 
     // GRÚA
