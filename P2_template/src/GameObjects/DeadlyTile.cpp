@@ -17,5 +17,7 @@ void DeadlyTile::draw() {
 
 void DeadlyTile::receiveCarCollision(Player* car) {
 	car->stop();
+	ofSoundPlayer gameOver = game->getGameOverSound();
+	gameOver.play();
 	game->gameOver();
 }

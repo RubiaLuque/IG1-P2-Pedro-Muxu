@@ -1,5 +1,6 @@
 #include "Lever.h"
 #include "Player.h"
+#include "../Game/Game.h"
 
 Lever::Lever(Game* game, ofNode* hoistArmTransform, BoxCollider* hoistArmCollider) :
 	GameObject(game, glm::vec3(0, 0, 0), glm::vec3(hoistArmCollider->getWidth() / 2.5, 100, hoistArmCollider->getWidth() / 2.5)),
@@ -24,5 +25,7 @@ void Lever::update() {
 
 void Lever::receiveCarCollision(Player* car) {
 	car->stop();
+	ofSoundPlayer drop = game->getCoinDropSound();
+	drop.play();
 	car->setCoins(0);
 }

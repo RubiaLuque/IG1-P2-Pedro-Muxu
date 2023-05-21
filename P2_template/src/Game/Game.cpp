@@ -11,6 +11,7 @@ void Game::drawUIOrNot(bool isUIElement) {
     }
 }
 
+
 void Game::loadResources() {
     // TEXTURAS
     // se dejan de usar texturas rectangulares y se utilizan texturas 2D,
@@ -43,6 +44,19 @@ void Game::loadResources() {
 
     coinSound.load(COIN_SOUND_PATH);
     assert(coinSound.isLoaded());
+
+    coinDropSound.load(COIN_DROP_SOUND_PATH);
+    assert(coinDropSound.isLoaded());
+
+    gameOverSound.load(GAMEOVER_SOUND_PATH);
+    assert(gameOverSound.isLoaded());
+
+    skidSound.load(SKID_SOUND_PATH);
+    skidSound.setMultiPlay(true);
+    assert(skidSound.isLoaded());
+
+    winnerSound.load(WINNER_SOUND_PATH);
+    assert(winnerSound.isLoaded());
 }
 
 

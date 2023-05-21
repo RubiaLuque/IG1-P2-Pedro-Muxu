@@ -16,7 +16,7 @@ private:
     const float GRAVITY_SCALE = 60;
     const float JUMPFORCE = 450;
     const float FALLING_TIMER = 2;
-    const float SKIDDING_TIME = 0.3;
+    const float SKIDDING_TIME = 0.4;
 
     // luz del coche
     ofLight faro;

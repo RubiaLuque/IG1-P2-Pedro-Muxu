@@ -25,6 +25,8 @@ void Player::skid() {
     counter++;
     inputActivated = false;
     transform.rotateRad(ofRandom(0, PI), 0, 1, 0);
+    ofSoundPlayer skidSound = game->getSkidSound();
+    skidSound.play();
 }
 
 void Player::continuousInput() {

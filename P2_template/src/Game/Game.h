@@ -19,10 +19,14 @@ private:
     const int FONT_SIZE = 100;
     const string EXPLOSION_SOUND_PATH = "explosion.wav";
     const string SCREAM_SOUND_PATH = "scream.mp3";
-    const string COIN_SOUND_PATH = "super_mario_coin.wav";
+    const string COIN_SOUND_PATH = "coin.mp3";
     const string GROUND_TEXTURE_PATH = "TexturesCom_Ground_ForestMoss02_header.jpg";
     const string OIL_TEXTURE_PATH = "oil_spill.jpg";
     const string WARNING_TEXTURE_PATH = "warning.jpg";
+    const string COIN_DROP_SOUND_PATH = "coin_drop.mp3";
+    const string GAMEOVER_SOUND_PATH = "game_over.mp3";
+    const string SKID_SOUND_PATH = "car_skid.mp3";
+    const string WINNER_SOUND_PATH = "winner.mp3";
 
     ofEasyCam cam;
     // el juego solo tiene referencia al player
@@ -49,6 +53,11 @@ private:
     ofSoundPlayer explosionSound;
     ofSoundPlayer screamSound;
     ofSoundPlayer coinSound;
+    ofSoundPlayer coinDropSound;
+    ofSoundPlayer gameOverSound;
+    ofSoundPlayer skidSound;
+    ofSoundPlayer winnerSound;
+
     ofTexture groundTexture;
     ofTexture oilSpillTexture;
     ofTexture warningTexture;
@@ -125,6 +134,22 @@ public:
 
     inline ofSoundPlayer getCoinSound() const {
         return coinSound;
+    }
+
+    inline ofSoundPlayer getCoinDropSound() const {
+        return coinDropSound;
+    }
+
+    inline ofSoundPlayer getGameOverSound() const {
+        return gameOverSound;
+    }
+
+    inline ofSoundPlayer getSkidSound() const {
+        return skidSound;
+    }
+
+    inline ofSoundPlayer getWinnerSound() const {
+        return winnerSound;
     }
 
     inline ofTexture getGroundTexture() const {

@@ -7,10 +7,13 @@ class Game;
 // Clase abstracta
 class State {
 protected:
+    const string CLICK_SOUND_PATH = "click.mp3";
     // id del estado
     ecs::stateId id;
     // puntero al juego
     Game* game;
+
+    ofSoundPlayer clickSound;
 
     State(Game* game, ecs::stateId id);
 public:

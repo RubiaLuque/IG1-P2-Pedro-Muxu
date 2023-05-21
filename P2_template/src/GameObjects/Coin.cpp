@@ -1,6 +1,7 @@
 #include "Coin.h"
 #include "Player.h"
 #include "../Utils/checkML.h"
+#include "../Game/Game.h"
 
 // en este caso, podría hacerse sin utilizar el nodo
 // porque el objeto no se mueve, es estático
@@ -31,5 +32,7 @@ void Coin::update() {
 
 void Coin::receiveCarCollision(Player* car) {
     car->addCoins(coinsToAdd);
+    ofSoundPlayer coin = game->getCoinSound();
+    coin.play();
     kill();
 }
